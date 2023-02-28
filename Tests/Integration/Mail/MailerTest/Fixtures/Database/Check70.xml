@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>70</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+
+        <layout_paths>EXT:postmaster/Tests/Integration/Mailer/MailerTest/Fixtures/Frontend/Layouts/</layout_paths>
+        <template_paths>EXT:postmaster/Tests/Integration/Mail/MailerTest/Fixtures/Frontend/Templates/</template_paths>
+        <partial_paths />
+
+        <plaintext_template>Email/Test</plaintext_template>
+        <html_template>Email/Test</html_template>
+        <calendar_template>Email/Test</calendar_template>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>70</uid>
+        <pid>0</pid>
+        <queue_mail>70</queue_mail>
+        <email>debug@example.com</email>
+        <first_name>Sebastian</first_name>
+        <last_name>Schmidt</last_name>
+        <subject>Betreff</subject>
+        <status>1</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>71</uid>
+        <pid>0</pid>
+        <queue_mail>70</queue_mail>
+        <email>debug@example.com</email>
+        <first_name>Sebastian</first_name>
+        <last_name>Schmidt</last_name>
+        <subject>Betreff</subject>
+        <status>1</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+</dataset>

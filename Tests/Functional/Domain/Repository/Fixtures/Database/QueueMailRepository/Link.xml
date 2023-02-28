@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_link>
+        <uid>1</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <hash>978cdd2b8c754afd9a22dc7627230cc26934dcf9</hash>
+        <url>https://www.example.com/gruendung/buch/gruenderoekosysteme-gestalten/</url>
+    </tx_postmaster_domain_model_link>
+
+
+</dataset>

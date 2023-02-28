@@ -1,0 +1,17 @@
+routeEnhancers:
+  Postmaster:
+    type: Extbase
+    namespace: 'tx_postmaster_tracking'
+    routes:
+      - routePath: '/postmaster/track/{mid}'
+        _controller: 'Tracking::opening'
+      - routePath: '/postmaster/track/{mid}/{uid}'
+        _controller: 'Tracking::opening'
+      - routePath: '/postmaster/redirect/{mid}'
+        _controller: 'Tracking::redirect'
+      - routePath: '/postmaster/redirect/{mid}/{uid}'
+        _controller: 'Tracking::redirect'
+    defaultController: 'Tracking::redirect'
+    requirements:
+      mid: '[0-9]{1,10000}'
+      uid: '[0-9]{1,10000}'

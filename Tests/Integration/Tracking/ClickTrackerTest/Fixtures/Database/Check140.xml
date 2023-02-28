@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>140</uid>
+        <pid>1</pid>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>140</uid>
+        <pid>1</pid>
+        <queue_mail>140</queue_mail>
+    </tx_postmaster_domain_model_queuerecipient>
+
+</dataset>

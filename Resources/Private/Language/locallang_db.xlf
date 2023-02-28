@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-11-07T15:00:08Z" product-name="postmaster">
+		<header/>
+		<body>
+
+            <!-- =================================================== -->
+            <!-- tx_postmaster_domain_model_queuemail                 -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_queuemail">
+                <source>Postmaster: Queue Mail</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- tx_postmaster_domain_model_queuerecipient            -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_queuerecipient">
+                <source>Postmaster: Queue Recipient</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- tx_postmaster_domain_model_mailingstatistics            -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_mailingstatistics">
+                <source>Postmasterr: Statistics for mailings</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- tx_postmaster_domain_model_clickstatistics            -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_clickstatistics">
+                <source>Postmaster: Statistics for links</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- tx_postmaster_domain_model_openingstatistics            -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_openingstatistics">
+                <source>Postmaster: Statistics for openings</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- tx_postmaster_domain_model_bouncemail                -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_bouncemail">
+                <source>Postmaster: Bounce-Mails</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- Tabs                                                -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_queuemail.tabs.from">
+                <source>Sender</source>
+            </trans-unit>
+            <trans-unit id="tx_postmaster_domain_model_queuemail.tabs.settings">
+                <source>Settings</source>
+            </trans-unit>
+            <trans-unit id="tx_postmaster_domain_model_queuemail.tabs.sending">
+                <source>Sending</source>
+            </trans-unit>
+
+		</body>
+	</file>
+</xliff>

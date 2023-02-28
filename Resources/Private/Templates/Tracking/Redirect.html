@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+	data-namespace-typo3-fluid="true">
+
+	<f:layout name="Default" />
+	
+	<f:section name="main">
+		<f:render partial="FlashMessages" arguments="{_all}" />
+	
+		<f:if condition="{redirectUrl}">
+			<f:link.external uri="{redirectUrl}" target="_blank"><f:translate key="templates_link_redirect.redirect_link" /></f:link.external>
+	
+			<script type="text/javascript">
+				setTimeout(function(){ document.location.href = '<f:format.raw>{redirectUrl}</f:format.raw>'; }, {redirectTimeout});
+			</script>
+		</f:if>
+</f:section>
+</html>

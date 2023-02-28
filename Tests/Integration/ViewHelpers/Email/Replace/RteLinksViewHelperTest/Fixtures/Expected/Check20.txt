@@ -1,0 +1,39 @@
+
+
+
+    Testen Sie hier mit Klick [https://www.google.de]!
+    Testen Sie da mit Klick [http://www.yahoo.de/#anchor-1]!
+    Testen Sie dort mit Klick [mailto:mail@example.com]!
+    Testen Sie überall mit Klick [http://www.example.com/testseite]!
+    Testen Sie hüben mit Klick [http://www.example.com/testseite#anchor-1]!
+    Testen Sie drüben mit Klick [http://www.example.com/fileadmin/test.pdf]!
+
+    Testen Sie hier mit Klick [https://www.google.de]!
+    Testen Sie da mit Klick [http://www.yahoo.de/#anchor-1]!
+    Testen Sie dort mit Klick [mailto:mail@example.com]!
+    Testen Sie überall mit Klick [http://www.example.com/testseite]!
+    Testen Sie hüben mit Klick [http://www.example.com/testseite#anchor-1]!
+    Testen Sie drüben mit Klick [http://www.example.com/fileadmin/test.pdf]!
+
+
+
+
+    <p>
+        Testen Sie hier <a href="http://www.google.de" title="Titel ist Titel" target="_blank" class="external-link">mit Klick</a>!<br />
+        Testen Sie da <a href="http://www.yahoo.de/#anchor-1" title="Titel ist Titel" target="_blank" class="external-link">mit Klick</a>!<br />
+        Testen Sie dort <a href="mailto:mail@example.com" title="Titel ist Titel" target="_blank" class="mail">mit Klick</a>!<br />
+        Testen Sie überall <a href="http://www.example.com/testseite" title="Titel ist Titel" target="_blank" class="internal-link">mit Klick</a>!<br />
+        Testen Sie hüben <a href="http://www.example.com/testseite#anchor-1" title="Titel ist Titel" target="_blank" class="internal-link">mit Klick</a>!<br />
+        Testen Sie drüben <a href="http://www.example.com/fileadmin/test.pdf" target="_blank" class="download">Titel ist Titel"mit Klick</a>!
+    </p>
+    <p>
+        Testen Sie hier <a href="https://www.google.de" class="external-link" target="_blank" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie da <a href="http://www.yahoo.de/#anchor-1" class="external-link" target="_blank" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie dort <a href="mailto:mail@example.com" class="mail" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie überall <a href="http://www.example.com/testseite" class="internal-link" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie hüben <a href="http://www.example.com/testseite#anchor-1" class="internal-link" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie drüben <a href="http://www.example.com/fileadmin/test.pdf" class="download" target="_blank" title="Titel ist Titel" style="color:red;">mit Klick</a>!
+    </p>
+
+
+

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-11-07T15:00:08Z" product-name="postmaster">
+		<header/>
+		<body>
+
+            <!-- =================================================== -->
+            <!-- Used for personalization                            -->
+            <!-- =================================================== -->
+            <trans-unit id="tx_postmaster_domain_model_queuerecipient.salutation.I.0">
+                <source>Mr.</source>
+            </trans-unit>
+            <trans-unit id="tx_postmaster_domain_model_queuerecipient.salutation.I.1">
+                <source>Mrs.</source>
+            </trans-unit>
+            <trans-unit id="tx_postmaster_domain_model_queuerecipient.salutation.I.2">
+                <source>Mx</source>
+            </trans-unit>
+
+
+            <!-- =================================================== -->
+            <!-- Template : Layouts/BackendModule                    -->
+            <!-- =================================================== -->
+            <trans-unit id="layouts_backendmodule.menuStats">
+                <source>Statistic</source>
+            </trans-unit>
+            <trans-unit id="layouts_backendmodule.menuList">
+                <source>List</source>
+            </trans-unit>
+
+
+
+            <!-- =================================================== -->
+            <!-- Template : Partials/Backend/Datepicker              -->
+            <!-- =================================================== -->
+            <trans-unit id="partials_backend_datepicker.showAll">
+                <source>Show all time</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showThisMonth">
+                <source>Show this month</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showLastMonth">
+                <source>Show last month</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showThisQuarter">
+                <source>Show this quarter</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showLastQuarter">
+                <source>Show last quarter</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showThisHalfYear">
+                <source>Show this half-year</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showLastHalfYear">
+                <source>Show last half-year</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showThisYear">
+                <source>Show this year</source>
+            </trans-unit>
+            <trans-unit id="partials_backend_datepicker.showLastYear">
+                <source>Show last year</source>
+            </trans-unit>
+
+
+            <!-- =================================================== -->
+            <!-- Template : Partials/Backend/MailTypePicker          -->
+            <!-- =================================================== -->
+            <trans-unit id="partials_backend_mailTypePicker.showAll">
+                <source>Show all types</source>
+            </trans-unit>
+
+
+            <!-- =================================================== -->
+            <!-- Template : Templates/Backend/Statistics             -->
+            <!-- =================================================== -->
+            <trans-unit id="templates_backend_statistics.countMailingsTotal">
+                <source>Total mailings</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.mailsTotal">
+                <source>Sent e-mails</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.statusTotal">
+                <source><![CDATA[Status<br />(delivered / failed / deferred / bounced)]]></source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.readTotal">
+                <source><![CDATA[Read e-mails<br />(HTML only)]]></source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.clicksTotal">
+                <source>Clicked Links</source>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.uid">
+                <source>Id</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.subject">
+                <source>Subject</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.status">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.status.3">
+                <source>Sending</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.status.4">
+                <source>Send</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.realSending">
+                <source>Started sending</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_statistics.endSending">
+                <source>Sending end</source>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.clickStatistics">
+                <source>Click Statistics</source>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.openClickStatistics">
+                <source>Open</source>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.noClicks">
+                <source>none</source>
+            </trans-unit>
+
+
+
+
+            <!-- =================================================== -->
+            <!-- Template : Templates/Backend/ClickStatistics        -->
+            <!-- =================================================== -->
+            <trans-unit id="templates_backend_clickstatistics.headline">
+                <source>Click Statistics</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_clickstatistics.url">
+                <source>Link</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_clickstatistics.clicks">
+                <source>Clicks</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_clickstatistics.back">
+                <source>Back to List</source>
+                <target>Zurück zur Liste</target>
+            </trans-unit>
+
+
+            <!-- =================================================== -->
+            <!-- Template : Templates/Backend/List                   -->
+            <!-- =================================================== -->
+            <trans-unit id="templates_backend_list.uid">
+                <source>Id</source>
+            </trans-unit>
+             <trans-unit id="templates_backend_list.subject">
+                <source>Subject</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.status">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.status.1">
+                <source>Draft</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.status.2">
+                <source>Waiting</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.status.3">
+                <source>Sending</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.status.4">
+                <source>Send</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.favSending">
+                <source>Configured start</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.realSending">
+                <source>Started sending</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.endSending">
+                <source>Sending end</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.status.99">
+                <source>Error</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.pause">
+                <source>Pause</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.continue">
+                <source>Continue</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.reset">
+                <source>Reset</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.resetConfirm">
+                <source>Do you really want to reset the selected e-mail? This will also reset the statistics. ALl recipients will be contacted again.</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.delete">
+                <source>Delete</source>
+            </trans-unit>
+            <trans-unit id="templates_backend_list.deleteConfirm">
+                <source>Do you really want to delete the selected e-mail? This will also delete the statistics. All redirect-links of this e-mail will stop working.</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- Messages from linkController                        -->
+            <!-- =================================================== -->
+            <trans-unit id="linkController.error.redirect_not_possible">
+                <source>Redirect was not possible. We are sorry.</source>
+            </trans-unit>
+            <trans-unit id="linkController.message.redirect_wait">
+                <source>You will be redirected in a few seconds. Please wait.</source>
+            </trans-unit>
+
+            <!-- =================================================== -->
+            <!-- Template Link/Redirect                              -->
+            <!-- =================================================== -->
+            <trans-unit id="templates_link_redirect.redirect_link">
+                <source>If you don't get redirected, just click here</source>
+            </trans-unit>
+
+             <!-- =================================================== -->
+            <!-- Template Email/Footer                               -->
+            <!-- =================================================== -->
+            <trans-unit id="partials_email_footer.privacyText1">
+                <source>Information on the processing of your personal data</source>
+            </trans-unit>
+            <trans-unit id="partials_email_footer.privacyText2">
+                <source>can be found in our</source>
+            </trans-unit>
+            <trans-unit id="partials_email_footer.privacyText3">
+                <source>data protection notices</source>
+            </trans-unit>
+
+        </body>
+	</file>
+</xliff>

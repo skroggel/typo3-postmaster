@@ -1,0 +1,60 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+	data-namespace-typo3-fluid="true">
+
+	<!-- PLAINTEXT -->
+	<f:section name="Plaintext"><postmaster:email.plaintextLineBreaks>
+		\n\n
+		------------------------------------------------------------------------------------------------\n\n
+
+		Example Company\n
+
+		<f:if condition="{settings.privacyPid}">\n
+			<postmaster:email.translate
+				key="partials_email_footer.privacyText1"
+				languageKey="{queueRecipient.languageCode}"
+				extensionName="postmaster" />\n
+			<postmaster:email.translate
+				key="partials_email_footer.privacyText2"
+				languageKey="{queueRecipient.languageCode}"
+				extensionName="postmaster" /> <postmaster:email.translate
+				key="partials_email_footer.privacyText3"
+				languageKey="{queueRecipient.languageCode}"
+				extensionName="postmaster" />:\n
+			<postmaster:email.uri.action absolute="true" pageUid="{settings.privacyPid}" noCacheHash="true"/>\n
+		</f:if>
+	</postmaster:email.plaintextLineBreaks></f:section>
+
+
+	<!-- HTML -->
+	<f:section name="Html">
+		<tr>
+			<td style="padding: 32px 16px 0 16px">
+				<p style="margin: 0; padding: 9px 0 9px; border-top: 1px solid #000; font-size: 12px; line-height:12px;">
+					&nbsp;
+				</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td style="padding: 16px" class="footer">
+				<p>
+					Example Company<br>
+					<a href="###baseUrl###">example.com</a><br>
+				</p>
+			</td>
+		</tr>
+		<f:if condition="{settings.privacyPid}">
+			<tr>
+				<td style="padding:8px 16px 16px 16px" class="footer">
+					<p>
+						<postmaster:email.translate key="partials_email_footer.privacyText1" languageKey="{queueRecipient.languageCode}" extensionName="postmaster" /><br>
+						<postmaster:email.translate key="partials_email_footer.privacyText2" languageKey="{queueRecipient.languageCode}" extensionName="postmaster" />
+						<a href="{postmaster:email.uri.action(absolute:'true', pageUid:'{settings.privacyPid}', noCacheHash:'true')}"><postmaster:email.translate key="partials_email_footer.privacyText3" languageKey="{queueRecipient.languageCode}" extensionName="postmaster" /></a>.
+					</p>
+				</td>
+			</tr>
+		</f:if>
+
+	</f:section>
+</html>

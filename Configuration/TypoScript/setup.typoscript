@@ -1,0 +1,76 @@
+# Plugin configuration
+plugin.tx_postmaster {
+    persistence {
+        storagePid = {$plugin.tx_postmaster.persistence.storagePid}
+    }
+    view {
+        layoutRootPaths {
+            0 = EXT:postmaster/Resources/Private/Layouts/
+            1 = {$plugin.tx_postmaster.view.layoutRootPath}
+        }
+        templateRootPaths {
+            0 = EXT:postmaster/Resources/Private/Templates/
+            1 = {$plugin.tx_postmaster.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:postmaster/Resources/Private/Partials/
+            1 = {$plugin.tx_postmaster.view.partialRootPath}
+        }
+    }
+    features {
+
+        # see: https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/8.5/Breaking-78002-EnforceCHashArgumentForExtbaseActions.html
+        requireCHashArgumentForActionArguments = 0
+    }
+    settings {
+
+        privacyPid = {$plugin.tx_postmaster.settings.privacyPid}
+        redirectPid = {$plugin.tx_postmaster.settings.redirectPid}
+        redirectDelay = {$plugin.tx_postmaster.settings.redirectDelay}
+        counterPixelPid = {$plugin.tx_postmaster.settings.counterPixelPid}
+        baseUrl = {$plugin.tx_postmaster.settings.baseUrl}
+        basePathImages = {$plugin.tx_postmaster.settings.basePathImages}
+        basePathLogo = {$plugin.tx_postmaster.settings.basePathLogo}
+    }
+}
+
+
+# Module configuration
+module.tx_postmaster {
+    persistence {
+        storagePid = {$module.tx_postmaster.persistence.storagePid}
+    }
+    view {
+        layoutRootPaths {
+            0 = EXT:postmaster/Resources/Private/Layouts/
+            1 = {$module.tx_postmaster.view.layoutRootPath}
+        }
+        templateRootPaths {
+            0 = EXT:postmaster/Resources/Private/Templates/
+            1 = {$module.tx_postmaster.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:postmaster/Resources/Private/Partials/
+            1 = {$module.tx_postmaster.view.partialRootPath}
+        }
+
+        widget {
+            TYPO3\CMS\Fluid\ViewHelpers\Be\Widget\PaginateViewHelper {
+                templateRootPath = EXT:postmaster/Resources/Private/Templates/
+            }
+        }
+    }
+    features {
+
+        # see: https://docs.typo3.org/c/typo3/cms-core/master/en-us/Changelog/8.5/Breaking-78002-EnforceCHashArgumentForExtbaseActions.html
+        requireCHashArgumentForActionArguments = 0
+    }
+    settings {
+        types {
+            0 = Message
+            1 = Newsletter
+            2 = Alert
+        }
+    }
+}
+

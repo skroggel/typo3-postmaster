@@ -1,0 +1,24 @@
+table.tx_postmaster td,
+table.tx_postmaster th { padding:5px; text-align:center; }
+table.tx_postmaster td { text-align:left;}
+table.tx_postmaster tr:hover a,
+table.tx_postmaster td:hover a { text-decoration:none;}
+table.tx_postmaster tr a {margin-right:2em;}
+table.tx_postmaster tr a:last-of-type { margin-right:0;}
+table.tx_postmaster tr a:hover {text-decoration:underline;}
+table.tx_postmaster td.center {text-align:center;}
+table.tx_postmaster td.center table { margin:auto; }
+.link {color:#e64415; font-weight:bold; }
+
+.status1 { color:darkblue; }
+.status2 { color:darkorange; }
+.status3,
+.status97,
+.status98,
+.status99,
+.error,
+.failed,
+.deferred,
+.bounced { color:red; }
+.status4,
+.okay { color:darkgreen; }

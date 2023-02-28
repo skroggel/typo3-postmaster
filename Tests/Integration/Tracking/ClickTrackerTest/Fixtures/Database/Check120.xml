@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>120</uid>
+        <pid>1</pid>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_clickstatistics>
+        <uid>120</uid>
+        <pid>1</pid>
+        <queue_mail>120</queue_mail>
+        <queue_mail_uid>120</queue_mail_uid>
+        <hash>af3b8acda5db82b543bfdb6a83570a12d8cdcff9</hash>
+        <url>https://www.google.de/suchen/</url>
+        <counter>1</counter>
+    </tx_postmaster_domain_model_clickstatistics>
+
+
+</dataset>

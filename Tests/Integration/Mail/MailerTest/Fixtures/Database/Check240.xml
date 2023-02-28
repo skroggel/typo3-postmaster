@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>240</uid>
+        <pid>0</pid>
+        <from_name>Testen Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>2</status>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>240</uid>
+        <pid>1</pid>
+        <queue_mail>240</queue_mail>
+        <email>testen@example.com</email>
+        <status>2</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+</dataset>

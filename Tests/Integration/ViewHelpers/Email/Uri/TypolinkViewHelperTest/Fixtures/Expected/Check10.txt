@@ -1,0 +1,11 @@
+
+http://www.google.de
+http://www.yahoo.de/#anchor-1
+mailto:mail@example.com
+mailto:mail@example.com
+http://www.example.com/testseite
+http://www.example.com/testseite
+http://www.example.com/testseite#anchor-1
+http://www.example.com/testseite#anchor-1
+http://www.example.com/fileadmin/test.pdf
+

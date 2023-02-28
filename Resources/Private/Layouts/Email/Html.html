@@ -1,0 +1,35 @@
+{namespace vh=Madj2k\Postmaster\ViewHelpers}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="background: #ffffff;">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Your Message Subject or Title</title>
+
+        <f:render partial="Email/Css" />
+
+	</head>
+	<body style="background: #ffffff">
+		<table cellpadding="0" cellspacing="0" border="0" id="backgroundTable" style="background: #ffffff;">
+			<tr>
+				<td>
+					<table class="contentTable" cellpadding="0" cellspacing="0" border="0" width="600" style="width: 100%; max-width: 600px; background: #ffffff; font-family: 'Arial', sans-serif; font-size: 14px">
+						<tr>
+							<td style="padding: 16px 16px 0">
+								<f:render partial="Email/Header" section="Html" arguments="{_all}"/>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding: 16px 16px 0 16px" class="text">
+								<f:render section="Html" />
+							</td>
+						</tr>
+
+						<f:render partial="Email/Footer" section="Html" arguments="{_all}" />
+					</table>
+				</td>
+			</tr>
+		</table>
+		<vh:email.pixelCounter queueRecipient="{queueRecipient}" queueMail="{queueMail}" />
+	</body>
+</html>

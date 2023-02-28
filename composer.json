@@ -1,0 +1,44 @@
+{
+    "name": "madj2k/t3-postmaster",
+    "type": "typo3-cms-extension",
+    "description": "Extension sending e-mails and bulk-mailings",
+    "homepage": "https://www.steffenkroggel.de",
+    "license": ["GPL-2.0+"],
+    "keywords": ["TYPO3 CMS", "E-Mails", "Newsletter", "Queue"],
+    "support": {
+        "email": "developer@steffenkroggel.de"
+    },
+    "authors": [
+        {
+            "name": "Steffen Kroggel",
+            "email": "developer@steffenkroggel.de",
+            "homepage": "http://www.steffenkroggel.de",
+            "role": "Developer"
+        },
+        {
+            "name": "Maximilian Fäßler",
+            "email": "maximilian@faesslerweb.de",
+            "homepage": "https://www.faesslerweb.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-json" : "*",
+        "ext-fileinfo" : "*",
+        "typo3/cms-core": "~9.5.0",
+        "voku/bounce-mail-handler": "^5.5",
+		"madj2k/t3-accelerator": "~9.5.2",
+		"madj2k/t3-core-extended": "~9.5.3"
+	},
+    "autoload": {
+        "psr-4": {
+            "Madj2k\\Postmaster\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "postmaster"
+        }
+    }
+}

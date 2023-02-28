@@ -1,0 +1,48 @@
+plugin.tx_postmaster {
+    view {
+
+        layoutRootPaths {
+            0 = EXT:postmaster/Resources/Private/Layouts/
+            1 = EXT:postmaster/Tests/Integration/Tracking/ClickTrackerTest/Fixtures/Frontend/Layouts/
+        }
+
+        # cat=module.tx_postmaster/file; type=string; label=Path to template root (BE)
+        templateRootPaths {
+            0 = EXT:postmaster/Resources/Private/Templates/
+            1 = EXT:postmaster/Tests/Integration/Tracking/ClickTrackerTest/Fixtures/Frontend/Templates/
+        }
+
+        # cat=module.tx_postmaster/file; type=string; label=Path to template layouts (BE)
+        partialRootPaths {
+            0 = EXT:postmaster/Resources/Private/Partials/
+            1 = EXT:postmaster/Tests/Integration/Tracking/ClickTrackerTest/Fixtures/Frontend/Partials/
+        }
+    }
+    persistence {
+        # cat=module.tx_postmaster//a; type=string; label=Default storage PID
+        storagePid = 9999
+    }
+
+
+    settings {
+
+        # cat=module.tx_postmaster; type=integer; label=Pid of redirect plugin
+        redirectPid = 9999
+
+        # cat=module.tx_postmaster; type=integer; label= Delay for redirect (in sec)
+        redirectDelay = 5
+
+        # cat=module.tx_postmaster; type=integer; label=Pid of plugin for pixel counter (HTML-mails only)
+        counterPixelPid = 1
+
+        # cat=module.tx_postmaster; type=integer; label=URL for hard-links in templates
+        baseUrl = http://www.example.de
+
+        # cat=module.tx_postmaster; type=integer; label=URL for images in templates
+        basePathImages =  EXT:postmaster/Resources/Public/Images
+
+        # cat=module.tx_postmaster; type=integer; label=URL for logo in templates
+        basePathLogo = EXT:postmaster/Resources/Public/Images/logo.png
+    }
+}
+

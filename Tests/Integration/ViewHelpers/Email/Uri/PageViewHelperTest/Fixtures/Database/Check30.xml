@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>1</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address />
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <body_text />
+        <attachment />
+        <campaign_parameter />
+        <plaintext_template />
+        <html_template />
+        <calendar_template />
+        <priority>0</priority>
+        <sorting>0</sorting>
+        <status>1</status>
+        <type>0</type>
+        <attachment_type />
+        <attachment_name />
+        <layout_paths />
+        <partial_paths />
+        <template_paths />
+        <pipeline>0</pipeline>
+        <settings_pid>0</settings_pid>
+        <category />
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>1</uid>
+        <pid>2</pid>
+        <queue_mail>1</queue_mail>
+        <email>debug@example.com</email>
+        <first_name>Sebastian</first_name>
+        <last_name>Schmidt</last_name>
+        <subject>Betreff</subject>
+        <status>1</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+</dataset>

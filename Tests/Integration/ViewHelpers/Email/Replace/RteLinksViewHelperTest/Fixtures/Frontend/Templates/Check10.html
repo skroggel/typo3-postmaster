@@ -1,0 +1,41 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<postmaster:email.replace.rteLinks isPlaintext="true" style="color:green;">
+    Testen Sie hier <link https://www.google.de _blank external-link Titel ist Titel>mit Klick</link>!
+    Testen Sie da <link http://www.yahoo.de/#anchor-1 _blank external-link "Titel ist Titel">mit Klick</link>!
+    Testen Sie dort <link mail@example.com _blank mail "Titel ist Titel">mit Klick</link>!
+    Testen Sie überall <link 9999 _blank tinternal-link "Titel ist Titel">mit Klick</link>!
+    Testen Sie hüben <link 9999#anchor-1 _blank tinternal-link "Titel ist Titel">mit Klick</link>!
+    Testen Sie drüben <link file:999 _blank download "Titel ist Titel">mit Klick</link>!
+
+    Testen Sie hier <a class="external-link" href="https://www.google.de" target="_blank" title="Test">mit Klick</a>!
+    Testen Sie da <a class="external-link" href="http://www.yahoo.de/#anchor-1" target="_blank" title="Test">mit Klick</a>!
+    Testen Sie dort <a class="mail" href="mailto:mail@example.com" title="Test">mit Klick</a>!
+    Testen Sie überall <a class="internal-link" href="t3://page?uid=9999" title="Test">mit Klick</a>!
+    Testen Sie hüben <a class="internal-link" href="t3://page?uid=9999#anchor-1" title="Test">mit Klick</a>!
+    Testen Sie drüben <a class="download" href="t3://file?uid=999" title="Test">mit Klick</a>!
+
+</postmaster:email.replace.rteLinks>
+
+<postmaster:email.replace.rteLinks style="color:green;">
+    <p>
+        Testen Sie hier <link http://www.google.de _blank external-link "Titel ist Titel">mit Klick</link>!<br />
+        Testen Sie da <link http://www.yahoo.de/#anchor-1 _blank external-link "Titel ist Titel">mit Klick</link>!<br />
+        Testen Sie dort <link mail@example.com _blank mail "Titel ist Titel">mit Klick</link>!<br />
+        Testen Sie überall <link 9999 _blank internal-link "Titel ist Titel">mit Klick</link>!<br />
+        Testen Sie hüben <link 9999#anchor-1 _blank internal-link "Titel ist Titel">mit Klick</link>!<br />
+        Testen Sie drüben <link file:999 _blank download ">Titel ist Titel"mit Klick</link>!
+    </p>
+    <p>
+        Testen Sie hier <a class="external-link" href="https://www.google.de" target="_blank" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie da <a class="external-link" href="http://www.yahoo.de/#anchor-1" target="_blank" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie dort <a class="mail" href="mailto:mail@example.com" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie überall <a class="internal-link" href="t3://page?uid=9999" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie hüben <a class="internal-link" href="t3://page?uid=9999#anchor-1" title="Titel ist Titel" style="color:red;">mit Klick</a>!<br />
+        Testen Sie drüben <a class="download" href="t3://file?uid=999" target="_blank" title="Titel ist Titel" style="color:red;">mit Klick</a>!
+    </p>
+</postmaster:email.replace.rteLinks>
+
+</html>

@@ -1,0 +1,33 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+	data-namespace-typo3-fluid="true">
+
+	<f:layout name="BackendModule" />
+	
+	<f:section name="content">
+	
+		<f:render partial="FlashMessages" arguments="{_all}" />
+	
+		<h1><f:translate key="templates_backend_clickstatistics.headline" /></h1>
+		<h2><f:format.crop maxCharacters="250" respectWordBoundaries="false">{queueMailStatistics.subject}</f:format.crop> (id={queueMailStatistics.queueMailUid})</h2>
+	
+		<f:link.action action="statistics" class="link">&lt;&lt; <f:translate key="templates_backend_clickstatistics.back" /></f:link.action>
+		<table class="tx_postmaster" border="1" >
+			<tr>
+				<th><f:translate key="templates_backend_clickstatistics.url" /></th>
+				<th><f:translate key="templates_backend_clickstatistics.clicks" /></th>
+			</tr>
+			
+			<f:for each="{clickedLinks}" as="link" >
+				<tr>
+					<td>
+						<a href="{link.url}" title="{link.url}" target="_blank"><f:format.crop maxCharacters="150" respectWordBoundaries="false">{link.url}</f:format.crop></a>
+					</td>
+					<td class="center">
+						{link.counter}
+					</td>
+				</tr>
+			</f:for>
+		</table>
+	
+	</f:section>

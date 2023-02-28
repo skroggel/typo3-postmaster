@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <!--  queueMail with wrong status -->
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>1</uid>
+        <pid>1</pid>
+        <queue_mail>1</queue_mail>
+        <email>nothing@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>4</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <!-- queueRecipients -->
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>2</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient1@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>1</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>3</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient2@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>2</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>4</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient3@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>3</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>5</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient4@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>4</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>6</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient5@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>4</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>7</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient6@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>98</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>8</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient7@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>98</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>9</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient6@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>97</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>10</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <email>recipient8@example.com</email>
+        <first_name>Karl</first_name>
+        <last_name>Napp</last_name>
+        <subject>Betreff für Karl</subject>
+        <status>99</status>
+        <salutation>0</salutation>
+        <title>Dr.</title>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+</dataset>

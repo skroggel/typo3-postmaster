@@ -1,0 +1,29 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:be.container includeCssFiles="{1 :\"{f:uri.resource(path:'Css/Backend.css')}\"}">
+        <div class="typo3-fullDoc">
+            <div id="typo3-docheader">
+                <div class="typo3-docheader-functions">
+                    <div class="left">
+                        <f:be.buttons.csh />
+                        <f:be.menus.actionMenu>
+                            <f:be.menus.actionMenuItem label="{f:translate(key:\"layouts_backendmodule.menuStats\")}" controller="Backend" action="statistics" />
+                            <postmaster:security.ifIsAdmin>
+                                <f:be.menus.actionMenuItem label="{f:translate(key:\"layouts_backendmodule.menuList\")}" controller="Backend" action="list" />
+                            </postmaster:security.ifIsAdmin>
+                        </f:be.menus.actionMenu>
+                    </div>
+    
+                </div>
+            </div>
+            <div id="typo3-docbody">
+                <div id="typo3-inner-docbody">
+                    <f:render partial="FlashMessages" arguments="{_all}" />
+                    <f:render section="content" />
+                </div>
+            </div>
+        </div>
+    </f:be.container>
+</html>

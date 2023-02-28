@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <pages>
+        <uid>1</uid>
+        <pid>0</pid>
+        <title>Rootpage</title>
+        <doktype>1</doktype>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+
+    <pages>
+        <uid>9999</uid>
+        <pid>1</pid>
+        <title>Testseite</title>
+        <slug>testseite</slug>
+        <doktype>1</doktype>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+
+    <sys_file>
+        <uid>999</uid>
+        <pid>0</pid>
+        <type>0</type>
+        <storage>1</storage>
+        <extension>pdf</extension>
+        <mime_type>application/pdf</mime_type>
+        <name>test.pdf</name>
+        <identifier>test.pdf</identifier>
+    </sys_file>
+</dataset>

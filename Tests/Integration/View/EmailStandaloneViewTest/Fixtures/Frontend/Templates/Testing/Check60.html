@@ -1,0 +1,52 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+    <f:layout name="Email/{mailType}" />
+
+    <f:section name="Plaintext">
+        ROOTPAGE
+        queueMail.uid: {queueMail.uid}
+        queueMail.settingsPid: {queueMail.settingsPid}
+        mailType: {mailType}
+        settings.redirectPid: {settings.redirectPid}
+        baseUrl: ###baseUrl###
+        baseUrlImages: ###baseUrlImages###
+        baseUrlLogo: ###baseUrlLogo###
+
+        queueRecipient.uid: {queueRecipient.uid}
+        queueRecipient.firstName: {queueRecipient.firstName}
+        queueRecipient.lastName: {queueRecipient.lastName}
+        test1.uid: {test1.uid}
+        test2.0.uid: {test2.0.uid}
+    </f:section>
+
+    <!-- HTML -->
+    <f:section name="Html">
+        ROOTPAGE
+        queueMail.uid: {queueMail.uid}
+        queueMail.settingsPid: {queueMail.settingsPid}
+        mailType: {mailType}
+        settings.redirectPid: {settings.redirectPid}
+        baseUrl: ###baseUrl###
+        baseUrlImages: ###baseUrlImages###
+        baseUrlLogo: ###baseUrlLogo###
+
+        queueRecipient.uid: {queueRecipient.uid}
+        queueRecipient.firstName: {queueRecipient.firstName}
+        queueRecipient.lastName: {queueRecipient.lastName}
+        test1.uid: {test1.uid}
+        test2.0.uid: {test2.0.uid}
+
+        <a href="/test.html">Test</a>
+        <img src="/test.png" width="30" height="30" alt="Test"/>
+        <img src="/var/www/komze/web/fileadmin/_processed_/5/e/csm_image-placeholder_1eb4fdc08f.jpg" width="536" height="200" alt="" title="Platzhalter" />
+    </f:section>
+
+    <!-- HTML -->
+    <f:section name="Calendar">BEGIN:VEVENT
+        SUMMARY:Test Kalender
+        CLASS:PUBLIC
+        END:VEVENT
+    </f:section>
+
+</html>

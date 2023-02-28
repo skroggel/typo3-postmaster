@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_bouncemail>
+        <uid>1</uid>
+        <pid>1</pid>
+        <crdate>500</crdate>
+        <tstamp>500</tstamp>
+        <type>hard</type>
+        <email>nothing4@example.com</email>
+        <header />
+        <header_full />
+        <body />
+        <body_full />
+    </tx_postmaster_domain_model_bouncemail>
+
+    <tx_postmaster_domain_model_bouncemail>
+        <uid>2</uid>
+        <pid>1</pid>
+        <crdate>2000</crdate>
+        <tstamp>2000</tstamp>
+        <type>hard</type>
+        <email>match1@example.com</email>
+        <header />
+        <header_full />
+        <body />
+        <body_full />
+    </tx_postmaster_domain_model_bouncemail>
+
+    <tx_postmaster_domain_model_bouncemail>
+        <uid>3</uid>
+        <pid>1</pid>
+        <crdate>2000</crdate>
+        <tstamp>2000</tstamp>
+        <type>hard</type>
+        <email>match2@example.com</email>
+        <header />
+        <header_full />
+        <body />
+        <body_full />
+    </tx_postmaster_domain_model_bouncemail>
+
+    <tx_postmaster_domain_model_bouncemail>
+        <uid>4</uid>
+        <pid>1</pid>
+        <crdate>2000</crdate>
+        <tstamp>2000</tstamp>
+        <type>soft</type>
+        <email>nothing5@example.com</email>
+        <header />
+        <header_full />
+        <body />
+        <body_full />
+    </tx_postmaster_domain_model_bouncemail>
+
+    <tx_postmaster_domain_model_bouncemail>
+        <uid>5</uid>
+        <pid>1</pid>
+        <crdate>2000</crdate>
+        <tstamp>2000</tstamp>
+        <type>hard</type>
+        <status>1</status>
+        <email>nothing6@example.com</email>
+        <header />
+        <header_full />
+        <body />
+        <body_full />
+    </tx_postmaster_domain_model_bouncemail>
+
+
+</dataset>

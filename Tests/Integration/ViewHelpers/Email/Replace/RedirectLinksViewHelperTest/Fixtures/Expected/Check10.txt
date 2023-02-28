@@ -1,0 +1,18 @@
+
+
+
+    Testen Sie hier: http://www.google.de
+    Testen Sie da: [http://www.yahoo.de/#anchor-1]
+    Testen Sie dort: mail@example.com
+    Testen Sie überall: #anchor-2
+
+
+
+    <p>
+        <a href="http://www.google.de">Testen Sie hier</a>
+        <a href="http://www.yahoo.de/#anchor-1">Testen Sie da</a>
+        <a href="mailto:mail@example.com">Testen Sie dort</a>
+        <a href="#anchor-2">Testen Sie überall</a>
+    </p>
+
+

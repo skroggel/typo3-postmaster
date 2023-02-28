@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <!-- check against opening pixel -->
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>1</uid>
+        <pid>1</pid>
+        <queue_mail>1</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>1</link>
+        <pixel>0</pixel>
+        <click_count>2</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>2</uid>
+        <pid>1</pid>
+        <queue_mail>1</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>1</link>
+        <pixel>1</pixel>
+        <click_count>1</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <!-- check if queueMails is checked correctly -->
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>3</uid>
+        <pid>1</pid>
+        <queue_mail>2</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>2</link>
+        <pixel>0</pixel>
+        <click_count>4</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>4</uid>
+        <pid>1</pid>
+        <queue_mail>3</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>2</link>
+        <pixel>0</pixel>
+        <click_count>100</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+
+    <!-- Check grouping -->
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>5</uid>
+        <pid>1</pid>
+        <queue_mail>4</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>3</link>
+        <pixel>0</pixel>
+        <click_count>5</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>6</uid>
+        <pid>1</pid>
+        <queue_mail>4</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>5</link>
+        <pixel>0</pixel>
+        <click_count>5</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>7</uid>
+        <pid>1</pid>
+        <queue_mail>4</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>4</link>
+        <pixel>0</pixel>
+        <click_count>8</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>8</uid>
+        <pid>1</pid>
+        <queue_mail>4</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>5</link>
+        <pixel>0</pixel>
+        <click_count>2</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>9</uid>
+        <pid>1</pid>
+        <queue_mail>4</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>3</link>
+        <pixel>0</pixel>
+        <click_count>5</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>10</uid>
+        <pid>1</pid>
+        <queue_mail>5</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>6</link>
+        <pixel>0</pixel>
+        <click_count>4</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+
+    <tx_postmaster_domain_model_statisticopening>
+        <uid>14</uid>
+        <pid>1</pid>
+        <queue_mail>6</queue_mail>
+        <queue_recipient>0</queue_recipient>
+        <link>7</link>
+        <pixel>0</pixel>
+        <click_count>5</click_count>
+    </tx_postmaster_domain_model_statisticopening>
+</dataset>

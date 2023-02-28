@@ -1,0 +1,21 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<postmaster:email.replace.redirectLinks queueMail="{queueMail}" isPlaintext="true">
+    Testen Sie hier: http://www.google.de
+    Testen Sie da: [http://www.yahoo.de/#anchor-1]
+    Testen Sie dort: mail@example.com
+    Testen Sie überall: #anchor-2
+</postmaster:email.replace.redirectLinks>
+
+<postmaster:email.replace.redirectLinks queueMail="{queueMail}" >
+    <p>
+        <a href="http://www.google.de">Testen Sie hier</a>
+        <a href="http://www.yahoo.de/#anchor-1">Testen Sie da</a>
+        <a href="mailto:mail@example.com">Testen Sie dort</a>
+        <a href="#anchor-2">Testen Sie überall</a>
+    </p>
+</postmaster:email.replace.redirectLinks>
+
+</html>

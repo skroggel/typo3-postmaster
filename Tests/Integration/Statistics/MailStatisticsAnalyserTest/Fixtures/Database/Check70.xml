@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>70</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>1</status>
+        <type>1</type>
+        <tstamp_fav_sending>111</tstamp_fav_sending>
+        <tstamp_real_sending>222</tstamp_real_sending>
+        <tstamp_send_finish>333</tstamp_send_finish>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>71</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>1</status>
+        <mailing_statistics>70</mailing_statistics>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_mailingstatistics>
+        <uid>70</uid>
+        <pid>0</pid>
+        <queue_mail>71</queue_mail>
+        <queue_mail_uid>71</queue_mail_uid>
+    </tx_postmaster_domain_model_mailingstatistics>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>70</uid>
+        <pid>1</pid>
+        <queue_mail>70</queue_mail>
+        <email>nothing@example.com</email>
+        <status>1</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>71</uid>
+        <pid>1</pid>
+        <queue_mail>70</queue_mail>
+        <email>nothing@example.com</email>
+        <status>4</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>72</uid>
+        <pid>1</pid>
+        <queue_mail>70</queue_mail>
+        <email>nothing@example.com</email>
+        <status>97</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>73</uid>
+        <pid>1</pid>
+        <queue_mail>70</queue_mail>
+        <email>nothing@example.com</email>
+        <status>99</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>74</uid>
+        <pid>1</pid>
+        <queue_mail>71</queue_mail>
+        <email>nothing@example.com</email>
+        <status>4</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+</dataset>

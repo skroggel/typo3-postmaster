@@ -1,0 +1,30 @@
+
+
+<div id="8effee409c625e1a2d8f5033631840e6ce1dcb64-99" class="search-result-section" data-ajaxapi-id="99" data-ajaxapi-action="replace">
+
+        <div class="boxes-grid" id="grid-section">
+
+            <div class="box-wrapper">
+                <a class="box topic-3 event big" title="Roadshow Tournee.Digital in Baden-Württemberg an der österreichischen Weinstraße" href="veranstaltungen/details/roadshow-tourneedigital-in-sachsen-anhalt-552/">
+                    <header>
+                        <p>
+
+                            Roadshow Tournee.Digital in Baden-Württemberg an der österreichischen Weinstraße
+                        </p>
+                    </header>
+                    <div class="box-content">
+                        <p class="event-city">Haldensleben</p>
+                        <p class="event-date">
+                            <strong>
+                                01.09.2020
+                            </strong>
+                        </p>
+                    </div>
+                    <footer>
+                        <p class="icon-calendar">Veranstaltung</p>
+                    </footer>
+                </a>
+            </div>
+        </div>
+
+    </div>

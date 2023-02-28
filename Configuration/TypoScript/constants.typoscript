@@ -1,0 +1,65 @@
+plugin.tx_postmaster {
+	persistence {
+		# cat=module.tx_postmaster//a; type=string; label=Default storage PID
+		storagePid =
+	}
+
+	view {
+
+        # cat=plugin.tx_postmaster/file; type=string; label=Path to template layouts (BE)
+        layoutRootPath = EXT:postmaster/Resources/Private/Layouts/
+
+		# cat=plugin.tx_postmaster/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:postmaster/Resources/Private/Templates/
+
+		# cat=plugin.tx_postmaster/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:postmaster/Resources/Private/Partials/
+	}
+
+    settings {
+
+        # cat=plugin.tx_postmaster; type=integer; label=Pid of privacy information
+        privacyPid = 1
+
+        # cat=plugin.tx_postmaster; type=integer; label=Pid of redirect plugin
+        redirectPid = 1
+
+        # cat=plugin.tx_postmaster; type=integer; label= Delay for redirect (in sec)
+        redirectDelay = 5
+
+        # cat=plugin.tx_postmaster; type=integer; label=Pid of plugin for pixel counter (HTML-mails only)
+        counterPixelPid = 1
+
+        # cat=plugin.tx_postmaster; type=integer; label=URL for hard-links in templates
+        baseUrl =
+
+        # cat=plugin.tx_postmaster; type=integer; label=URL for images in templates
+        basePathImages = EXT:postmaster/Resources/Public/Images
+
+        # cat=plugin.tx_postmaster; type=integer; label=URL for logo in templates
+        basePathLogo = EXT:postmaster/Resources/Public/Images/logo.png
+    }
+}
+
+
+
+module.tx_postmaster {
+	persistence {
+		# cat=module.tx_postmaster//a; type=string; label=Default storage PID
+		storagePid =
+	}
+
+	view {
+
+        # cat=module.tx_postmaster/file; type=string; label=Path to template layouts (BE)
+        layoutRootPath = EXT:postmaster/Resources/Private/Layouts/
+
+		# cat=module.tx_postmaster/file; type=string; label=Path to template root (BE)
+		templateRootPath = EXT:postmaster/Resources/Private/Templates/
+
+		# cat=module.tx_postmaster/file; type=string; label=Path to template partials (BE)
+		partialRootPath = EXT:postmaster/Resources/Private/Partials/
+	}
+}
+
+

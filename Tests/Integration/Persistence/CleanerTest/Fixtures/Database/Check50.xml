@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>50</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>3</status>
+        <mailing_statistics>50</mailing_statistics>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_mailingstatistics>
+        <uid>50</uid>
+        <pid>0</pid>
+        <queue_mail>50</queue_mail>
+        <queue_mail_uid>50</queue_mail_uid>
+    </tx_postmaster_domain_model_mailingstatistics>
+
+</dataset>

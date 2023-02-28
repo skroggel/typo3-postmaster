@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <pages>
+        <uid>1</uid>
+        <pid>0</pid>
+        <title>Rootpage</title>
+        <doktype>1</doktype>
+        <is_siteroot>1</is_siteroot>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+
+    <pages>
+        <uid>10</uid>
+        <pid>0</pid>
+        <title>Rootpage</title>
+        <doktype>1</doktype>
+        <is_siteroot>1</is_siteroot>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+
+    <pages>
+        <uid>9999</uid>
+        <pid>1</pid>
+        <title>Umleitungsseite der Umleitungen</title>
+        <slug>umleitungsseite-der-umleitungen</slug>
+        <doktype>1</doktype>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+
+</dataset>

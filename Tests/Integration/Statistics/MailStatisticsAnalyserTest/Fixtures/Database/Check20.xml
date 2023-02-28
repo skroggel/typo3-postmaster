@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>20</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>1</status>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>20</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>1</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>21</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>2</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>22</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>3</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>23</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>4</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>24</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>97</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>25</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>98</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>26</uid>
+        <pid>1</pid>
+        <queue_mail>20</queue_mail>
+        <email>nothing@example.com</email>
+        <status>99</status>
+        <language_code>de</language_code>
+        <marker />
+    </tx_postmaster_domain_model_queuerecipient>
+
+</dataset>

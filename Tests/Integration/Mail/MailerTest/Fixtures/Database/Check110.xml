@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>110</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>2</status>
+        <mailing_statistics>110</mailing_statistics>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>111</uid>
+        <pid>0</pid>
+        <from_name>Test</from_name>
+        <from_address>test@testen.de</from_address>
+        <reply_to_name>Reply Name</reply_to_name>
+        <reply_to_address>reply@testen.de</reply_to_address>
+        <return_path>return@testen.de</return_path>
+        <subject>Test</subject>
+        <status>2</status>
+        <mailing_statistics>111</mailing_statistics>
+    </tx_postmaster_domain_model_queuemail>
+
+
+    <tx_postmaster_domain_model_mailingstatistics>
+        <uid>110</uid>
+        <pid>0</pid>
+        <queue_mail>110</queue_mail>
+        <queue_mail_uid>110</queue_mail_uid>
+        <tstamp_real_sending>999</tstamp_real_sending>
+    </tx_postmaster_domain_model_mailingstatistics>
+
+    <tx_postmaster_domain_model_mailingstatistics>
+        <uid>111</uid>
+        <pid>0</pid>
+        <queue_mail>111</queue_mail>
+        <queue_mail_uid>111</queue_mail_uid>
+        <tstamp_real_sending>555</tstamp_real_sending>
+    </tx_postmaster_domain_model_mailingstatistics>
+
+</dataset>

@@ -1,0 +1,155 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+	data-namespace-typo3-fluid="true">
+	
+	<f:layout name="BackendModule" />
+	
+	<f:section name="content">
+	
+		<f:render partial="FlashMessages" arguments="{_all}" />
+	
+		<f:form action="statistics" name="timeFrame">
+			<f:render partial="Backend/Datepicker" arguments="{timeFrame:timeFrame}"/>
+			<f:render partial="Backend/MailTypePicker" arguments="{mailTypeList:mailTypeList, mailType:mailType}"/>
+		</f:form>
+
+		<f:be.widget.paginate objects="{mailingStatisticsList}" as="mailingStatisticsListSub" configuration="{itemsPerPage: 25}">
+
+			<table class="tx_postmaster" border="1" >
+				<tr>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.uid" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.subject" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.status" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.realSending" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.endSending" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.mailsTotal" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.statusTotal" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.readTotal" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.clicksTotal" /></f:format.raw></th>
+					<th><f:format.raw><f:translate key="templates_backend_statistics.clickStatistics" /></f:format.raw></th>
+				</tr>
+	
+				<f:for each="{mailingStatisticsListSub}" as="mailingStatistics" >
+					<tr>
+						<td>
+							{mailingStatistics.queueMailUid}
+						</td>
+						<td>
+							<strong>
+								<span title="{mailingStatistics.subject}">
+									<f:format.crop maxCharacters="60" respectWordBoundaries="false">{mailingStatistics.subject}</f:format.crop>
+								</span>
+							</strong>
+						</td>
+						<td class="center">
+							<span class="status{mailingStatistics.status}">
+								<nobr><f:translate key="templates_backend_statistics.status.{mailingStatistics.status}" /></nobr>
+							</span>
+						</td>
+						<td class="center">
+							<f:if condition="{mailingStatistics.tstampRealSending}">
+								<nobr><f:format.date format="d.m.Y H:i">{mailingStatistics.tstampRealSending}</f:format.date></nobr>
+							</f:if>
+						</td>
+						<td class="center">
+							<f:if condition="{mailingStatistics.tstampFinishedSending}">
+								<nobr><f:format.date format="d.m.Y H:i">{mailingStatistics.tstampFinishedSending}</f:format.date></nobr>
+							</f:if>
+						</td>
+						<td class="center">
+							<nobr>
+								<span class="sent">
+									{mailingStatistics.totalRecipients}
+								</span> /
+								<span class="total">
+									{mailingStatistics.totalSent}
+								</span>
+							</nobr>
+						</td>
+						<td class="center">
+							<table>
+								<tr>
+									<td class="okay">
+										{mailingStatistics.delivered}
+									</td>
+									<td>
+										/
+									</td>
+									<td class="failed">
+										{mailingStatistics.failed}
+									</td>
+									<td>
+										/
+									</td>
+									<td class="deferred">
+										{mailingStatistics.deferred}
+									</td>
+									<td>
+										/
+									</td>
+									<td class="bounced">
+										{mailingStatistics.bounced}
+									</td>
+								</tr>
+								<tr>
+									<td class="okay">
+										<postmaster:calcPercentage percentage="{mailingStatistics.delivered}" total="{mailingStatistics.totalSent}" />
+									</td>
+									<td>
+										/
+									</td>
+									<td class="failed">
+										<postmaster:calcPercentage percentage="{mailingStatistics.failed}" total="{mailingStatistics.totalSent}" />
+									</td>
+									<td>
+										/
+									</td>
+									<td class="deferred">
+										<postmaster:calcPercentage percentage="{mailingStatistics.deferred}" total="{mailingStatistics.totalSent}" />
+									</td>
+									<td>
+										/
+									</td>
+									<td class="bounced">
+										<postmaster:calcPercentage percentage="{mailingStatistics.bounced}" total="{mailingStatistics.totalSent}" />
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td class="center">
+							<table>
+								<tr>
+									<td>
+										<postmaster:statistics.openings queueMailUid="{mailingStatistics.queueMailUid}" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<postmaster:calcPercentage percentage="{postmaster:statistics.openings(queueMailUid:mailingStatistics.queueMailUid)}" total="{mailingStatistics.delivered}" />
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td class="center">
+							<postmaster:statistics.clickedLinks queueMailUid="{mailingStatistics.queueMailUid}" />
+						</td>
+						<td>
+							<f:if condition="{postmaster:statistics.clickedLinks(queueMailUid:mailingStatistics.queueMailUid)}">
+								<f:then>
+									<f:link.action action="clickStatistics" arguments="{queueMailUid:mailingStatistics.queueMailUid}" class="link">
+										&gt;&gt; <f:translate key="templates_backend_statistics.openClickStatistics" />
+									</f:link.action>
+								</f:then>
+								<f:else>
+									<f:translate key="templates_backend_statistics.noClicks" />
+								</f:else>
+							</f:if>
+						</td>
+					</tr>
+				</f:for>
+			</table>
+			
+		</f:be.widget.paginate>
+	
+	</f:section>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+
+    <tx_postmaster_domain_model_queuemail>
+        <uid>40</uid>
+        <pid>1</pid>
+    </tx_postmaster_domain_model_queuemail>
+
+    <tx_postmaster_domain_model_queuerecipient>
+        <uid>40</uid>
+        <pid>1</pid>
+    </tx_postmaster_domain_model_queuerecipient>
+
+    <tx_postmaster_domain_model_openingstatistics>
+        <uid>40</uid>
+        <pid>1</pid>
+        <queue_mail>40</queue_mail>
+        <queue_mail_uid>40</queue_mail_uid>
+        <queue_recipient>40</queue_recipient>
+        <hash>yasgfasfasf</hash>
+        <counter>1</counter>
+    </tx_postmaster_domain_model_openingstatistics>
+</dataset>
