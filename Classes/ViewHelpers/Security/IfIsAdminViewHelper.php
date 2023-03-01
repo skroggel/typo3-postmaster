@@ -33,7 +33,7 @@ class IfIsAdminViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Be\Security\IfAut
      * @param array|null $arguments ViewHelper arguments to evaluate the condition for this ViewHelper, allows for flexiblity in overriding this method.
      * @return bool
      */
-    protected static function evaluateCondition(?array $arguments = null): bool
+    protected static function evaluateCondition($arguments = null): bool
     {
         return isset($GLOBALS['BE_USER']) && $GLOBALS['BE_USER']->user['admin'];
     }
