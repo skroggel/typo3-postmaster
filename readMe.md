@@ -242,8 +242,8 @@ Result:
 Hello Mr. Dr. Schmidt M. Sc.
 ```
 
-## Important when migrating from rkw_mailer to postmaster
-Execute the following MySQL-queries BEFORE checking the database-tables and fields in backend!
+## When migrating from rkw_mailer to postmaster
+Execute the following MySQL-queries BEFORE checking the database-tables and fields via backend!
 ```
 RENAME TABLE `tx_rkwmailer_domain_model_queuemail` TO `tx_postmaster_domain_model_queuemail`;
 RENAME TABLE `tx_rkwmailer_domain_model_queuerecipient` TO `tx_postmaster_domain_model_queuerecipient`;
