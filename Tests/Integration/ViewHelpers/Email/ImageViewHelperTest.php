@@ -82,7 +82,8 @@ class ImageViewHelperTest extends FunctionalTestCase
                 'EXT:core_extended/Configuration/TypoScript/setup.typoscript',
                 'EXT:postmaster/Configuration/TypoScript/setup.typoscript',
                 self::FIXTURE_PATH . '/Frontend/Configuration/Rootpage.typoscript',
-            ]
+            ],
+            ['example.com' => self::FIXTURE_PATH .  '/Frontend/Configuration/config.yaml']
         );
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */

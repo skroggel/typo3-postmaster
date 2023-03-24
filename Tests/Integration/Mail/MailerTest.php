@@ -88,7 +88,7 @@ class MailerTest extends FunctionalTestCase
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository|null
      */
-    private ?QueueRecipientRepository $mailingStatisticsRepository = null;
+    private ?MailingStatisticsRepository $mailingStatisticsRepository = null;
 
 
     /**
@@ -2035,14 +2035,14 @@ class MailerTest extends FunctionalTestCase
         /**
          * Scenario:
          *
-         * Given a persisted queueRecipient-object
-         * Given that queueRecipient-object has the marker-property set
+         * Given two persisted queueRecipient-objects
+         * Given that queueRecipient-objects have the marker-property set
          * Given to that markers the current timestamp is added
          * Given a persisted queueMail-object
          * Given that queueMail-object has templates for all three types set
-         * Given the method has already been called with the another queueRecipient
+         * Given the method has already been called with the first queueRecipient
          * Given the timestamp has been changed in the markers of the queueRecipient-object after that first call
-         * When the method is called a second time
+         * When the method is called a second time with the second queueRecipient
          * Then all three template-types were rendered into the cache
          * Then all three template-codes returned after both calls of the method are not identical for each type
          * Then all three template-codes of the first call of the method contain the first timestamp
@@ -2088,6 +2088,73 @@ class MailerTest extends FunctionalTestCase
         self::assertStringContainsString("$secondTimestamp", $resultPlaintextSecond);
         self::assertStringContainsString("$secondTimestamp", $resultHtmlSecond);
         self::assertStringContainsString("$secondTimestamp", $resultCalendarSecond);
+    }
+
+    /**
+     * @test
+     * @throws \Exception
+     */
+    public function renderTemplatesReplacesDomainForDifferentSettingsPids()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a persisted queueMail-object A
+         * Given that queueMail-objects has templates for all three types set
+         * Given that queueMail-object refers to page X as settingsPid
+         * Given a persisted queueRecipient-object A1
+         * Given the queueMail-object A is addressed to queueRecipient-object A1
+         * Given a persisted queueMail-object B
+         * Given that queueMail-object has templates for all three types set
+         * Given that queueMail-object refers to page Y as settingsPid*
+         * Given a persisted queueRecipient-object B1
+         * Given the queueMail-object B is addressed to queueRecipient-object B1
+         * When the method is called for both queueMail-objects
+         * Then the
+         */
+
+        $this->importDataSet(self::FIXTURE_PATH . '/Database/Check450.xml');
+
+        /** @var \Madj2k\Postmaster\Domain\Model\QueueMail $queueMailOne */
+        $queueMailOne = $this->queueMailRepository->findByIdentifier(450);
+
+        /** @var \Madj2k\Postmaster\Domain\Model\QueueMail $queueMailTwo */
+        $queueMailTwo = $this->queueMailRepository->findByIdentifier(451);
+
+        /** @var \Madj2k\Postmaster\Domain\Model\QueueRecipient $queueRecipientOne */
+        $queueRecipientOne = $this->queueRecipientRepository->findByIdentifier(450);
+
+        /** @var \Madj2k\Postmaster\Domain\Model\QueueRecipient $queueRecipientTwo */
+        $queueRecipientTwo = $this->queueRecipientRepository->findByIdentifier(451);
+
+        $this->subject->renderTemplates($queueMailOne, $queueRecipientOne);
+
+        $resultPlaintextFirst = $this->mailCache->getPlaintextBody($queueRecipientOne);
+        $resultHtmlFirst = $this->mailCache->getHtmlBody($queueRecipientOne);
+        $resultCalendarFirst = $this->mailCache->getCalendarBody($queueRecipientOne);
+
+        $this->setUpFrontendRootPage(
+            2,
+            [
+                'EXT:accelerator/Configuration/TypoScript/setup.typoscript',
+                'EXT:core_extended/Configuration/TypoScript/setup.typoscript',
+                'EXT:postmaster/Configuration/TypoScript/setup.typoscript',
+                self::FIXTURE_PATH . '/Frontend/Configuration/RootpageTwo.typoscript',
+            ]
+        );
+
+        $this->subject->renderTemplates($queueMailTwo, $queueRecipientTwo);
+
+
+        $resultPlaintextSecond = $this->mailCache->getPlaintextBody($queueRecipientTwo);
+        $resultHtmlSecond = $this->mailCache->getHtmlBody($queueRecipientTwo);
+        $resultCalendarSecond = $this->mailCache->getCalendarBody($queueRecipientTwo);
+
+        self::assertNotEquals($resultPlaintextFirst, $resultPlaintextSecond);
+        self::assertNotEquals($resultHtmlFirst, $resultHtmlSecond);
+        self::assertNotEquals($resultCalendarFirst, $resultCalendarSecond);
+
     }
 
     //=============================================

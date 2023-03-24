@@ -252,6 +252,6 @@ RENAME TABLE `tx_rkwmailer_domain_model_clickstatistics` TO `tx_postmaster_domai
 RENAME TABLE `tx_rkwmailer_domain_model_openingstatistics` TO `tx_postmaster_domain_model_openingstatistics`;
 RENAME TABLE `tx_rkwmailer_domain_model_bouncemail` TO `tx_postmaster_domain_model_bouncemail`;
 RENAME TABLE `tx_rkwmailer_domain_model_openingstatistics` TO `tx_postmaster_domain_model_openingstatistics`;
-UPDATE tt_content SET list_type = "rkwmailer_rkwmailer" WHERE list_type = "postmaster_tracking";
+UPDATE tt_content SET list_type = "postmaster_tracking" WHERE list_type = "rkwmailer_rkwmailer";
 ```
 

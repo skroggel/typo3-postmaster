@@ -563,6 +563,7 @@ class Mailer
      * @return void
      * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \Exception
      */
     public function renderTemplates(
         \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail,
@@ -676,7 +677,7 @@ class Mailer
     {
         if (GeneralUtility::getApplicationContext()->isDevelopment()) {
 
-            $path = \TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/var/logs/tx_postmaster_runtime.txt';
+            $path = \TYPO3\CMS\Core\Core\Environment::getVarPath() . '/log/tx_postmaster_runtime.txt';
             file_put_contents($path, microtime() . ' ' . $line . ' ' . $function . "\n", FILE_APPEND);
         }
     }

@@ -14,6 +14,7 @@ namespace Madj2k\Postmaster\Tests\Integration\ViewHelpers\Email;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\CoreExtended\Utility\FrontendSimulatorUtility;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use Madj2k\Postmaster\View\EmailStandaloneView;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
@@ -189,6 +190,7 @@ class PixelCounterViewHelperTest extends FunctionalTestCase
          * Given a queueMail is defined
          * When the ViewHelper is rendered
          * Then a valid tracking link is returned
+         * Then the tracking link uses the routing-configuration of the extension
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check30.xml');
 

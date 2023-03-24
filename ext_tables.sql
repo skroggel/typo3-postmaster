@@ -71,7 +71,7 @@ CREATE TABLE tx_postmaster_domain_model_queuerecipient (
 	subject varchar(255) DEFAULT '' NOT NULL,
 	marker longtext NOT NULL,
 	status tinyint(2) unsigned DEFAULT '1',
-	language_code varchar(2) DEFAULT '' NOT NULL,
+	language_code varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

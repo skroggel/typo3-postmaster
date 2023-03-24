@@ -20,7 +20,9 @@ use Madj2k\Postmaster\View\EmailStandaloneView;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
 use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Site\PseudoSiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
@@ -144,9 +146,8 @@ class ActionViewHelperTest extends FunctionalTestCase
 
 
     /**
-     * @test
-     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
-     * @todo this test runs smoothly if you select the ViewHelper-tests directory. If you run ALL tests, this test fails for mysterious reasons
+     * @throws \Exception
+     * @todo this test won't work if executed via folder. If executed as single-test it works
      */
     public function itRendersAbsoluteLinkHttps ()
     {
@@ -163,6 +164,8 @@ class ActionViewHelperTest extends FunctionalTestCase
          * Then the link uses the https-protocol
          * Then no cHash is used
          */
+
+        // Use another domain because YAML-files will be overriden otherwise
         $this->setUpFrontendRootPage(
             10,
             [
@@ -171,13 +174,20 @@ class ActionViewHelperTest extends FunctionalTestCase
                 'EXT:postmaster/Configuration/TypoScript/setup.typoscript',
                 self::FIXTURE_PATH . '/Frontend/Configuration/RootpageHttps.typoscript',
             ],
-            ['example.com' => self::FIXTURE_PATH .  '/Frontend/Configuration/configHttps.yaml']
+            ['example.net' => self::FIXTURE_PATH .  '/Frontend/Configuration/configHttps.yaml']
         );
 
-        // Flush all caches because of file-cache for YAML-files!
-        FrontendSimulatorUtility::resetFrontendEnvironment();
-        GeneralUtility::makeInstance(CacheManager::class)->flushCaches();
-        sleep(3);
+        /**
+         * we need to flush all rootline-caches here since the site-configuration is cached
+         * @see \TYPO3\CMS\Core\Routing\SiteMatcher::refresh()
+         */
+        RootlineUtility::purgeCaches();
+        GeneralUtility::makeInstance(CacheManager::class)->getCache('cache_rootline')->flush();
+        $pseudoSiteFinder = GeneralUtility::makeInstance(PseudoSiteFinder::class);
+        $pseudoSiteFinder->refresh();
+
+        // clearing of caches takes some time - we have to wait for so long
+        sleep(5);
 
         $this->standAloneViewHelper = $this->objectManager->get(EmailStandaloneView::class, 10);
         $this->standAloneViewHelper->setTemplate('Check10.html');
@@ -188,8 +198,7 @@ class ActionViewHelperTest extends FunctionalTestCase
         );
         $result = $this->standAloneViewHelper->render();
 
-        /** IMPORTANT HINT IN PhpDocs !!! */
-        self::assertStringContainsString('https://www.example.com/coreextended/mediasources', $result);
+        self::assertStringContainsString('https://www.example.net/coreextended/mediasources', $result);
         self::assertStringNotContainsString('cHash=', $result);
     }
 

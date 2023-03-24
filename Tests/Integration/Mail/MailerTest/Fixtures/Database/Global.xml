@@ -9,13 +9,21 @@
     </pages>
 
     <pages>
+        <uid>2</uid>
+        <pid>0</pid>
+        <title>Rootpage</title>
+        <doktype>1</doktype>
+        <perms_everybody>15</perms_everybody>
+    </pages>
+
+    <pages>
         <uid>9998</uid>
         <pid>1</pid>
         <title>Rootpage</title>
         <doktype>1</doktype>
         <perms_everybody>15</perms_everybody>
     </pages>
-    
+
     <pages>
         <uid>9999</uid>
         <pid>1</pid>

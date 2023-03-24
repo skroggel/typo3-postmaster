@@ -76,7 +76,6 @@ abstract class AbstractCache
      */
     public function getContent(string $cacheIdentifier): string
     {
-
         if ($this->cache->has($cacheIdentifier)) {
 
             // get cached content

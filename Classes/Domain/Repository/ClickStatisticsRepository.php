@@ -42,6 +42,7 @@ class ClickStatisticsRepository extends AbstractRepository
      * initializeObject
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function initializeObject(): void
     {
@@ -55,6 +56,7 @@ class ClickStatisticsRepository extends AbstractRepository
     /**
      * findOneByHashAndQueueMail
      *
+     * @param string $hash
      * @param \Madj2k\Postmaster\Domain\Model\queueMail $queueMail
      * @return \Madj2k\Postmaster\Domain\Model\ClickStatistics|null
      * comment: implicitly tested

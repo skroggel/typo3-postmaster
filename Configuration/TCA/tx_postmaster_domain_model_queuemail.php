@@ -159,41 +159,6 @@ return [
                 'type' => 'passthrough',
             ],
 		],
-        'total' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
-        'sent' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
-        'successful' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
-        'failed' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
-        'deferred' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
-        'bounced' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
-        'opened' => [
-            'config' => [
-                'type' => 'passthrough',
-            ],
-        ],
         'mailing_statistics' => [
             'config' => [
                 'type' => 'inline',

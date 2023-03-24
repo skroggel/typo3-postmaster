@@ -32,6 +32,6 @@
         <salutation>0</salutation>
         <title>Dr.</title>
         <language_code>de</language_code>
-        <marker>a:2:{s:5:"test1";s:61:"TX_ACCELERATOR_NAMESPACES Madj2k\Postmaster\Domain\Model\QueueMail:40";s:5:"test2";s:6:"Hello!";}</marker>
+        <marker>a:2:{s:5:"test1";s:69:"TX_ACCELERATOR_NAMESPACES Madj2k\Postmaster\Domain\Model\QueueMail:40";s:5:"test2";s:6:"Hello!";}</marker>
     </tx_postmaster_domain_model_queuerecipient>
 </dataset>

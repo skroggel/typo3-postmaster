@@ -15,11 +15,12 @@ namespace Madj2k\Postmaster\Example;
  */
 
 use Madj2k\CoreExtended\Utility\GeneralUtility;
-use Madj2k\Postmaster\Service\MailService as PostmasterMailService;
+use Madj2k\Postmaster\Mail\MailMessage;
 use Madj2k\Postmaster\Utility\FrontendLocalizationUtility;
 use Madj2k\FeRegister\Domain\Model\FrontendUser;
 use Madj2k\FeRegister\Domain\Model\OptIn;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -58,8 +59,8 @@ class MailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \Madj2k\Postmaster\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PostmasterMailService::class);
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailMessage */
+            $mailMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(MailMessage::class);
 
             /**
              * Here we set the recipients of the email.
@@ -82,7 +83,7 @@ class MailService implements \TYPO3\CMS\Core\SingletonInterface
              * You can call setTo multiple times in order to send the same email to different users.
              * The variables will be set for every recipient accordingly.
              */
-            $mailService->setTo($frontendUser, array(
+            $mailMessage->setTo($frontendUser, array(
                 'marker' => array(
                     'tokenYes'        => $optIn->getTokenYes(),
                     'tokenNo'         => $optIn->getTokenNo(),
@@ -97,7 +98,7 @@ class MailService implements \TYPO3\CMS\Core\SingletonInterface
              * Set the globally used subject
              * Here we use a user-specific translation based on the languageKey of the user.
              */
-            $mailService->getQueueMail()->setSubject(
+            $mailMessage->getQueueMail()->setSubject(
                 FrontendLocalizationUtility::translate(
                     'postmaster.optIn.subject',
                     'your_extension',
@@ -109,15 +110,15 @@ class MailService implements \TYPO3\CMS\Core\SingletonInterface
             /**
              * Set the templates. The templates are to be placed in the extension that uses the service.
              */
-            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
-            $mailService->getQueueMail()->setPlaintextTemplate('Email/Example/OptIn');
-            $mailService->getQueueMail()->setHtmlTemplate('Email/Example/OptIn');
+            $mailMessage->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailMessage->getQueueMail()->setPlaintextTemplate('Email/Example/OptIn');
+            $mailMessage->getQueueMail()->setHtmlTemplate('Email/Example/OptIn');
 
             /**
              * send the email.
              * If you have set more than one recipient, the mail will be queued and send via cronjob
              */
-            $mailService->send();
+            $mailMessage->send();
         }
     }
 
@@ -144,14 +145,14 @@ class MailService implements \TYPO3\CMS\Core\SingletonInterface
 
         if ($settings['view']['templateRootPaths']) {
 
-            /** @var \Madj2k\Postmaster\Service\MailService $mailService */
-            $mailService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(PostmasterMailService::class);
+            /** @var \Madj2k\Postmaster\Mail\MailMessage $mailMessage */
+            $mailMessage = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(MailMessage::class);
 
             /** @var \Madj2k\FeRegister\Domain\Model\BackendUser $backendUser */
             foreach ($approvals as $backendUser) {
 
                 // send new user an email with token
-                $mailService->setTo($backendUser, array(
+                $mailMessage->setTo($backendUser, array(
                     'marker' => array(
                         'tokenYes' => $optIn->getAdminTokenYes(),
                         'tokenNo' => $optIn->getAdminTokenNo(),
@@ -179,17 +180,17 @@ class MailService implements \TYPO3\CMS\Core\SingletonInterface
              * Set the globally used subject
              * Here we use a user-specific translation based on the languageKey of the user.
              */
-            $mailService->getQueueMail()->setSubject(
+            $mailMessage->getQueueMail()->setSubject(
                 FrontendLocalizationUtility::translate(
                     'postmaster.group.optInAdmin.subject',
                     'your_extension',
                 )
             );
 
-            $mailService->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
-            $mailService->getQueueMail()->setPlaintextTemplate('Email/Example/OptInAdmin');
-            $mailService->getQueueMail()->setHtmlTemplate('Email/Example/OptInAdmin');
-            $mailService->send();
+            $mailMessage->getQueueMail()->addTemplatePaths($settings['view']['templateRootPaths']);
+            $mailMessage->getQueueMail()->setPlaintextTemplate('Email/Example/OptInAdmin');
+            $mailMessage->getQueueMail()->setHtmlTemplate('Email/Example/OptInAdmin');
+            $mailMessage->send();
         }
     }
 

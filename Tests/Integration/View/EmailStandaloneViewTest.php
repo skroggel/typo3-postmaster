@@ -19,6 +19,7 @@ use Madj2k\CoreExtended\Domain\Repository\PagesRepository;
 use Madj2k\Postmaster\Domain\Model\QueueMail;
 use Madj2k\Postmaster\Domain\Model\QueueRecipient;
 use Madj2k\Postmaster\View\EmailStandaloneView;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -1559,9 +1560,8 @@ class EmailStandaloneViewTest extends FunctionalTestCase
          * Then the absolute src is resolved to an url
          */
         $this->subject->setTemplate('Testing/Check50.html');
-        $this->subject->assign('webPath', $_SERVER['TYPO3_PATH_WEB']);
+        $this->subject->assign('webPath', Environment::getPublicPath());
         $result = $this->subject->render();
-
 
         self::assertStringContainsString('<a href="http://www.example.de/test.html">Test</a>', $result);
         self::assertStringContainsString('<img src="http://www.example.de/test.png" width="30" height="30" alt="Test"/>', $result);
