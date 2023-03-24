@@ -98,7 +98,7 @@ class PixelCounterViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractV
                     ->setArguments(
                         array(
                             'tx_postmaster_tracking[uid]' => intval($queueRecipient->getUid()),
-                            'tx_postmaster_trackingr[mid]' => intval($queueMail->getUid()),
+                            'tx_postmaster_tracking[mid]' => intval($queueMail->getUid()),
                         )
                     );
 

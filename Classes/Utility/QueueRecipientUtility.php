@@ -152,7 +152,7 @@ class QueueRecipientUtility
 
         // expand mapping for \Madj2k\FeRegister\Domain\Model\BackendUser
         $additionalPropertyMapper = [];
-        if ($backendUser instanceof \Madj2k\FeRegister\Domain\Model\BackendUser) {
+        if ($backendUser instanceof \Madj2k\CoreExtended\Domain\Model\BackendUser) {
             $additionalPropertyMapper['lang'] = 'languageCode';
         }
 

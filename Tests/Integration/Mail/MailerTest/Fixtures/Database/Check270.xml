@@ -4,7 +4,7 @@
     <tx_postmaster_domain_model_queuemail>
         <uid>270</uid>
         <pid>0</pid>
-        <from_name>Example/from_name>
+        <from_name>Example</from_name>
         <from_address>mailto:test@testen.de</from_address>
         <reply_to_name>Reply Name</reply_to_name>
         <reply_to_address>mailto:reply@testen.de</reply_to_address>

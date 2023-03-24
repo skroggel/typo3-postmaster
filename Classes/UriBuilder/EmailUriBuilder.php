@@ -246,11 +246,11 @@ class EmailUriBuilder extends \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      * @see build()
      */
     public function uriFor(
-        ?string $actionName = null,
+        $actionName = null,
         $controllerArguments = [],
-        ?string $controllerName = null,
-        ?string $extensionName = null,
-        ?string $pluginName = null
+        $controllerName = null,
+        $extensionName = null,
+        $pluginName = null
     ): string {
 
         // kill request-calls for non-set values

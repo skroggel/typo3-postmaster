@@ -18,6 +18,7 @@ use Madj2k\CoreExtended\Utility\FrontendSimulatorUtility;
 use Madj2k\Postmaster\Domain\Model\QueueMail;
 use Madj2k\Postmaster\Domain\Model\QueueRecipient;
 use Madj2k\Postmaster\Exception;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -77,7 +78,7 @@ class EmailStandaloneView extends StandaloneView
     /**
      * @var \Madj2k\Postmaster\Domain\Model\QueueRecipient|null
      */
-    protected ?QueueRecipient $queueRecipient;
+    protected ?QueueRecipient $queueRecipient = null;
 
 
     /**
@@ -489,24 +490,23 @@ class EmailStandaloneView extends StandaloneView
      * @return string
      * @api
      */
-    public function render(?string $actionName = null): string
+    public function render($actionName = null): string
     {
         // empty call to inject settings and other fix variables
         $this->assignMultiple([]);
 
         $renderedTemplate = parent::render($actionName);
 
-        // replace baseURLs in final email  - replacement with asign only works in template-files, not on layout-files
+        // replace baseURLs in final email  - replacement with assign only works in template-files, not on layout-files
         $renderedTemplate = preg_replace('/###baseUrl###/', $this->getBaseUrl(), $renderedTemplate);
         $renderedTemplate = preg_replace('/###baseUrlImages###/', $this->getBaseUrlImages(), $renderedTemplate);
         $renderedTemplate = preg_replace('/###baseUrlLogo###/', $this->getLogoUrl(), $renderedTemplate);
         $renderedTemplate = preg_replace('/###logoUrl###/', $this->getLogoUrl(), $renderedTemplate);
 
         // replace relative paths and absolute paths to server-root!
-        /* @todo Check if Environment-variables are still valid in TYPO3 9 and upwards! */
         $replacePaths = [
-            GeneralUtility::getIndpEnv('TYPO3_SITE_PATH'),
-            $_SERVER['TYPO3_PATH_ROOT'] .'/'
+            Environment::getPublicPath() . '/',
+            Environment::getProjectPath() .'/'
         ];
 
         foreach ($replacePaths as $replacePath) {
@@ -516,12 +516,12 @@ class EmailStandaloneView extends StandaloneView
                 $renderedTemplate
             );
         }
+
         $renderedTemplate = preg_replace(
             '/(src|href)="\/([^"]+)"/',
             '$1="' . $this->getBaseUrl() . '/$2"',
             $renderedTemplate
         );
-
 
         // reset frontend
         FrontendSimulatorUtility::resetFrontendEnvironment();

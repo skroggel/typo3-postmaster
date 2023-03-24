@@ -119,7 +119,7 @@ class RenderCacheTest extends FunctionalTestCase
          * Then the nginx-file is written to the cache dir
          */
 
-        $this->subject= $this->objectManager->get(MailCache::class, SimpleFileBackend::class);
+        $this->subject = $this->objectManager->get(RenderCache::class, SimpleFileBackend::class);
         $cacheDir = $this->subject->getCache()->getBackend()->getCacheDirectory();
         self::assertTrue($this->subject->securityCheck());
 

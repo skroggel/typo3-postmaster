@@ -40,6 +40,7 @@ class OpeningStatisticsRepository extends AbstractRepository
     /**
      * initializeObject
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function initializeObject(): void
     {
