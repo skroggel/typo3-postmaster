@@ -1,5 +1,5 @@
 <?php
-namespace Madj2k\Postmaster\Tests\Integration\Service;
+namespace Madj2k\Postmaster\Tests\Integration\Mail;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,6 +15,7 @@ namespace Madj2k\Postmaster\Tests\Integration\Service;
  */
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use Madj2k\Postmaster\Mail\MailMessage;
 use Madj2k\CoreExtended\Utility\FrontendSimulatorUtility;
 use Madj2k\Postmaster\Cache\MailCache;
 use Madj2k\Postmaster\Domain\Model\MailingStatistics;
@@ -23,7 +24,6 @@ use Madj2k\Postmaster\Domain\Model\QueueRecipient;
 use Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
-use Madj2k\Postmaster\Service\MailService;
 use Madj2k\Postmaster\Utility\QueueMailUtility;
 use Madj2k\Postmaster\Utility\QueueRecipientUtility;
 use Madj2k\CoreExtended\Domain\Model\FrontendUser;
@@ -32,20 +32,20 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /**
- * MailServiceTest
+ * MailMessageTest
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Steffen Kroggel
  * @package Madj2k_Postmaster
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class MailServiceTest extends FunctionalTestCase
+class MailMessageTest extends FunctionalTestCase
 {
 
     /**
      * @const
      */
-    const FIXTURE_PATH = __DIR__ . '/MailServiceTest/Fixtures';
+    const FIXTURE_PATH = __DIR__ . '/MailMessageTest/Fixtures';
 
 
     /**
@@ -65,9 +65,9 @@ class MailServiceTest extends FunctionalTestCase
 
 
     /**
-     * @var \Madj2k\Postmaster\Service\MailService|null
+     * @var \Madj2k\Postmaster\Mail\MailMessage|null
      */
-    private ?MailService $subject = null;
+    private ?MailMessage $subject = null;
 
 
     /**
@@ -126,7 +126,7 @@ class MailServiceTest extends FunctionalTestCase
         $this->queueRecipientRepository = $this->objectManager->get(QueueRecipientRepository::class);
         $this->mailingStatisticsRepository = $this->objectManager->get(MailingStatisticsRepository::class);
         $this->mailCache = $this->objectManager->get(MailCache::class);
-        $this->subject = $this->objectManager->get(MailService::class);
+        $this->subject = $this->objectManager->get(MailMessage::class);
     }
 
     //=============================================
@@ -333,7 +333,7 @@ class MailServiceTest extends FunctionalTestCase
          *
          * Given a queueMail-object
          * Given this queueMail-object has templates and paths to the templates set
-         * Given this queueMail-object is set to the mailService
+         * Given this queueMail-object is set to the mailMessage
          * Given a frontendUser-object
          * Given that frontendUser-object has a valid email set
          * Given that frontendUser-object has a first name
@@ -399,7 +399,7 @@ class MailServiceTest extends FunctionalTestCase
          *
          * Given a queueMail-object
          * Given this queueMail-object has templates and paths to the templates set
-         * Given this queueMail-object is set to the mailService
+         * Given this queueMail-object is set to the mailMessage
          * Given a frontendUser-object
          * Given that frontendUser-object has a valid email set as Typolink with "mailto:"-prefix
          * Given that frontendUser-object has a first name
@@ -453,7 +453,7 @@ class MailServiceTest extends FunctionalTestCase
          *
          * Given a queueMail-object
          * Given this queueMail-object has templates and paths to the templates set
-         * Given this queueMail-object is set to the mailService
+         * Given this queueMail-object is set to the mailMessage
          * Given a frontendUser-object
          * Given that frontendUser-object has a valid email set
          * Given this e-mail-address has not been added as recipient to the queueMail
@@ -627,10 +627,6 @@ class MailServiceTest extends FunctionalTestCase
     /**
      * @test
      * @throws \Exception
-     * @throws \Madj2k\Postmaster\Service\Exception\MailServiceException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
-     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
      */
     public function addQueueRecipientSetsDefaultValues()
     {
@@ -908,7 +904,7 @@ class MailServiceTest extends FunctionalTestCase
          * Then the status of the queueMail-object is changed to waiting
          * Then mailingStatistics-property of this queueMail-object contains a MailingStatistics-object
          * Then this mailingStatistics-object has the tstampFavSending-property set to the current time
-         * // Then the queueMail-object of the mailService is reset
+         * // Then the queueMail-object of the mailMessage is reset
          */
 
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check60.xml');

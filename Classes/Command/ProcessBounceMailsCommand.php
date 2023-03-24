@@ -154,9 +154,7 @@ class ProcessBounceMailsCommand extends Command
                     $this->getLogger()->log(LogLevel::INFO, $message);
                 }
 
-                $io->note('test' . count($bouncedRecipients ));
-
-
+                $io->note(sprintf('Processed %s emails.',  count($bouncedRecipients)));
                 $this->persistenceManager->persistAll();
 
             } else {
@@ -173,6 +171,7 @@ class ProcessBounceMailsCommand extends Command
             );
             $io->error($message);
             $this->getLogger()->log(LogLevel::ERROR, $message);
+            $result = 1;
         }
 
         $io->writeln('Done');

@@ -29,6 +29,7 @@ class BounceMailRepository extends AbstractRepository
 
     /**
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
     public function initializeObject(): void
     {

@@ -651,10 +651,10 @@ class QueueMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the attachment
      *
-     * @return int $attachment
+     * @return string $attachment
      * @deprecated
      */
-    public function getAttachmentType(): int
+    public function getAttachmentType(): string
     {
         return $this->attachmentType;
     }
@@ -663,11 +663,11 @@ class QueueMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the attachmentType
      *
-     * @param int $attachmentType
+     * @param string $attachmentType
      * @return void
      * @deprecated
      */
-    public function setAttachmentType(int $attachmentType): int
+    public function setAttachmentType(string $attachmentType): void
     {
         $this->attachmentType = $attachmentType;
     }

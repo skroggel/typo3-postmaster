@@ -28,51 +28,39 @@ class QueueRecipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * queueMail
-     *
-     * @var \Madj2k\Postmaster\Domain\Model\QueueMail
+     * @var \Madj2k\Postmaster\Domain\Model\QueueMail|null
      */
-    protected $queueMail;
+    protected ?QueueMail $queueMail = null;
 
 
     /**
-     * email
-     *
      * @var string
      */
-    protected $email = '';
+    protected string $email = '';
 
 
     /**
-     * title
-     *
      * @var string
      */
-    protected $title = '';
+    protected string $title = '';
 
 
     /**
-     * salutation
-     *
      * @var int
      */
-    protected $salutation = 99;
+    protected int $salutation = 99;
 
 
     /**
-     * firstName
-     *
      * @var string
      */
-    protected $firstName = '';
+    protected string $firstName = '';
 
 
     /**
-     * lastName
-     *
      * @var string
      */
-    protected $lastName = '';
+    protected string $lastName = '';
 
 
     /**
@@ -84,36 +72,27 @@ class QueueRecipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
-     * marker
-     *
      * @var string
      */
-    protected $marker = '';
+    protected string $marker = '';
 
 
     /**
-     * markerUnserialized
-     *
      * @var array
      */
-    protected $markerUnserialized = [];
+    protected array $markerUnserialized = [];
 
 
     /**
-     * status
-     *
      * @var integer
      */
-    protected $status = 0;
+    protected int $status = 0;
 
 
     /**
-     * languageCode
-     *
      * @var string
      */
-    protected $languageCode = 'de';
-
+    protected string $languageCode = 'de';
 
 
     /**
@@ -121,10 +100,11 @@ class QueueRecipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueMail
      */
-    public function getQueueMail()
+    public function getQueueMail():? QueueMail
     {
         return $this->queueMail;
     }
+
 
     /**
      * Sets the queueMail
@@ -210,6 +190,7 @@ class QueueRecipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return '';
     }
+
 
     /**
      * Sets the salutation
@@ -313,6 +294,7 @@ class QueueRecipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return ($this->markerUnserialized) ?: [];
     }
 
+
     /**
      * Sets the marker
      *
@@ -357,6 +339,7 @@ class QueueRecipient extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->languageCode;
     }
+
 
     /**
      * Sets the languageCode

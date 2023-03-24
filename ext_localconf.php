@@ -9,7 +9,7 @@ call_user_func(
         //=================================================================
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'Madj2k.' . $extKey,
-            'Postmaster',
+            'Tracking',
             array(
                 'Link' => 'redirect, confirmation', // deprecated
                 'Tracking' => 'redirect, opening',
@@ -45,7 +45,7 @@ call_user_func(
                 // add a FileWriter
                 'TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
                     // configuration for the writer
-                    'logFile' => 'typo3temp/var/logs/tx_postmaster.log'
+                    'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath()  . '/log/tx_postmaster.log'
                 )
             ),
         );

@@ -1,5 +1,5 @@
 <?php
-namespace Madj2k\Postmaster\Service;
+namespace Madj2k\Postmaster\Mail;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,10 +13,11 @@ namespace Madj2k\Postmaster\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use Madj2k\Accelerator\Persistence\MarkerReducer;
+
 use Madj2k\Postmaster\Domain\Model\MailingStatistics;
 use Madj2k\Postmaster\Domain\Model\QueueMail;
 use Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository;
+use Madj2k\Postmaster\Exception;
 use Madj2k\Postmaster\Mail\Mailer;
 use Madj2k\Postmaster\Utility\QueueMailUtility;
 use Madj2k\Postmaster\Utility\QueueRecipientUtility;
@@ -24,6 +25,7 @@ use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -34,83 +36,74 @@ use Madj2k\Postmaster\Validation\QueueRecipientValidator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
- * MailService
+ * MailMessage
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Steffen Kroggel
  * @package Madj2k_Postmaster
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class MailService
+class MailMessage
 {
 
     /**
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager|null
      */
-    protected ObjectManager $objectManager;
+    protected ?ObjectManager $objectManager = null;
 
 
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface|null
      */
-    protected ConfigurationManagerInterface $configurationManager;
+    protected ?ConfigurationManagerInterface $configurationManager = null;
 
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager|null
      */
-    protected PersistenceManager $persistenceManager;
+    protected ?PersistenceManager $persistenceManager = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository|null
+     */
+    protected ?QueueMailRepository $queueMailRepository = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository|null
+     */
+    protected ?QueueRecipientRepository $queueRecipientRepository = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository|null
+     */
+    protected ?MailingStatisticsRepository $mailingStatisticsRepository = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Validation\QueueMailValidator|null
+     */
+    protected ?QueueMailValidator $queueMailValidator = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Validation\QueueRecipientValidator|null
+     */
+    protected ?QueueRecipientValidator $queueRecipientValidator = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Mail\Mailer|null
+     */
+    protected ?Mailer $mailer = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Model\QueueMail|null
      */
     protected ?QueueMail $queueMail = null;
-
-
-    /**
-     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected QueueMailRepository $queueMailRepository;
-
-
-    /**
-     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected QueueRecipientRepository $queueRecipientRepository;
-
-
-    /**
-     * @var \Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected MailingStatisticsRepository $mailingStatisticsRepository;
-
-
-    /**
-     * @var \Madj2k\Postmaster\Validation\QueueMailValidator
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected QueueMailValidator $queueMailValidator;
-
-
-    /**
-     * @var \Madj2k\Postmaster\Validation\QueueRecipientValidator
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected QueueRecipientValidator $queueRecipientValidator;
-
-
-    /**
-     * @var \Madj2k\Postmaster\Mail\Mailer
-     * @TYPO3\CMS\Extbase\Annotation\Inject
-     */
-    protected Mailer $mailer;
 
 
     /**
@@ -126,56 +119,71 @@ class MailService
 
 
     /**
-     * Constructor
-     * @param bool $unitTest
+     * init
+     *
+     * @return void
      */
-    public function __construct(bool $unitTest = false)
+    public function __construct()
+    {
+        $this->init();
+    }
+
+
+    /**
+     * Initialize service
+     *
+     * @return void
+     */
+    public function init(): void
     {
         self::debugTime(__LINE__, __METHOD__);
-        if (! $unitTest) {
-            $this->initializeService();
-        }
+
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface configurationManager */
+        $this->configurationManager = $objectManager->get(ConfigurationManager::class);
+
+        /** @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager persistenceManager */
+        $this->persistenceManager = $objectManager->get(PersistenceManager::class);
+
+        /** @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository queueMailRepository */
+        $this->queueMailRepository = $objectManager->get(QueueMailRepository::class);
+
+        /** @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository queueRecipientRepository */
+        $this->queueRecipientRepository = $objectManager->get(QueueRecipientRepository::class);
+
+        /** @var \Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository mailingStatisticsRepository */
+        $this->mailingStatisticsRepository = $objectManager->get(MailingStatisticsRepository::class);
+
+        /** @var \Madj2k\Postmaster\Validation\QueueMailValidator queueMailValidator */
+        $this->queueMailValidator = $objectManager->get(QueueMailValidator::class);
+
+        /** @var \Madj2k\Postmaster\Validation\QueueRecipientValidator queueRecipientValidator */
+        $this->queueRecipientValidator = $objectManager->get(QueueRecipientValidator::class);
+
+        /** @var \Madj2k\Postmaster\Validation\QueueRecipientValidator queueRecipientValidator */
+        $this->queueRecipientValidator = $objectManager->get(QueueRecipientValidator::class);
+
+        /** @var \Madj2k\Postmaster\Mail\Mailer mailer */
+        $this->mailer = $objectManager->get(Mailer::class);
+
+        /** @var \TYPO3\CMS\Core\Log\Logger logger */
+        $this->logger = $objectManager->get(LogManager::class)->getLogger(__CLASS__);
 
         self::debugTime(__LINE__, __METHOD__);
     }
 
 
     /**
-     * function initializeService
+     * Resets the service.
+     * Will be called by init(). Should be used before every use if a service instance is used multiple times.
      *
      * @return void
      */
-    public function initializeService(): void
+    public function reset(): void
     {
-        // set objects if they haven't been injected yet
-        if (!$this->objectManager) {
-            $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        }
-        if (!$this->configurationManager) {
-            $this->configurationManager = $this->objectManager->get(ConfigurationManagerInterface::class);
-        }
-        if (!$this->persistenceManager) {
-            $this->persistenceManager = $this->objectManager->get(PersistenceManager::class);
-        }
-        if (!$this->queueMailRepository) {
-            $this->queueMailRepository = $this->objectManager->get(QueueMailRepository::class);
-        }
-        if (!$this->queueRecipientRepository) {
-            $this->queueRecipientRepository = $this->objectManager->get(QueueRecipientRepository::class);
-        }
-        if (!$this->queueMailValidator) {
-            $this->queueMailValidator = $this->objectManager->get(QueueMailValidator::class);
-        }
-        if (!$this->queueRecipientValidator) {
-            $this->queueRecipientValidator = $this->objectManager->get(QueueRecipientValidator::class);
-        }
-        if (!$this->mailer) {
-            $this->mailer = $this->objectManager->get(Mailer::class);
-        }
-        if (!$this->mailingStatisticsRepository) {
-            $this->mailingStatisticsRepository = $this->objectManager->get(MailingStatisticsRepository::class);
-        }
-        trigger_error(__CLASS__ . ': Please use the ObjectManager to load this class.', E_USER_DEPRECATED);
+        unset($this->queueMail);
     }
 
 
@@ -445,7 +453,7 @@ class MailService
                 $this->persistenceManager->persistAll();
 
                 /** @todo can we savely remove this? It interferes with rkw_newsletter */
-                // $this->unsetVariables();
+                // $this->reset();
 
                 $this->getLogger()->log(
                     LogLevel::INFO,
@@ -548,16 +556,6 @@ class MailService
     }
 
 
-    /**
-     * unset several variables
-     *
-     * @return void
-     */
-    protected function unsetVariables()
-    {
-        unset($this->queueMail);
-    }
-
 
     /**
      * Gets TypoScript framework settings
@@ -598,9 +596,6 @@ class MailService
      */
     protected function getLogger(): Logger
     {
-        if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
-            $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
-        }
         return $this->logger;
     }
 
@@ -614,7 +609,7 @@ class MailService
     protected static function debugTime(int $line, string $function): void
     {
         if (GeneralUtility::getApplicationContext()->isDevelopment()) {
-            $path = \TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/var/logs/tx_postmaster_runtime.txt';
+            $path = \TYPO3\CMS\Core\Core\Environment::getVarPath() . '/log/tx_postmaster_runtime.txt';
             file_put_contents($path, microtime() . ' ' . $line . ' ' . $function . "\n", FILE_APPEND);
         }
     }

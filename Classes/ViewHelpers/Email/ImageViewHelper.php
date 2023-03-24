@@ -14,6 +14,7 @@ namespace Madj2k\Postmaster\ViewHelpers\Email;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Log\Logger;
 use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Core\Log\LogManager;
@@ -122,10 +123,9 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
     protected function replacePath (string $tag): string
     {
 
-        /* @todo Check if Environment-variables are still valid in TYPO3 8.7 and upwards! */
         $replacePaths = [
-            GeneralUtility::getIndpEnv('TYPO3_SITE_PATH'),
-            $_SERVER['TYPO3_PATH_ROOT'] .'/'
+            Environment::getPublicPath() . '/',
+            Environment::getProjectPath() .'/'
         ];
 
         foreach ($replacePaths as $replacePath) {
