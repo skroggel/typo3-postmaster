@@ -20,6 +20,7 @@ use Madj2k\Postmaster\Cache\RenderCache;
 use Madj2k\Postmaster\Domain\Model\QueueMail;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -120,11 +121,14 @@ class RenderCacheTest extends FunctionalTestCase
          */
 
         $this->subject = $this->objectManager->get(RenderCache::class, SimpleFileBackend::class);
-        $cacheDir = $this->subject->getCache()->getBackend()->getCacheDirectory();
+        $cachePath = DIRECTORY_SEPARATOR . trim($this->subject->getCache()->getBackend()->getCacheDirectory(), '/') . DIRECTORY_SEPARATOR;
+        $publicPath = DIRECTORY_SEPARATOR . trim(Environment::getPublicPath(), '/') . DIRECTORY_SEPARATOR;
+        $hash = substr(md5($cachePath), 0, 12);
+
         self::assertTrue($this->subject->securityCheck());
 
-        self::assertFileExists($cacheDir . '.htaccess');
-        self::assertFileExists($cacheDir . 'conf.nginx');
+        self::assertFileExists($cachePath . '.htaccess');
+        self::assertFileExists($publicPath . 'ext_' . $hash . '.nginx');
 
     }
 

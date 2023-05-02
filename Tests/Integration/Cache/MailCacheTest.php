@@ -21,6 +21,7 @@ use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
 use TYPO3\CMS\Core\Cache\Backend\NullBackend;
 use TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -117,15 +118,18 @@ class MailCacheTest extends FunctionalTestCase
          * When the method is called
          * Then true is returned
          * Then the htaccess-file is written to the cache dir
-         * Then the nginx-file is written to the cache dir
+         * Then the nginx-file is written to the public dir
          */
 
         $this->subject= $this->objectManager->get(MailCache::class, SimpleFileBackend::class);
-        $cacheDir = $this->subject->getCache()->getBackend()->getCacheDirectory();
+        $cachePath = DIRECTORY_SEPARATOR . trim($this->subject->getCache()->getBackend()->getCacheDirectory(), '/') . DIRECTORY_SEPARATOR;
+        $publicPath = DIRECTORY_SEPARATOR . trim(Environment::getPublicPath(), '/') . DIRECTORY_SEPARATOR;
+        $hash = substr(md5($cachePath), 0, 12);
+
         self::assertTrue($this->subject->securityCheck());
 
-        self::assertFileExists($cacheDir . '.htaccess');
-        self::assertFileExists($cacheDir . 'conf.nginx');
+        self::assertFileExists($cachePath . '.htaccess');
+        self::assertFileExists($publicPath . 'ext_' . $hash . '.nginx');
 
     }
 
