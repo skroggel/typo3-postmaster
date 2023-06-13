@@ -50,6 +50,7 @@ abstract class AbstractCache
      * Constructor
      * @throws \Madj2k\Postmaster\Exception
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     * @throws \Madj2k\CoreExtended\Exception
      */
     public function __construct()
     {
