@@ -154,14 +154,38 @@ class BounceMailAnalyser
      * bounceMailCallback
      *
      * @param int $counter  the message number returned by Bounce Mail Handler
-     * @param string  $type the bounce type: 'antispam','autoreply','concurrent','content_reject','command_reject','internal_error','defer','delayed'
-     *                                     => array('remove'=>0,'bounce_type'=>'temporary'),'dns_loop','dns_unknown','full','inactive','latin_only','other','oversize','outofoffice','unknown','unrecognized','user_reject','warning'
+     * @param string  $type the bounce type:
+     *       'antispam',
+     *       'autoreply',
+     *       'concurrent',
+     *       'content_reject',
+     *       'command_reject',
+     *       'internal_error',
+     *       'defer',
+     *       'delayed'
+     *       =>
+     *       array(
+     *           'remove' => 0,
+     *           'bounce_type' => 'temporary'
+     *       ),
+     *       'dns_loop',
+     *       'dns_unknown',
+     *       'full',
+     *       'inactive',
+     *       'latin_only',
+     *       'other',
+     *       'oversize',
+     *       'outofoffice',
+     *       'unknown',
+     *       'unrecognized',
+     *       'user_reject',
+     *       'warning'
      * @param string $email the target email address
      * @param string $subject the subject, ignore now
-     * @param object $header the XBounceHeader from the mail
-     * @param boolean $remove remove status, 1 means removed, 0 means not removed
-     * @param string|boolean $ruleNumber  Bounce Mail Handler detect rule no.
-     * @param string|boolean $ruleCategory      Bounce Mail Handler detect rule category.
+     * @param mixed $header the XBounceHeader from the mail
+     * @param int $remove remove status, 1 means removed, 0 means not removed
+     * @param string $ruleNumber  Bounce Mail Handler detect rule no.
+     * @param string $ruleCategory      Bounce Mail Handler detect rule category.
      * @param int  $totalFetched total number of messages in the mailbox
      * @param string $body Bounce Mail Body
      * @param string $headerFull Bounce Mail Header
@@ -175,10 +199,10 @@ class BounceMailAnalyser
         string $type,
         string $email,
         string $subject,
-        object $header,
-        bool $remove,
-        $ruleNumber = false,
-        $ruleCategory = false,
+        $header,
+        int $remove,
+        string $ruleNumber = '',
+        string $ruleCategory = '',
         int $totalFetched = 0,
         string $body = '',
         string $headerFull = '',
@@ -200,7 +224,7 @@ class BounceMailAnalyser
             $bounceMail->setRuleCategory($ruleCategory);
             $bounceMail->setEmail($email);
             $bounceMail->setSubject($subject);
-            $bounceMail->setHeader(json_decode(json_encode($header), true));
+            # $bounceMail->setHeader([$header]);
             $bounceMail->setBody($body);
             $bounceMail->setHeaderFull($headerFull);
             $bounceMail->setBodyFull($bodyFull);
