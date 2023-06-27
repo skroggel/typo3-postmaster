@@ -19,16 +19,16 @@ CREATE TABLE tx_postmaster_domain_model_queuemail (
 	return_path varchar(255) DEFAULT '' NOT NULL,
 
 	subject varchar(255) DEFAULT '' NOT NULL,
-	body_text text NOT NULL,
-	attachment_paths text NOT NULL,
+	body_text text,
+	attachment_paths text,
 
-	plaintext_template longtext NOT NULL,
-	html_template longtext NOT NULL,
-	calendar_template longtext NOT NULL,
+	plaintext_template longtext,
+	html_template longtext,
+	calendar_template longtext,
 
-	layout_paths text NOT NULL,
-	partial_paths text NOT NULL,
-	template_paths text NOT NULL,
+	layout_paths text,
+	partial_paths text,
+	template_paths text,
 
 	category varchar(255) DEFAULT '' NOT NULL,
 	campaign_parameter varchar(255) DEFAULT '' NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE tx_postmaster_domain_model_queuerecipient (
 	first_name varchar(255) DEFAULT '' NOT NULL,
 	last_name varchar(255) DEFAULT '' NOT NULL,
 	subject varchar(255) DEFAULT '' NOT NULL,
-	marker longtext NOT NULL,
+	marker longtext,
 	status tinyint(2) unsigned DEFAULT '1',
 	language_code varchar(255) DEFAULT '' NOT NULL,
 
@@ -96,7 +96,7 @@ CREATE TABLE tx_postmaster_domain_model_mailingstatistics (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	queue_mail int(11) DEFAULT '0' NOT NULL,
+	queue_mail int(11) DEFAULT '0',
 	queue_mail_uid int(11) DEFAULT '0' NOT NULL,
 	subject varchar(255) DEFAULT '' NOT NULL,
 	status tinyint(2) unsigned DEFAULT '1',
@@ -130,20 +130,20 @@ CREATE TABLE tx_postmaster_domain_model_clickstatistics (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	queue_mail int(11) DEFAULT '0' NOT NULL,
+	queue_mail int(11) DEFAULT '0',
 	queue_mail_uid int(11) DEFAULT '0' NOT NULL,
 	hash varchar(255) DEFAULT '' NOT NULL,
 	link_hash varchar(255) DEFAULT '' NOT NULL,
-	url text NOT NULL,
+	url text,
 	counter int(11) DEFAULT '1' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 
-	comment text NOT NULL,
+	comment text,
 
 	PRIMARY KEY (uid),
-    UNIQUE KEY `hash` (`hash`, `queue_mail`),
+  UNIQUE KEY `hash` (`hash`, `queue_mail`),
 	KEY parent (pid),
 	KEY queue_mail (queue_mail),
 );
@@ -157,22 +157,22 @@ CREATE TABLE tx_postmaster_domain_model_openingstatistics (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	queue_mail int(11) DEFAULT '0' NOT NULL,
+	queue_mail int(11) DEFAULT '0',
 	queue_mail_uid int(11) DEFAULT '0' NOT NULL,
-	queue_recipient int(11) DEFAULT '0' NOT NULL,
+	queue_recipient int(11) DEFAULT '0',
 	hash varchar(255) DEFAULT '' NOT NULL,
 	counter int(11) DEFAULT '1' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 
-	comment text NOT NULL,
+	comment text,
 
 	PRIMARY KEY (uid),
-    UNIQUE KEY `hash` (`hash`, `queue_mail`),
+  UNIQUE KEY `hash` (`hash`, `queue_mail`),
 	KEY parent (pid),
 	KEY queue_mail (queue_mail),
-    KEY queue_recipient (queue_recipient),
+  KEY queue_recipient (queue_recipient),
 );
 
 
@@ -192,11 +192,11 @@ CREATE TABLE tx_postmaster_domain_model_bouncemail (
 	rule_number int(11) unsigned DEFAULT '0' NOT NULL,
 	rule_category varchar(255) DEFAULT '' NOT NULL,
 
-	header text NOT NULL,
-  body text NOT NULL,
+	header text,
+  body text,
 
-  header_full longtext NOT NULL,
-  body_full longtext NOT NULL,
+  header_full longtext,
+  body_full longtext,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -216,16 +216,16 @@ CREATE TABLE tx_postmaster_domain_model_link (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
-	queue_mail int(11) DEFAULT '0' NOT NULL,
+	queue_mail int(11) DEFAULT '0',
 
 	hash varchar(255) DEFAULT '' NOT NULL,
-	url text NOT NULL,
+	url text,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
-    UNIQUE KEY `hash` (`hash`),
+  UNIQUE KEY `hash` (`hash`),
 	KEY parent (pid),
 	KEY queue_mail (queue_mail),
 );
