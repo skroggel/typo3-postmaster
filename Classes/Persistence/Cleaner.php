@@ -190,13 +190,18 @@ class Cleaner
      * delete statistics by queueMail-object
      *
      * @param \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
+     * @param bool $keepMailingStatistics
      * @return int
      */
     public function deleteStatistics(
-        \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
+        \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail,
+        bool $keepMailingStatistics = false
     ): int {
 
-        $result = $this->mailingStatisticsRepository->deleteByQueueMail($queueMail);
+        $result = 0;
+        if (! $keepMailingStatistics) {
+            $result += $this->mailingStatisticsRepository->deleteByQueueMail($queueMail);
+        }
         $result += $this->openingStatisticsRepository->deleteByQueueMail($queueMail);
         $result += $this->clickStatisticsRepository->deleteByQueueMail($queueMail);
 

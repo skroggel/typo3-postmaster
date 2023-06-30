@@ -208,7 +208,6 @@ class QueueMailRepository extends AbstractRepository
             [
                 'status' => QueryInterface::ORDER_ASCENDING,
                 'mailingStatistics.tstampFavSending' => QueryInterface::ORDER_DESCENDING,
-                'mailingStatistics.tstampFavSending' => QueryInterface::ORDER_DESCENDING,
             ]
         );
 

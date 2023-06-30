@@ -227,7 +227,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         }
 
         // reset statistics by queueMail
-        $this->cleaner->deleteStatistics($queueMail);
+        $this->cleaner->deleteStatistics($queueMail, true);
 
         $this->redirect('list');
     }
