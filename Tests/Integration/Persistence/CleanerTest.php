@@ -302,6 +302,46 @@ class CleanerTest extends FunctionalTestCase
         self::assertCount(0, $this->clickStatisticsRepository->findByQueueMail($queueMail));
     }
 
+
+    /**
+     * @test
+     * @throws \Exception
+     */
+    public function deleteStatisticsDeletesStatisticsOfGivenQueueMailWithoutMailingStatistics()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given two queueMail-objects in database
+         * Given both queueMail-objects have a mailingStatistics-object
+         * Given both queueMail-objects have two openingStatistics-object
+         * Given both queueMail-objects have two clickStatistics-object
+         * Given one of these queueMail-objects as parameter for the method
+         * When the method is called with keepMailStatistics=true
+         * Then the value four is returned
+         * Then only the statistic-objects of the given queueMail are deleted
+         * Then the mailingStatistics are kept
+         */
+
+        $this->importDataSet(self::FIXTURE_PATH . '/Database/Check40.xml');
+
+        /** @var \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail */
+        $queueMail= $this->queueMailRepository->findByIdentifier(40);
+
+        $result = $this->subject->deleteStatistics($queueMail, true);
+
+        self::assertEquals(4, $result);
+        self::assertCount(2, $this->mailingStatisticsRepository->findAll());
+        self::assertCount(1, $this->mailingStatisticsRepository->findByQueueMail($queueMail));
+
+        self::assertCount(2, $this->openingStatisticsRepository->findAll());
+        self::assertCount(0, $this->openingStatisticsRepository->findByQueueMail($queueMail));
+
+        self::assertCount(2, $this->clickStatisticsRepository->findAll());
+        self::assertCount(0, $this->clickStatisticsRepository->findByQueueMail($queueMail));
+    }
+
     //=============================================
 
     /**
