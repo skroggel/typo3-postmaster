@@ -148,10 +148,16 @@
 						</td>
                         <td>
                             <f:if condition="{postmaster:statistics.bouncedEmails(queueMailUid:mailingStatistics.queueMailUid)}">
-                                <f:link.action action="downloadBounced" arguments="{queueMailUid:mailingStatistics.queueMailUid}" class="link">
-                                    &gt;&gt; <f:translate key="templates_backend_statistics.downloadBouncedLink" />
-                                </f:link.action>
+                                <f:then>
+                                    <f:link.action action="downloadBounced" arguments="{queueMailUid:mailingStatistics.queueMailUid}" class="link">
+                                        &gt;&gt; <f:translate key="templates_backend_statistics.downloadBouncedLink" />
+                                    </f:link.action>
+                                </f:then>
+                                <f:else>
+                                    <f:translate key="templates_backend_statistics.noDownloadBounced" />
+                                </f:else>
                             </f:if>
+
                         </td>
 					</tr>
 				</f:for>
