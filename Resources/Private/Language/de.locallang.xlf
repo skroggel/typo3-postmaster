@@ -98,7 +98,7 @@
             </trans-unit>
             <trans-unit id="templates_backend_statistics.statusTotal">
                 <source><![CDATA[Status<br />(delivered / failed / deferred / bounced)]]></source>
-                <target><![CDATA[Status<br />(Zugestellt / Fehler / Zurückgestellt / Bounced)]]></target>
+                <target><![CDATA[Status<br />(Zugestellt / Fehler / Zurückgestellt / Unzustellbar)]]></target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.readTotal">
                 <source><![CDATA[Read e-mails<br />(HTML only)]]></source>
@@ -148,7 +148,14 @@
                 <source>none</source>
                 <target>keine</target>
             </trans-unit>
-
+             <trans-unit id="templates_backend_statistics.downloadBounced">
+                <source>Bounced Addresses</source>
+                <target>Unzustellbare Adressen</target>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.downloadBouncedLink">
+                <source>Download as CSV</source>
+                <target>Download als CSV</target>
+            </trans-unit>
 
 
             <!-- =================================================== -->

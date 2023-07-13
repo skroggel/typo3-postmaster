@@ -38,6 +38,7 @@ class BounceMailRepository extends AbstractRepository
         $this->defaultQuerySettings->setRespectStoragePage(false);
     }
 
+
     /**
      * Count bounces by email and type
      *

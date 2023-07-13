@@ -19,7 +19,7 @@ call_user_func(
                 'mailadministration',	// Submodule key
                 '',						// Position
                 array(
-                    'Backend' => 'statistics, clickStatistics, list, pause, continue, delete, reset',
+                    'Backend' => 'statistics, clickStatistics, list, downloadBounced, pause, continue, delete, reset',
                 ),
                 array(
                     'access' => 'user,group',

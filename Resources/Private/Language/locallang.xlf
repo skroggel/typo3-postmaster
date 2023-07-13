@@ -118,7 +118,12 @@
              <trans-unit id="templates_backend_statistics.noClicks">
                 <source>none</source>
             </trans-unit>
-
+             <trans-unit id="templates_backend_statistics.downloadBounced">
+                <source>Bounced Addresses</source>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.downloadBouncedLink">
+                <source>Download as CSV</source>
+            </trans-unit>
 
 
 

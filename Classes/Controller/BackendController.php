@@ -15,6 +15,9 @@ namespace Madj2k\Postmaster\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\CoreExtended\Utility\CsvUtility;
+use Madj2k\CoreExtended\Utility\GeneralUtility;
+use Madj2k\Postmaster\Domain\Repository\BounceMailRepository;
 use Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository;
 use Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
@@ -46,6 +49,13 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected ClickStatisticsRepository $clickStatisticsRepository;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\BounceMailRepository
+     * @TYPO3\CMS\Extbase\Annotation\Inject
+     */
+    protected BounceMailRepository $bounceMailRepository;
 
 
     /**
@@ -96,12 +106,12 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 
         $this->view->assignMultiple(
-            array(
+            [
                 'mailingStatisticsList' => $mailingStatisticsList,
                 'timeFrame' => $timeFrame,
                 'mailTypeList' => $mailTypeList,
                 'mailType' => $mailType,
-            )
+            ]
         );
     }
 
@@ -156,6 +166,21 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 'mailType'     => $mailType,
             )
         );
+    }
+
+
+    /**
+     * Downloads bounced adresses
+     *
+     * @param int $queueMailUid
+     * @return void
+     * @throws \Madj2k\CoreExtended\Exception
+     */
+    public function downloadBouncedAction(int $queueMailUid)
+    {
+        $bouncedMails = $this->bounceMailRepository->findByQueueMailUid($queueMailUid);
+        CsvUtility::createCsv($bouncedMails);
+        exit();
     }
 
 
