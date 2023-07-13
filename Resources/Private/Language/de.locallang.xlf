@@ -145,8 +145,8 @@
                 <target>Öffnen</target>
             </trans-unit>
              <trans-unit id="templates_backend_statistics.noClicks">
-                <source>none</source>
-                <target>keine</target>
+                <source>not available</source>
+                <target>nicht verfügbar</target>
             </trans-unit>
              <trans-unit id="templates_backend_statistics.downloadBounced">
                 <source>Bounced Addresses</source>
@@ -155,6 +155,10 @@
              <trans-unit id="templates_backend_statistics.downloadBouncedLink">
                 <source>Download as CSV</source>
                 <target>Download als CSV</target>
+            </trans-unit>
+             <trans-unit id="templates_backend_statistics.noDownloadBounced">
+                <source>not available</source>
+                <target>nicht verfügbar</target>
             </trans-unit>
 
 
