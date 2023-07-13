@@ -142,6 +142,7 @@ class ProcessBounceMailsCommand extends Command
                     /** @var \Madj2k\Postmaster\Domain\Model\BounceMail $bounceMail */
                     foreach ($bounceMails as $bounceMail) {
                         $bounceMail->setStatus(1);
+                        $bounceMail->setQueueMail($queueRecipient->getQueueMail());
                         $this->bounceMailRepository->update($bounceMail);
                     }
 

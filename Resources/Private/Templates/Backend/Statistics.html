@@ -27,6 +27,7 @@
 					<th><f:format.raw><f:translate key="templates_backend_statistics.readTotal" /></f:format.raw></th>
 					<th><f:format.raw><f:translate key="templates_backend_statistics.clicksTotal" /></f:format.raw></th>
 					<th><f:format.raw><f:translate key="templates_backend_statistics.clickStatistics" /></f:format.raw></th>
+                    <th><f:format.raw><f:translate key="templates_backend_statistics.downloadBounced" /></f:format.raw></th>
 				</tr>
 	
 				<f:for each="{mailingStatisticsListSub}" as="mailingStatistics" >
@@ -145,6 +146,13 @@
 								</f:else>
 							</f:if>
 						</td>
+                        <td>
+                            <f:if condition="{postmaster:statistics.bouncedEmails(queueMailUid:mailingStatistics.queueMailUid)}">
+                                <f:link.action action="downloadBounced" arguments="{queueMailUid:mailingStatistics.queueMailUid}" class="link">
+                                    &gt;&gt; <f:translate key="templates_backend_statistics.downloadBouncedLink" />
+                                </f:link.action>
+                            </f:if>
+                        </td>
 					</tr>
 				</f:for>
 			</table>

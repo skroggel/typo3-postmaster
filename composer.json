@@ -29,7 +29,7 @@
         "typo3/cms-core": "~9.5.0",
         "voku/bounce-mail-handler": "^5.5",
 		"madj2k/t3-accelerator": "~9.5.2",
-		"madj2k/t3-core-extended": "~9.5.3"
+		"madj2k/t3-core-extended": "~9.5.21"
 	},
 	"replace": {
 		"rkw/rkw-mailer":">=9.5.0"

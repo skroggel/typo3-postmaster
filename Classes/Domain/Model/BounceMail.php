@@ -34,6 +34,18 @@ class BounceMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
+     * @var \Madj2k\Postmaster\Domain\Model\QueueMail|null
+     */
+    protected ?QueueMail $queueMail = null;
+
+
+    /**
+     * @var int
+     */
+    protected int $queueMailUid = 0;
+
+
+    /**
      * @var string
      */
     protected string $type = '';
@@ -107,6 +119,53 @@ class BounceMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setStatus(string $status)
     {
         $this->status = $status;
+    }
+
+
+    /**
+     * Returns the queueMail
+     *
+     * @return \Madj2k\Postmaster\Domain\Model\QueueMail
+     */
+    public function getQueueMail():? QueueMail
+    {
+        return $this->queueMail;
+    }
+
+
+    /**
+     * Sets the queueMail
+     *
+     * @param \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
+     * @return void
+     */
+    public function setQueueMail(\Madj2k\Postmaster\Domain\Model\QueueMail $queueMail): void
+    {
+        $this->queueMail = $queueMail;
+        $this->setQueueMailUid($queueMail->getUid());
+    }
+
+
+    /**
+     * Returns the queueMailUid
+     *
+     * @return int
+     */
+    public function getQueueMailUid(): int
+    {
+        return $this->queueMailUid;
+    }
+
+
+    /**
+     * Sets the queueMail
+     *
+     * @param int $queueMailUid
+     * @return void
+     */
+    public function setQueueMailUid(int $queueMailUid): void
+    {
+        $this->queueMailUid = $queueMailUid;
     }
 
 
@@ -232,7 +291,8 @@ class BounceMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getHeader(): array
     {
-        return unserialize($this->header);
+        $unserializeResult = unserialize($this->header);
+        return is_array($unserializeResult) ? $unserializeResult  : [];
     }
 
 

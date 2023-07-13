@@ -27,13 +27,22 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-
+        'queue_mail' => [
+            'config' => [
+                'type' => 'passthrough',
+                'foreign_table' => 'tx_postmaster_domain_model_queuemail',
+            ],
+        ],
+        'queue_mail_uid' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
 		'type' => [
             'config' => [
                 'type' => 'passthrough',
             ],
 		],
-
         'email' => [
             'config' => [
                 'type' => 'passthrough',
