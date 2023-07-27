@@ -179,7 +179,7 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function downloadBouncedAction(int $queueMailUid)
     {
         $bouncedMails = $this->bounceMailRepository->findByQueueMailUid($queueMailUid);
-        CsvUtility::createCsv($bouncedMails);
+        CsvUtility::createCsv($bouncedMails,'', ';', ['body', 'bodyFull']);
         exit();
     }
 

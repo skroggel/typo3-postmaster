@@ -530,7 +530,7 @@ class Mailer
 
         // add mailing list header if type > 0
         if ($queueMail->getType() > 0) {
-            $message->getHeaders()->addTextHeader('List-Unsubscribe', '<mailto:' . EmailValidator::cleanUpEmail($queueMail->getFromAddress()) . '>');
+            $message->getHeaders()->addTextHeader('List-Unsubscribe', '<mailto:' . EmailValidator::cleanUpEmail($queueMail->getFromAddress()) . '?subject=Unsubscribe' . urlencode(' "' . $message->getSubject() . '"') . '>');
         }
 
         // ====================================================
