@@ -15,6 +15,7 @@ namespace Madj2k\Postmaster\Domain\Repository;
  */
 
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * BounceMailRepository
@@ -61,6 +62,31 @@ class BounceMailRepository extends AbstractRepository
         );
 
         return $query->execute()->count();
+    }
+
+
+    /**
+     * Return bounces by email and status
+     *
+     * @param string $email
+     * @param int $status
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @todo write tests
+     */
+    public function findByEmailAndStatus (
+        string $email,
+        int $status = 0
+    ): QueryResultInterface {
+
+        $query = $this->createQuery();
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('email', $email),
+                $query->equals('status', $status)
+            )
+        );
+
+        return $query->execute();
     }
 
 }

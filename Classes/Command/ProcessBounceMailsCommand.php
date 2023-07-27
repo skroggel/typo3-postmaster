@@ -137,7 +137,8 @@ class ProcessBounceMailsCommand extends Command
                     $this->queueRecipientRepository->update($queueRecipient);
 
                     // set status of bounceMail to processed for all bounces of the same email-address
-                    $bounceMails = $this->bounceMailRepository->findByEmail($queueRecipient->getEmail());
+                    // but only if they haven't been processed yet
+                    $bounceMails = $this->bounceMailRepository->findByEmailAndStatus($queueRecipient->getEmail(), 0);
 
                     /** @var \Madj2k\Postmaster\Domain\Model\BounceMail $bounceMail */
                     foreach ($bounceMails as $bounceMail) {

@@ -1226,7 +1226,7 @@ class MailerTest extends FunctionalTestCase
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertStringContainsString('List-Unsubscribe: <mailto:test@testen.de>', $result->getHeaders()->toString());
+        self::assertStringContainsString('List-Unsubscribe: <mailto:test@testen.de?subject=Unsubscribe>', $result->getHeaders()->toString());
     }
 
 
