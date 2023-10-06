@@ -171,6 +171,8 @@ class ProcessBounceMailsCommand extends Command
             $message = sprintf('An unexpected error occurred while trying to update the statistics of e-mails: %s',
                 str_replace(array("\n", "\r"), '', $e->getMessage())
             );
+
+            // @extensionScannerIgnoreLine
             $io->error($message);
             $this->getLogger()->log(LogLevel::ERROR, $message);
             $result = 1;

@@ -15,6 +15,7 @@ namespace Madj2k\Postmaster\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\CoreExtended\Transfer\CsvExporter;
 use Madj2k\CoreExtended\Utility\CsvUtility;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use Madj2k\Postmaster\Domain\Repository\BounceMailRepository;
@@ -24,6 +25,7 @@ use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
 use Madj2k\Postmaster\Persistence\Cleaner;
 use Madj2k\Postmaster\Utility\TimePeriodUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * BackendController
@@ -179,7 +181,11 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function downloadBouncedAction(int $queueMailUid)
     {
         $bouncedMails = $this->bounceMailRepository->findByQueueMailUid($queueMailUid);
-        CsvUtility::createCsv($bouncedMails,'', ';', ['body', 'bodyFull']);
+
+        /** @var \Madj2k\CoreExtended\Transfer\CsvExporter $dataMapper */
+        $csvExporter = $this->objectManager->get(CsvExporter::class);
+        $csvExporter->export($bouncedMails,'', ';', ['body', 'bodyFull']);
+
         exit();
     }
 
