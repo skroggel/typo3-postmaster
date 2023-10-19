@@ -608,7 +608,7 @@ class MailMessage
      */
     protected static function debugTime(int $line, string $function): void
     {
-        if (GeneralUtility::getApplicationContext()->isDevelopment()) {
+        if (\TYPO3\CMS\Core\Core\Environment::getContext()->isDevelopment()) {
             $path = \TYPO3\CMS\Core\Core\Environment::getVarPath() . '/log/tx_postmaster_runtime.txt';
             file_put_contents($path, microtime() . ' ' . $line . ' ' . $function . "\n", FILE_APPEND);
         }
