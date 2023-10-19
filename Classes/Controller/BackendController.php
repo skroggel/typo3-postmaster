@@ -16,8 +16,6 @@ namespace Madj2k\Postmaster\Controller;
  */
 
 use Madj2k\CoreExtended\Transfer\CsvExporter;
-use Madj2k\CoreExtended\Utility\CsvUtility;
-use Madj2k\CoreExtended\Utility\GeneralUtility;
 use Madj2k\Postmaster\Domain\Repository\BounceMailRepository;
 use Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository;
 use Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository;
@@ -25,7 +23,6 @@ use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
 use Madj2k\Postmaster\Persistence\Cleaner;
 use Madj2k\Postmaster\Utility\TimePeriodUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * BackendController

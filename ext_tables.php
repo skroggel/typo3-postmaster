@@ -58,7 +58,7 @@ call_user_func(
         );
 
     },
-    $_EXTKEY
+    'postmaster'
 );
 
 
