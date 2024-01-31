@@ -1083,17 +1083,12 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has all basic values for validation set (email)
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this mailMessage-object contains three message-parts
-         * Then the first message-part is a Swift_MimePart-object
-         * Then this first object has the content-type text/html
-         * Then this first object contains the content of the defined html-template
-         * Then the second message-part is a Swift_MimePart-object
-         * Then this second object has the content-type text/plaintext
-         * Then this second object contains the content of the defined plaintext-template
-         * Then the third message-part is a Swift_MimePart-object
-         * Then this third object has the content-type text/calendar
-         * Then this third object contains the content of the defined calendar-template
-         * Then this third object contains an attachment with the filename meeting.ics
+         * Then this mailMessage-object contains the html-template
+         * Then this mailMessage-object contains the plaintext-template
+         * Then this mailMessage-object has one attachment
+         * Then this attachment contains the content of the defined calendar-template
+         * Then this attachment has the filename meeting.ics in the content-header
+         * Then this attachment has the type text/calendar in the content-header
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check250.xml');
 
@@ -1103,27 +1098,21 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result*/
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertCount(3, $result->getChildren());
 
-        /** @var \Swift_MimePart  $mimePartHtml */
-        $mimePartHtml = $result->getChildren()[0];
-        self::assertEquals(\Swift_MimePart::class, get_class($mimePartHtml));
-        self::assertEquals('text/html', $mimePartHtml->getContentType());
-        self::assertStringContainsString('TEST-TEMPLATE-HTML', $mimePartHtml->getBody());
+        self::assertStringContainsString('TEST-TEMPLATE-HTML', $result->getHtmlBody());
+        self::assertStringContainsString('TEST-TEMPLATE-PLAINTEXT', $result->getTextBody());
 
-        /** @var \Swift_MimePart  $mimePartPlaintext */
-        $mimePartPlaintext = $result->getChildren()[1];
-        self::assertEquals(\Swift_MimePart::class, get_class($mimePartPlaintext));
-        self::assertStringContainsString('TEST-TEMPLATE-PLAINTEXT', $mimePartPlaintext->getBody());
+        $attachments = $result->getAttachments();
 
-        /** @var \Swift_Attachment  $mimePartCalendar */
-        $mimePartCalendar = $result->getChildren()[2];
-        self::assertEquals(\Swift_Attachment::class, get_class($mimePartCalendar));
-        self::assertEquals('text/calendar', $mimePartCalendar->getContentType());
-        self::assertStringContainsString('BEGIN:VCALENDAR', $mimePartCalendar->getBody());
-        self::assertEquals('meeting.ics', $mimePartCalendar->getFilename());
+        /** @var \Symfony\Component\Mime\Part\DataPart */
+        $firstAttachment = $attachments[0];
 
+        self::assertCount(1, $attachments);
+        self::assertStringContainsString('BEGIN:VCALENDAR', $firstAttachment->getBody());
+        self::assertStringContainsString('meeting.ics', $firstAttachment->asDebugString());
+        self::assertStringContainsString('text/calendar', $firstAttachment->asDebugString());
     }
 
 
@@ -1144,7 +1133,6 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has all basic values for validation set (email)
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this mailMessage-object contains no message-parts
          * Then this mailMessage-object contains the content of the defined bodyText-property
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check260.xml');
@@ -1155,9 +1143,9 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result */
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertCount(0, $result->getChildren());
-        self::assertStringContainsString('Test the best', $result->getBody());
+        self::assertStringContainsString('Test the best', $result->getTextBody());
     }
 
 
@@ -1188,13 +1176,27 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result */
         self::assertInstanceOf(MailMessage::class, $result);
 
-        self::assertEquals(['test@testen.de' => 'Example'], $result->getFrom());
-        self::assertEquals(['reply@testen.de' => 'Reply Name'], $result->getReplyTo());
-        self::assertEquals('return@testen.de', $result->getReturnPath());
-        self::assertEquals(1, $result->getPriority());
+        /** @var \Symfony\Component\Mime\Address[] $from */
+        $from = $result->getFrom();
+        self::assertCount(1, $from);
+        self::assertEquals('test@testen.de', $from[0]->getAddress());
+        self::assertEquals('Example', $from[0]->getName());
 
+        /** @var \Symfony\Component\Mime\Address[] $replyTo */
+        $replyTo = $result->getReplyTo();
+        self::assertCount(1, $replyTo);
+        self::assertEquals('reply@testen.de', $replyTo[0]->getAddress());
+        self::assertEquals('Reply Name', $replyTo[0]->getName());
+
+        /** @var \Symfony\Component\Mime\Address $returnPath */
+        $returnPath = $result->getReturnPath();
+        self::assertEquals('return@testen.de', $returnPath->getAddress());
+        self::assertEquals('', $returnPath->getName());
+
+        self::assertEquals(1, $result->getPriority());
     }
 
 
@@ -1225,8 +1227,9 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result */
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertStringContainsString('List-Unsubscribe: <mailto:test@testen.de?subject=Unsubscribe>', $result->getHeaders()->toString());
+        self::assertStringContainsString('List-Unsubscribe: <mailto:test@testen.de?subject=Unsubscribe+%22Betreff>', $result->getHeaders()->toString());
     }
 
 
@@ -1256,6 +1259,7 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result */
         self::assertInstanceOf(MailMessage::class, $result);
         self::assertEquals('Let us test it', $result->getSubject());
     }
@@ -1288,6 +1292,7 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result */
         self::assertInstanceOf(MailMessage::class, $result);
         self::assertEquals('Test the mail', $result->getSubject());
     }
@@ -1311,8 +1316,9 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has the title-property set
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this object has the to-header set as array with the email of the recipient set as key
-         * Then this object has the to-header set as array with the full name and title of the recipient as value
+         * Then this mailMessage-object has one recipient
+         * Then this recipient has the email of the queueRecipient-object set
+         * Then this recipient has the fullname and title of the queueRecipient-object set
          * Then no leading or trailing spaces are added to the name
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check300.xml');
@@ -1323,9 +1329,16 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
+        /** @var \TYPO3\CMS\Core\Mail\MailMessage $result */
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertIsArray( $result->getTo());
-        self::assertEquals(['debug@example.com' => 'Dr. Sebastian Schmidt'], $result->getTo());
+
+        /** @var \Symfony\Component\Mime\Address[] $to */
+        $to = $result->getTo();
+        self::assertIsArray($to);
+        self::assertCount(1, $to);
+
+        self::assertEquals('debug@example.com', $to[0]->getAddress());
+        self::assertEquals('Dr. Sebastian Schmidt', $to[0]->getName());
     }
 
 
@@ -1347,9 +1360,10 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has no title-property set
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this object has the to-header set as array with the email of the recipient set as key
-         * Then this object has the to-header set as array with the full name of the recipient as value
-         * Then no leading or trailing spaces are added to the name-part
+         * Then this mailMessage-object has one recipient
+         * Then this recipient has the email of the queueRecipient-object set
+         * Then this recipient has the fullname of the queueRecipient-object set
+         * Then no leading or trailing spaces are added to the name
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check310.xml');
 
@@ -1360,8 +1374,14 @@ class MailerTest extends FunctionalTestCase
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertIsArray( $result->getTo());
-        self::assertEquals(['debug@example.com' => 'Sebastian Schmidt'], $result->getTo());
+
+        /** @var \Symfony\Component\Mime\Address[] $to */
+        $to = $result->getTo();
+        self::assertIsArray($to);
+        self::assertCount(1, $to);
+
+        self::assertEquals('debug@example.com', $to[0]->getAddress());
+        self::assertEquals('Sebastian Schmidt', $to[0]->getName());
     }
 
 
@@ -1381,9 +1401,10 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has the lastName-property set
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this object has the to-header set as array with the email of the recipient set as key
-         * Then this object has the to-header set as array with the last name of the recipient as value
-         * Then no leading or trailing spaces are added to the name-part
+         * Then this mailMessage-object has one recipient
+         * Then this recipient has the email of the queueRecipient-object set
+         * Then this recipient has the lastname of the queueRecipient-object set
+         * Then no leading or trailing spaces are added to the name
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check320.xml');
 
@@ -1394,8 +1415,14 @@ class MailerTest extends FunctionalTestCase
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertIsArray( $result->getTo());
-        self::assertEquals(['debug@example.com' => 'Schmidt'], $result->getTo());
+
+        /** @var \Symfony\Component\Mime\Address[] $to */
+        $to = $result->getTo();
+        self::assertIsArray($to);
+        self::assertCount(1, $to);
+
+        self::assertEquals('debug@example.com', $to[0]->getAddress());
+        self::assertEquals('Schmidt', $to[0]->getName());
     }
 
 
@@ -1416,9 +1443,10 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has the title-property set
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this object has the to-header set as array with the email of the recipient set as key
-         * Then this object has the to-header set as array with the last name and title of the recipient as value
-         * Then no leading or trailing spaces are added to the name-part
+         * Then this mailMessage-object has one recipient
+         * Then this recipient has the email of the queueRecipient-object set
+         * Then this recipient has the lastname and title of the queueRecipient-object set
+         * Then no leading or trailing spaces are added to the name
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check340.xml');
 
@@ -1429,8 +1457,13 @@ class MailerTest extends FunctionalTestCase
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertIsArray( $result->getTo());
-        self::assertEquals(['debug@example.com' => 'Dr. Schmidt'], $result->getTo());
+        /** @var \Symfony\Component\Mime\Address[] $to */
+        $to = $result->getTo();
+        self::assertIsArray($to);
+        self::assertCount(1, $to);
+
+        self::assertEquals('debug@example.com', $to[0]->getAddress());
+        self::assertEquals('Dr. Schmidt', $to[0]->getName());
     }
 
 
@@ -1452,8 +1485,9 @@ class MailerTest extends FunctionalTestCase
          * Given this queueRecipient-object has no title-property set
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this object has the to-header set as array with the email of the recipient set as key
-         * Then this object has the to-header set as array with null set as value
+         * Then this mailMessage-object has one recipient
+         * Then this recipient has only the email of the queueRecipient-object set
+         * Then no leading or trailing spaces are added to the name
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check330.xml');
 
@@ -1464,103 +1498,13 @@ class MailerTest extends FunctionalTestCase
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
 
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertIsArray( $result->getTo());
-        self::assertEquals(['debug@example.com' => null], $result->getTo());
-    }
+        /** @var \Symfony\Component\Mime\Address[] $to */
+        $to = $result->getTo();
+        self::assertIsArray($to);
+        self::assertCount(1, $to);
 
-
-    /**
-     * @test
-     * @throws \Exception
-     */
-    public function prepareEmailBodyAddsAttachmentViaBlob()
-    {
-        /**
-         * Scenario:
-         *
-         * Given a queueMail-object in database
-         * Given this queueMail-objects has all basic values for validation set (fromAddress, fromName)
-         * Given a queueRecipient-object in database
-         * Given this queueRecipient-object has all basic values for validation set (email)
-         * Given an XML-file is added as attachment via BLOB-method
-         * Given as mime-type is set "text/xml"
-         * Given as file-name is set "Attachment.xml"
-         * When the method is called
-         * Then an mailMessage-object is returned
-         * Then this mailMessage-object has one message-part
-         * Then this message-part is a Swift_Attachment-object
-         * Then this object has the mime-type "text/xml"
-         * Then this object has file-name "Attachment.xml"
-         * Then this object contains the content of the attached XML-file
-         */
-        $this->importDataSet(self::FIXTURE_PATH . '/Database/Check430.xml');
-
-        /** @var \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail */
-        $queueMail = $this->queueMailRepository->findByIdentifier(430);
-        $queueRecipient = $this->queueRecipientRepository->findByIdentifier(430);
-
-        $queueMail->setAttachment(file_get_contents(self::FIXTURE_PATH . '/Database/Check430.xml'));
-        $queueMail->setAttachmentName('Attachment.xml');
-        $queueMail->setAttachmentType('text/xml');
-
-        $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
-        self::assertInstanceOf(MailMessage::class, $result);
-        self::assertCount(1, $result->getChildren());
-
-        $mimePartAttachment = $result->getChildren()[0];
-        self::assertEquals(\Swift_Attachment::class, get_class($mimePartAttachment));
-        self::assertEquals('Attachment.xml', $mimePartAttachment->getFilename());
-        self::assertEquals('text/xml', $mimePartAttachment->getContentType());
-        self::assertStringContainsString('tx_postmaster_domain_model_queuemail', $mimePartAttachment->getBody());
-    }
-
-
-    /**
-     * @test
-     * @throws \Exception
-     */
-    public function prepareEmailBodyAddsAttachmentViaJson()
-    {
-        /**
-         * Scenario:
-         *
-         * Given a queueMail-object in database
-         * Given this queueMail-objects has all basic values for validation set (fromAddress, fromName)
-         * Given a queueRecipient-object in database
-         * Given this queueRecipient-object has all basic values for validation set (email)
-         * Given an XML-file is added as attachment via JSON-method
-         * Given as mime-type is set "text/xml"
-         * When the method is called
-         * Then an mailMessage-object is returned
-         * Then this mailMessage-object has one message-part
-         * Then this message-part is a Swift_Attachment-object
-         * Then this object has the mime-type "text/xml"
-         * Then this object has file-name "Check430.xml"
-         * Then this object contains the content of the attached XML-file
-         */
-        $this->importDataSet(self::FIXTURE_PATH . '/Database/Check430.xml');
-
-        /** @var \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail */
-        $queueMail = $this->queueMailRepository->findByIdentifier(430);
-        $queueRecipient = $this->queueRecipientRepository->findByIdentifier(430);
-
-        $json = json_encode([
-            0 => [
-                'path' => self::FIXTURE_PATH . '/Database/Check430.xml',
-                'type' => 'text/xml'
-            ]
-        ]);
-        $queueMail->setAttachment($json);
-
-        $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
-        self::assertInstanceOf(MailMessage::class, $result);
-        self::assertCount(1, $result->getChildren());
-
-        $mimePartAttachment = $result->getChildren()[0];
-        self::assertEquals(\Swift_Attachment::class, get_class($mimePartAttachment));
-        self::assertEquals('Check430.xml', $mimePartAttachment->getFilename());
-        self::assertEquals('text/xml', $mimePartAttachment->getContentType());
-        self::assertStringContainsString('tx_postmaster_domain_model_queuemail', $mimePartAttachment->getBody());
+        self::assertEquals('debug@example.com', $to[0]->getAddress());
+        self::assertEmpty($to[0]->getName());
     }
 
 
@@ -1580,11 +1524,10 @@ class MailerTest extends FunctionalTestCase
          * Given an XML-file is added as attachment via new standard-method
          * When the method is called
          * Then an mailMessage-object is returned
-         * Then this mailMessage-object has one message-part
-         * Then this message-part is a Swift_Attachment-object
-         * Then this object has the mime-type "text/xml"
-         * Then this object has file-name "Check430.xml"
-         * Then this object contains the content of the attached XML-file
+         * Then this mailMessage-object has one attachment
+         * Then this attachment has the mime-type "text/xml"
+         * Then this attachment has file-name "Check430.xml"
+         * Then this attachment contains the content of the attached XML-file
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check430.xml');
 
@@ -1596,13 +1539,17 @@ class MailerTest extends FunctionalTestCase
 
         $result = $this->subject->prepareEmailBody($queueMail, $queueRecipient);
         self::assertInstanceOf(MailMessage::class, $result);
-        self::assertCount(1, $result->getChildren());
 
-        $mimePartAttachment = $result->getChildren()[0];
-        self::assertEquals(\Swift_Attachment::class, get_class($mimePartAttachment));
-        self::assertEquals('Check430.xml', $mimePartAttachment->getFilename());
-        self::assertEquals('text/xml', $mimePartAttachment->getContentType());
-        self::assertStringContainsString('tx_postmaster_domain_model_queuemail', $mimePartAttachment->getBody());
+        $attachments = $result->getAttachments();
+
+        /** @var \Symfony\Component\Mime\Part\DataPart */
+        $firstAttachment = $attachments[0];
+
+        self::assertCount(1, $attachments);
+        self::assertStringContainsString('Check430.xml', $firstAttachment->asDebugString());
+        self::assertStringContainsString('text/xml', $firstAttachment->asDebugString());
+        self::assertStringContainsString('tx_postmaster_domain_model_queuemail', $firstAttachment->getBody());
+
     }
 
     //=============================================
@@ -2141,11 +2088,11 @@ class MailerTest extends FunctionalTestCase
                 'EXT:core_extended/Configuration/TypoScript/setup.typoscript',
                 'EXT:postmaster/Configuration/TypoScript/setup.typoscript',
                 self::FIXTURE_PATH . '/Frontend/Configuration/RootpageTwo.typoscript',
-            ]
+            ],
+            ['example.com' => self::FIXTURE_PATH .  '/Frontend/Configuration/config.yaml']
         );
 
         $this->subject->renderTemplates($queueMailTwo, $queueRecipientTwo);
-
 
         $resultPlaintextSecond = $this->mailCache->getPlaintextBody($queueRecipientTwo);
         $resultHtmlSecond = $this->mailCache->getHtmlBody($queueRecipientTwo);

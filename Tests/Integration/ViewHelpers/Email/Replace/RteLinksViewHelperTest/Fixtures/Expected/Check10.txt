@@ -19,8 +19,8 @@
 
 
     <p>
-        Testen Sie hier <a href="http://www.google.de" title="Titel ist Titel" target="_blank" class="external-link" style="color:green;">mit Klick</a>!<br />
-        Testen Sie da <a href="http://www.yahoo.de/#anchor-1" title="Titel ist Titel" target="_blank" class="external-link" style="color:green;">mit Klick</a>!<br />
+        Testen Sie hier <a href="http://www.google.de" title="Titel ist Titel" target="_blank" class="external-link" style="color:green;" rel="noreferrer">mit Klick</a>!<br />
+        Testen Sie da <a href="http://www.yahoo.de/#anchor-1" title="Titel ist Titel" target="_blank" class="external-link" style="color:green;" rel="noreferrer">mit Klick</a>!<br />
         Testen Sie dort <a href="mailto:mail@example.com" title="Titel ist Titel" target="_blank" class="mail" style="color:green;">mit Klick</a>!<br />
         Testen Sie überall <a href="http://www.example.com/testseite" title="Titel ist Titel" target="_blank" class="internal-link" style="color:green;">mit Klick</a>!<br />
         Testen Sie hüben <a href="http://www.example.com/testseite#anchor-1" title="Titel ist Titel" target="_blank" class="internal-link" style="color:green;">mit Klick</a>!<br />

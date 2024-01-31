@@ -14,18 +14,18 @@ call_user_func(
         if (TYPO3_MODE === 'BE') {
 
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-                'Madj2k.' . $extKey,
+                $extKey,
                 'tools',	 // Make module a submodule of 'Web'
                 'mailadministration',	// Submodule key
                 '',						// Position
-                array(
-                    'Backend' => 'statistics, clickStatistics, list, downloadBounced, pause, continue, delete, reset',
-                ),
-                array(
+                [
+                    \Madj2k\Postmaster\Controller\BackendController::class => 'statistics, clickStatistics, list, downloadBounced, pause, continue, delete, reset',
+                ],
+                [
                     'access' => 'user,group',
                     'icon'   => 'EXT:' . $extKey . '/ext_icon.gif',
                     'labels' => 'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_backend.xlf',
-                )
+                ]
             );
         }
 

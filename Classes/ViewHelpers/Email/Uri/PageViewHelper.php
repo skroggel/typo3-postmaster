@@ -70,16 +70,15 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Uri\PageViewHelper
 
         $queueMail = $arguments['queueMail'];
         $queueRecipient = $arguments['queueRecipient'];
-        $pageUid = $arguments['pageUid'];
-        $additionalParams = $arguments['additionalParams'];
-        $pageType = $arguments['pageType'];
-        $noCache = $arguments['noCache'];
-        $noCacheHash = $arguments['noCacheHash'];
-        $section = $arguments['section'];
-        $linkAccessRestrictedPages = $arguments['linkAccessRestrictedPages'];
-        $addQueryString = $arguments['addQueryString'];
-        $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'];
-        $addQueryStringMethod = $arguments['addQueryStringMethod'];
+        $pageUid = intval($arguments['pageUid']);
+        $additionalParams = $arguments['additionalParams'] ?: [];
+        $pageType = intval($arguments['pageType']);
+        $noCache = boolval($arguments['noCache']);
+        $section = $arguments['section'] ?: '';
+        $linkAccessRestrictedPages = boolval($arguments['linkAccessRestrictedPages']);
+        $addQueryString = boolval($arguments['addQueryString']);
+        $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'] ?: [];
+        $addQueryStringMethod = $arguments['addQueryStringMethod'] ?: '';
 
         try {
 
@@ -93,7 +92,6 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Uri\PageViewHelper
                 ->setTargetPageUid($pageUid)
                 ->setTargetPageType($pageType)
                 ->setNoCache($noCache)
-                ->setUseCacheHash(!$noCacheHash)
                 ->setSection($section)
                 ->setLinkAccessRestrictedPages($linkAccessRestrictedPages)
                 ->setArguments($additionalParams)

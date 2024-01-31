@@ -148,7 +148,7 @@ class EmailUriBuilder extends \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueMail|null
      */
-    public function getQueueMail():? QueueMail
+    public function getQueueMail(): ?QueueMail
     {
         return $this->queueMail;
     }
@@ -172,7 +172,7 @@ class EmailUriBuilder extends \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueRecipient|null
      */
-    public function getQueueRecipient():? QueueRecipient
+    public function getQueueRecipient(): ?QueueRecipient
     {
         return $this->queueRecipient;
     }
@@ -273,31 +273,10 @@ class EmailUriBuilder extends \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
 
         ArrayUtility::mergeRecursiveWithOverrule($this->arguments, $prefixedControllerArguments);
 
-        // Fix since TYPO3 9: Remove cHash-param manually!
-        $uri = $this->build();
-        if (! $this->getUseCacheHash()) {
-            $uri = preg_replace('#([&|\?]cHash=[^&]+)#', '', $uri);
-        }
-
-        return $uri;
+        return $this->build();
     }
 
 
-    /**
-     * Builds the URI, frontend flavour
-     *
-     * @return string The URI
-     */
-    public function buildFrontendUri(): string
-    {
-        // Fix since TYPO3 9: Remove cHash-param manually!
-        $uri = parent::buildFrontendUri();
-        if (! $this->getUseCacheHash()) {
-            $uri = preg_replace('#([&|\?]cHash=[^&]+)#', '', $uri);
-        }
-
-        return $uri;
-    }
 
 
     /**
@@ -347,7 +326,6 @@ class EmailUriBuilder extends \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
                 $this->setTargetPageUid($this->getRedirectPid())
                     ->setNoCache(true)
                     ->setTargetPageType(0)
-                    ->setUseCacheHash(false)
                     ->setCreateAbsoluteUri(true)
                     ->setArguments(
                         $arguments
@@ -368,8 +346,7 @@ class EmailUriBuilder extends \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder
 
         // never use cHash here - this is a bad thing when sending from BE!
         // force absolute link and link to access-restricted pages
-        $this->setUseCacheHash(false)
-            ->setCreateAbsoluteUri(true)
+        $this->setCreateAbsoluteUri(true)
             ->setLinkAccessRestrictedPages(true);
 
         return $this->buildFrontendUri();

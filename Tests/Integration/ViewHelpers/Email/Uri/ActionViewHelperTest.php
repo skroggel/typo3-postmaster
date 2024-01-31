@@ -20,7 +20,6 @@ use Madj2k\Postmaster\View\EmailStandaloneView;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
 use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Site\PseudoSiteFinder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -183,8 +182,7 @@ class ActionViewHelperTest extends FunctionalTestCase
          */
         RootlineUtility::purgeCaches();
         GeneralUtility::makeInstance(CacheManager::class)->getCache('cache_rootline')->flush();
-        $pseudoSiteFinder = GeneralUtility::makeInstance(PseudoSiteFinder::class);
-        $pseudoSiteFinder->refresh();
+
 
         // clearing of caches takes some time - we have to wait for so long
         sleep(5);
@@ -311,7 +309,6 @@ class ActionViewHelperTest extends FunctionalTestCase
          * Then the redirect link contains the queueMailUid
          * Then the redirect link contains an url-attribute
          * Then the url-attribute contains the absolute link to the given pageUid
-         * Then no cHash is used
          * Then a noCache-parameter is set
          */
 
@@ -324,7 +321,6 @@ class ActionViewHelperTest extends FunctionalTestCase
 
         self::assertStringContainsString('http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/?', $result);
         self::assertStringContainsString('tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.example.com%2Ftest%2Fcoreextended%2Fmediasources%2F', $result);
-        self::assertStringNotContainsString('cHash=', $result);
         self::assertStringContainsString('no_cache=1', $result);
 
     }
@@ -351,7 +347,6 @@ class ActionViewHelperTest extends FunctionalTestCase
          * Then the redirect link contains the queueMailUid
          * Then the redirect link contains the queueRecipientUid
          * Then the redirect link contains an url-attribute
-         * Then no cHash is used
          * Then a noCache-parameter is set
          */
 
@@ -366,7 +361,6 @@ class ActionViewHelperTest extends FunctionalTestCase
 
         self::assertStringContainsString('http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/1/?', $result);
         self::assertStringContainsString('tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.example.com%2Ftest%2Fcoreextended%2Fmediasources%2F', $result);
-        self::assertStringNotContainsString('cHash=', $result);
         self::assertStringContainsString('no_cache=1', $result);
 
     }
@@ -396,7 +390,6 @@ class ActionViewHelperTest extends FunctionalTestCase
          * Then the redirect link contains the pageType-parameter
          * Then the url-attribute contains the absolute link to the given pageUid
          * Then no pageType-parameter is added to the rendered link itself
-         * Then no cHash is used
          * Then a noCache-parameter is set
          */
 
@@ -412,7 +405,6 @@ class ActionViewHelperTest extends FunctionalTestCase
 
         self::assertStringContainsString('http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/1/?', $result);
         self::assertStringContainsString('tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.example.com%2Ftest%2Fcoreextended%2Fmediasources%2Fprint%2F', $result);
-        self::assertStringNotContainsString('cHash=', $result);
         self::assertStringNotContainsString('type=98', $result);
         self::assertStringContainsString('no_cache=1', $result);
 

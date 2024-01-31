@@ -86,7 +86,7 @@ class QueueRecipientRepository extends AbstractRepository
     public function findOneByUidAndQueueMail(
         int $uid,
         \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
-    ):? QueueRecipient {
+    ): ?QueueRecipient {
 
         $query = $this->createQuery();
         $query->matching(
@@ -110,7 +110,7 @@ class QueueRecipientRepository extends AbstractRepository
     public function findOneByEmailAndQueueMail(
         string $email,
         \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
-    ):? QueueRecipient {
+    ): ?QueueRecipient {
 
         $query = $this->createQuery();
         $query->matching(

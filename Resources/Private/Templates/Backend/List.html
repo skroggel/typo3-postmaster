@@ -9,79 +9,85 @@
 		<f:render partial="FlashMessages" arguments="{_all}" />
 	
 		<f:form action="list" name="timeFrame" >
-			<f:render partial="Backend/Datepicker" arguments="{timeFrame:timeFrame}"/>
-			<f:render partial="Backend/MailTypePicker" arguments="{mailTypeList:mailTypeList, mailType:mailType}"/>
+            <div class="form-group">
+                <f:render partial="Backend/Datepicker" arguments="{timeFrame:timeFrame}"/>
+                <f:render partial="Backend/MailTypePicker" arguments="{mailTypeList:mailTypeList, mailType:mailType}"/>
+            </div>
 		</f:form>
 		
 		<f:be.widget.paginate objects="{queueMailList}" as="queueMailListSub" configuration="{itemsPerPage: 25}">
-	
-			<table class="tx_postmaster" border="1" >
-				<tr>
-					<th><f:translate key="templates_backend_list.uid" /></th>
-					<th><f:translate key="templates_backend_list.subject" /></th>
-					<th><f:translate key="templates_backend_list.status" /></th>
-					<th><f:translate key="templates_backend_list.favSending" /></th>
-					<th><f:translate key="templates_backend_list.realSending" /></th>
-					<th><f:translate key="templates_backend_list.endSending" /></th>
-					<th>&nbsp;</th>
-				</tr>
-	
-				<f:for each="{queueMailListSub}" as="queueMail" iteration="mailNumber">
-					<tr>
-						<td>
-							{queueMail.uid}
-						</td>
-						<td>
-							<strong>
-								<f:format.crop maxCharacters="50" respectWordBoundaries="false">{queueMail.subject}</f:format.crop>
-							</strong>
-						</td>
-						<td class="center">
-							<nobr>
-								<span class="status{queueMail.status}">
-									<f:translate key="templates_backend_list.status.{queueMail.status}" />
-								</span>
-							</nobr>
-						</td>
-						<td class="center">
-							<nobr>
-								<f:if condition="{queueMail.mailingStatistics.tstampFavSending}">
-									<f:format.date format="d.m.Y H:i">{queueMail.mailingStatistics.tstampFavSending}</f:format.date>
-								</f:if>
-							</nobr>
-						</td>
-						<td class="center">
-							<nobr>
-								<f:if condition="{queueMail.mailingStatistics.tstampRealSending}">
-									<f:format.date format="d.m.Y H:i">{queueMail.mailingStatistics.tstampRealSending}</f:format.date>
-								</f:if>
-							</nobr>
-						</td>
-						<td class="center">
-							<nobr>
-								<f:if condition="{queueMail.mailingStatistics.tstampFinishedSending}">
-									<f:format.date format="d.m.Y H:i">{queueMail.mailingStatistics.tstampFinishedSending}</f:format.date>
-								</f:if>
-							</nobr>
-						</td>
-						<td>
-							<f:if condition="{queueMail.status} >= 2">
-								<f:if condition="{queueMail.status} < 4">
-									<f:link.action action="pause" arguments="{queueMail:queueMail}">&gt; <f:translate key="templates_backend_list.pause" /></f:link.action>
-								</f:if>
-							</f:if>
-							<f:if condition="{queueMail.status} >= 3">
-								<f:link.action action="reset" arguments="{queueMail:queueMail}" onclick="return confirm('{f:translate(key:\"templates_backend_list.resetConfirm\")}')">&gt; <f:translate key="templates_backend_list.reset" /></f:link.action>
-							</f:if>
-							<f:if condition="{queueMail.status} == 1">
-								<f:link.action action="continue" arguments="{queueMail:queueMail}">&gt; <f:translate key="templates_backend_list.continue" /></f:link.action>
-							</f:if>
-							<f:link.action action="delete" arguments="{queueMail:queueMail}" onclick="return confirm('{f:translate(key:\"templates_backend_list.deleteConfirm\")}')">&gt; <f:translate key="templates_backend_list.delete" /></f:link.action>
-						</td>
-					</tr>
-				</f:for>
+            
+            <table class="table table-striped table-hover postmaster-list">
+                <thead>
+                    <tr>
+                        <th role="columnheader"><f:translate key="templates_backend_list.uid" /></th>
+                        <th role="columnheader"><f:translate key="templates_backend_list.subject" /></th>
+                        <th role="columnheader"><f:translate key="templates_backend_list.status" /></th>
+                        <th role="columnheader"><f:translate key="templates_backend_list.favSending" /></th>
+                        <th role="columnheader"><f:translate key="templates_backend_list.realSending" /></th>
+                        <th role="columnheader"><f:translate key="templates_backend_list.endSending" /></th>
+                        <th role="columnheader">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <f:for each="{queueMailListSub}" as="queueMail" iteration="mailNumber">
+                        <tr role="row">
+                            <td>
+                                {queueMail.uid}
+                            </td>
+                            <td>
+                                <strong>
+                                    <f:format.crop maxCharacters="50" respectWordBoundaries="false">{queueMail.subject}</f:format.crop>
+                                </strong>
+                            </td>
+                            <td class="center">
+                                <nobr>
+                                    <span class="status{queueMail.status}">
+                                        <f:translate key="templates_backend_list.status.{queueMail.status}" />
+                                    </span>
+                                </nobr>
+                            </td>
+                            <td class="center">
+                                <nobr>
+                                    <f:if condition="{queueMail.mailingStatistics.tstampFavSending}">
+                                        <f:format.date format="d.m.Y H:i">{queueMail.mailingStatistics.tstampFavSending}</f:format.date>
+                                    </f:if>
+                                </nobr>
+                            </td>
+                            <td class="center">
+                                <nobr>
+                                    <f:if condition="{queueMail.mailingStatistics.tstampRealSending}">
+                                        <f:format.date format="d.m.Y H:i">{queueMail.mailingStatistics.tstampRealSending}</f:format.date>
+                                    </f:if>
+                                </nobr>
+                            </td>
+                            <td class="center">
+                                <nobr>
+                                    <f:if condition="{queueMail.mailingStatistics.tstampFinishedSending}">
+                                        <f:format.date format="d.m.Y H:i">{queueMail.mailingStatistics.tstampFinishedSending}</f:format.date>
+                                    </f:if>
+                                </nobr>
+                            </td>
+                            <td>
+                                <f:if condition="{queueMail.status} >= 2">
+                                    <f:if condition="{queueMail.status} < 4">
+                                        <f:link.action action="pause" arguments="{queueMail:queueMail}">&gt; <f:translate key="templates_backend_list.pause" /></f:link.action>
+                                    </f:if>
+                                </f:if>
+                                <f:if condition="{queueMail.status} >= 3">
+                                    <f:link.action action="reset" arguments="{queueMail:queueMail}" onclick="return confirm('{f:translate(key:\"templates_backend_list.resetConfirm\")}')">&gt; <f:translate key="templates_backend_list.reset" /></f:link.action>
+                                </f:if>
+                                <f:if condition="{queueMail.status} == 1">
+                                    <f:link.action action="continue" arguments="{queueMail:queueMail}">&gt; <f:translate key="templates_backend_list.continue" /></f:link.action>
+                                </f:if>
+                                <f:link.action action="delete" arguments="{queueMail:queueMail}" onclick="return confirm('{f:translate(key:\"templates_backend_list.deleteConfirm\")}')">&gt; <f:translate key="templates_backend_list.delete" /></f:link.action>
+                            </td>
+                        </tr>
+                    </f:for>
+                </tbody>
 			</table>
-	
+
 		</f:be.widget.paginate>
 	</f:section>
 </html>

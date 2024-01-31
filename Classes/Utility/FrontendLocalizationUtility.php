@@ -14,6 +14,8 @@ namespace Madj2k\Postmaster\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Localization\LanguageService;
+
 /**
  * FrontendLocalization
  *
@@ -22,19 +24,23 @@ namespace Madj2k\Postmaster\Utility;
  * @package Madj2k_Postmaster
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @see \TYPO3\CMS\Extbase\Utility\LocalizationUtility
- * @deprecated since TYPO3 v9.5 all relevant functions are already included in the core-class
  */
 class FrontendLocalizationUtility extends \TYPO3\CMS\Extbase\Utility\LocalizationUtility
 {
 
     /**
-     * constructor
+     * @return \TYPO3\CMS\Core\Localization\LanguageService
      */
-    public function __construct() {
-        trigger_error(
-            __CLASS__ . ' is deprecated and will be removed soon. Use \TYPO3\CMS\Extbase\Utility\LocalizationUtility instead.',
-            E_USER_DEPRECATED
-        );
-    }
+    protected static function getLanguageService(): LanguageService
+    {
+        // for usage in CLI-context
+        if (! $GLOBALS['LANG']) {
 
+            /** @var \TYPO3\CMS\Core\Localization\LanguageService $languageService */
+            $languageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(LanguageService::class);
+            $GLOBALS['LANG'] = $languageService;
+        }
+
+        return $GLOBALS['LANG'];
+    }
 }

@@ -1,3 +1,4 @@
+/** old CSS for TYPO3 v9 **/
 table.tx_postmaster td,
 table.tx_postmaster th { padding:5px; text-align:center; }
 table.tx_postmaster td { text-align:left;}
@@ -22,3 +23,17 @@ table.tx_postmaster td.center table { margin:auto; }
 .bounced { color:red; }
 .status4,
 .okay { color:darkgreen; }
+
+/** new CSS for TYPO3 v10 **/
+.postmaster-statistics-list.table > thead > tr > th { white-space: normal; }
+.postmaster-statistics-list th { width: 8% }
+.postmaster-statistics-list th:nth-child(2) { width: 30% }
+.postmaster-statistics-list th:nth-child(1) { width: 5%}
+.postmaster-statistics-list th:nth-child(6) { width: 15% }
+
+
+.postmaster-list.table > thead > tr > th { white-space: normal; }
+.postmaster-list th { width: 8% }
+.postmaster-list th:nth-child(1) { width: 5%}
+.postmaster-list th:nth-child(2) { width: 50% }
+.postmaster-list th:nth-child(7) { width: 15% }

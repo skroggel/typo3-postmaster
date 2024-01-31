@@ -85,9 +85,8 @@ class EmailStandaloneView extends StandaloneView
      * Constructor
      *
      * @param int $pid Pid to use for frontend simulation
-     * @return void
-     * @throws \InvalidArgumentException
-     * @throws \UnexpectedValueException
+     * @throws \Madj2k\CoreExtended\Exception
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
     public function __construct(int $pid = 0)
     {
@@ -555,7 +554,7 @@ class EmailStandaloneView extends StandaloneView
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueMail
      */
-    public function getQueueMail():? QueueMail
+    public function getQueueMail(): ?QueueMail
     {
         return $this->queueMail;
     }
@@ -591,7 +590,7 @@ class EmailStandaloneView extends StandaloneView
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueRecipient
      */
-    public function getQueueRecipient():? QueueRecipient
+    public function getQueueRecipient(): ?QueueRecipient
     {
         return $this->queueRecipient;
     }

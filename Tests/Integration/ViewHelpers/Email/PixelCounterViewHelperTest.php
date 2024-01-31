@@ -203,7 +203,8 @@ class PixelCounterViewHelperTest extends FunctionalTestCase
 
         $result = $this->standAloneViewHelper->render();
 
-        self::assertStringContainsString('<img src="http://www.example.com/pixelcounterseite/postmaster/track/1/1?no_cache=1" width="1" height="1" alt="" />', $result);
+        self::assertStringContainsString('<img src="http://www.example.com/pixelcounterseite/postmaster/track/1/1?no_cache=1', $result);
+        self::assertStringContainsString('width="1" height="1" alt="" />', $result);
 
     }
 

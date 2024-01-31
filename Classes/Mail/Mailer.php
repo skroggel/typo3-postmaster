@@ -424,15 +424,27 @@ class Mailer
             // build e-mail
             foreach (
                 array(
-                    'html'     => 'html',
-                    'plain'    => 'plaintext',
-                ) as $shortName => $longName
+                    'html'     => [
+                        'mimeType' => 'text/html',
+                        'internalType' => 'html'
+                    ],
+                    'plaintext'    => [
+                        'mimeType' => 'text/plain',
+                        'internalType' => 'text'
+                    ],
+                ) as $longName => $config
             ) {
 
                 $getter = 'get' . ucFirst($longName) . 'Body';
                 if ($template = $this->mailCache->$getter($queueRecipient)) {
 
-                    $message->addPart($template, 'text/' . $shortName);
+                    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 10000000) {
+                        $message->addPart($template, $config['mimeType']);
+                    } else {
+                        $setter = $config['internalType'];
+                        $message->$setter($template);
+                    }
+
                     $this->getLogger()->log(
                         LogLevel::DEBUG,
                         sprintf(
@@ -448,7 +460,12 @@ class Mailer
         // set raw body-text from queueMail
         } else {
             $emailBody = $queueMail->getBodyText();
-            $message->setBody($emailBody, 'text/plain');
+            if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 10000000) {
+                $message->setBody($emailBody, 'text/plain');
+            } else {
+                $message->text($emailBody);
+            }
+
             $this->getLogger()->log(
                 LogLevel::DEBUG,
                 sprintf(
@@ -464,8 +481,14 @@ class Mailer
 
             // replace line breaks according to RFC 5545 3.1.
             $emailString = preg_replace('/\n/', "\r\n", $template);
-            $attachment = \Swift_Attachment::newInstance($emailString, 'meeting.ics', 'text/calendar');
-            $message->attach($attachment);
+
+            if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 10000000) {
+                $attachment = \Swift_Attachment::newInstance($emailString, 'meeting.ics', 'text/calendar');
+                $message->attach($attachment);
+            } else {
+                $message->attach($emailString, 'meeting.ics', 'text/calendar');
+            }
+
             $this->getLogger()->log(
                 LogLevel::DEBUG,
                 sprintf(
@@ -476,7 +499,6 @@ class Mailer
             );
         }
 
-
         // add attachment if set - old versions first
         if ($queueMail->getAttachment()) {
             $this->getLogger()->log(
@@ -484,53 +506,39 @@ class Mailer
                 'This method to add attachments is deprecated. Please use $this->setAttachmentPath to add attachments.'
             );
             trigger_error(
-                __CLASS__ .':' . __METHOD__ . ' will be removed soon. Do not use it any more. '.
+                __CLASS__ .':' . __METHOD__ . ' is deprecated and has been removed. Do not use it any more. '.
                 'Use $this->setAttachmentPath to add attachments.',
                 E_USER_DEPRECATED
             );
-
-            // via BLOB: old version from Max
-            /** @deprecated */
-            if (
-                (is_string($queueMail->getAttachment())
-                && (! json_decode($queueMail->getAttachment(), true)))
-            ) {
-
-                $attachment = \Swift_Attachment::newInstance(
-                    $queueMail->getAttachment(),
-                    $queueMail->getAttachmentName(),
-                    $queueMail->getAttachmentType()
-                );
-                $message->attach($attachment);
-            }
-
-            // via array - old version from Christian
-            /** @deprecated */
-            if (is_array($attachments = json_decode($queueMail->getAttachment(), true))) {
-                foreach ($attachments as $attachment) {
-                    $file = \Swift_Attachment::fromPath(
-                        $attachment['path'],
-                        $attachment['type']
-                    );
-                    $message->attach($file);
-                }
-            }
         }
 
         // add attachments - new version
         if ($attachments = $queueMail->getAttachmentPaths()) {
             foreach ($attachments as $attachment) {
-                $file = \Swift_Attachment::fromPath(
-                    $attachment,
-                    mime_content_type($attachment)
-                );
-                $message->attach($file);
+
+                if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 10000000) {
+
+                    $file = \Swift_Attachment::fromPath(
+                        $attachment,
+                        mime_content_type($attachment)
+                    );
+                    $message->attach($file);
+
+                } else {
+                    $message->attachFromPath($attachment,
+                        basename($attachment),
+                        mime_content_type($attachment));
+                }
             }
         }
 
         // add mailing list header if type > 0
         if ($queueMail->getType() > 0) {
-            $message->getHeaders()->addTextHeader('List-Unsubscribe', '<mailto:' . EmailValidator::cleanUpEmail($queueMail->getFromAddress()) . '?subject=Unsubscribe' . urlencode(' "' . $message->getSubject() . '"') . '>');
+            $message->getHeaders()->addTextHeader(
+                'List-Unsubscribe',
+                '<mailto:' . EmailValidator::cleanUpEmail($queueMail->getFromAddress()) . '?subject=Unsubscribe'
+                    . urlencode(' "' . $queueRecipient->getSubject() ?: $queueMail->getSubject() . '"') . '>'
+            );
         }
 
         // ====================================================
@@ -546,7 +554,7 @@ class Mailer
         $message->setFrom([EmailValidator::cleanUpEmail($queueMail->getFromAddress()) => $queueMail->getFromName()])
             ->setReplyTo([EmailValidator::cleanUpEmail($queueMail->getReplyToAddress()) => $queueMail->getReplyToName() ?: $queueMail->getFromName()])
             ->setReturnPath(EmailValidator::cleanUpEmail($queueMail->getReturnPath()))
-            ->setPriority($queueMail->getPriority())
+            ->priority($queueMail->getPriority())
             ->setTo($recipientAddress)
             ->setSubject($queueRecipient->getSubject() ?: $queueMail->getSubject());
 

@@ -15,6 +15,7 @@ plugin.tx_postmaster {
         partialRootPaths {
             0 = EXT:postmaster/Resources/Private/Partials/
             1 = {$plugin.tx_postmaster.view.partialRootPath}
+			2 = {$plugin.tx_coreextended.view.partialRootPath}
         }
     }
     features {
@@ -52,6 +53,8 @@ module.tx_postmaster {
         partialRootPaths {
             0 = EXT:postmaster/Resources/Private/Partials/
             1 = {$module.tx_postmaster.view.partialRootPath}
+            2 = {$plugin.tx_coreextended.view.partialRootPath}
+            3 = {$plugin.tx_coreextended.view.partialRootPath}/Backend/
         }
 
         widget {

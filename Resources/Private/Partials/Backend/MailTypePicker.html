@@ -1,2 +1,11 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:form.select name="mailType" value="{mailType}" options="{mailTypeList}" prependOptionValue="-1" prependOptionLabel="{f:translate(key:\"partials_backend_mailTypePicker.showAll\")}" additionalAttributes="{onChange : 'this.form.submit();'}" />
+    <f:form.select name="mailType" 
+                   value="{mailType}"
+                   class="form-control form-control-adapt"
+                   options="{mailTypeList}" 
+                   prependOptionValue="-1" 
+                   prependOptionLabel="{f:translate(key:'partials_backend_mailTypePicker.showAll')}"
+                   additionalAttributes="{onChange : 'this.form.submit();'}" />
