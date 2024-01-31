@@ -77,8 +77,8 @@ class RedirectLinksViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abstract
         $value = $renderChildrenClosure();
         $queueMail = $arguments['queueMail'];
         $queueRecipient = $arguments['queueRecipient'];
-        $isPlaintext  = (bool) $arguments['isPlaintext'];
-        $additionalParams = $arguments['additionalParams'] ? $arguments['additionalParams'] : [] ;
+        $isPlaintext  = boolval($arguments['isPlaintext']);
+        $additionalParams = $arguments['additionalParams'] ?: [] ;
 
         try {
 

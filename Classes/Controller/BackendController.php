@@ -40,42 +40,96 @@ class BackendController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @var \Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected MailingStatisticsRepository $mailingStatisticsRepository;
+    protected ?MailingStatisticsRepository $mailingStatisticsRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected ClickStatisticsRepository $clickStatisticsRepository;
+    protected ?ClickStatisticsRepository $clickStatisticsRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\BounceMailRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected BounceMailRepository $bounceMailRepository;
+    protected ?BounceMailRepository $bounceMailRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected QueueMailRepository $queueMailRepository;
+    protected ?QueueMailRepository $queueMailRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected QueueRecipientRepository $queueRecipientRepository;
+    protected ?QueueRecipientRepository $queueRecipientRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Persistence\Cleaner
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected Cleaner $cleaner;
+    protected ?Cleaner $cleaner = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\MailingStatisticsRepository
+     */
+    public function injectMailingStatisticsRepository(MailingStatisticsRepository $mailingStatisticsRepository)
+    {
+        $this->mailingStatisticsRepository= $mailingStatisticsRepository;
+    }
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository
+     */
+    public function injectClickStatisticsRepository(ClickStatisticsRepository $clickStatisticsRepository)
+    {
+        $this->clickStatisticsRepository = $clickStatisticsRepository;
+    }
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\BounceMailRepository
+     */
+    public function injectBounceMailRepository(BounceMailRepository $bounceMailRepository)
+    {
+        $this->bounceMailRepository = $bounceMailRepository;
+    }
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository
+     */
+    public function injectQueueMailRepository(QueueMailRepository $queueMailRepository)
+    {
+        $this->queueMailRepository = $queueMailRepository;
+    }
+
+
+    /**
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository
+     */
+    public function injectQueueRecipientRepository(QueueRecipientRepository $queueRecipientRepository)
+    {
+        $this->queueRecipientRepository = $queueRecipientRepository;
+    }
+
+
+    /**
+     * @var \Madj2k\Postmaster\Persistence\Cleaner
+     */
+    public function injectCleaner(Cleaner $cleaner)
+    {
+        $this->cleaner = $cleaner;
+    }
 
 
     /**

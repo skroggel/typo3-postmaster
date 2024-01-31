@@ -93,16 +93,16 @@
                 <target>Anzahl aller versendeten Mailings:</target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.mailsTotal">
-                <source>Sent e-mails</source>
-                <target>Gesendete E-Mails</target>
+                <source>Sent</source>
+                <target>Gesendet</target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.statusTotal">
-                <source><![CDATA[Status<br />(delivered / failed / deferred / bounced)]]></source>
-                <target><![CDATA[Status<br />(Zugestellt / Fehler / Zurückgestellt / Unzustellbar)]]></target>
+                <source><![CDATA[Status<br />(OK / Error / Ignored / Bounced)]]></source>
+                <target><![CDATA[Status<br />(OK / Fehler / Ignoriert / Bounced)]]></target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.readTotal">
-                <source><![CDATA[Read e-mails<br />(HTML only)]]></source>
-                <target><![CDATA[Gelesene E-Mails<br />(nur HTML)]]></target>
+                <source><![CDATA[Opened<br />(HTML only)]]></source>
+                <target><![CDATA[Geöffnet<br />(nur HTML)]]></target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.clicksTotal">
                 <source>Clicked Links</source>
@@ -129,12 +129,12 @@
                 <target>Gesendet</target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.realSending">
-                <source>Started sending</source>
-                <target>Senden gestartet</target>
+                <source>Started</source>
+                <target>Gestartet</target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.endSending">
-                <source>Sending end</source>
-                <target>Senden beendet</target>
+                <source>Ended</source>
+                <target>Beendet</target>
             </trans-unit>
             <trans-unit id="templates_backend_statistics.clickStatistics">
                 <source>Click Statistics</source>

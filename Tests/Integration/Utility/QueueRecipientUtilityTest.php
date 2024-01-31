@@ -52,6 +52,7 @@ class QueueRecipientUtilityTest extends FunctionalTestCase
         'typo3conf/ext/core_extended',
         'typo3conf/ext/postmaster',
         'typo3conf/ext/fe_register',
+        'typo3conf/ext/ajax_api',
     ];
 
 

@@ -1,2 +1,19 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:postmaster="http://typo3.org/ns/Madj2k/Postmaster/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:form.select name="timeFrame" value="{timeFrame}" options="{0: '{f:translate(key:\"partials_backend_datepicker.showAll\")}', 1: '{f:translate(key:\"partials_backend_datepicker.showThisMonth\")}', 2: '{f:translate(key:\"partials_backend_datepicker.showLastMonth\")}', 3: '{f:translate(key:\"partials_backend_datepicker.showThisQuarter\")}', 4: '{f:translate(key:\"partials_backend_datepicker.showLastQuarter\")}', 5: '{f:translate(key:\"partials_backend_datepicker.showThisHalfYear\")}', 6: '{f:translate(key:\"partials_backend_datepicker.showLastHalfYear\")}', 7: '{f:translate(key:\"partials_backend_datepicker.showThisYear\")}', 8: '{f:translate(key:\"partials_backend_datepicker.showLastYear\")}'}" additionalAttributes="{onChange : 'this.form.submit();'}" />
+    <f:form.select name="timeFrame" 
+                   value="{timeFrame}" 
+                   class="form-control form-control-adapt pull-left"
+                   options="{0: '{f:translate(key:\'partials_backend_datepicker.showAll\')}', 
+                             1: '{f:translate(key:\'partials_backend_datepicker.showThisMonth\')}', 
+                             2: '{f:translate(key:\'partials_backend_datepicker.showLastMonth\')}', 
+                             3: '{f:translate(key:\'partials_backend_datepicker.showThisQuarter\')}', 
+                             4: '{f:translate(key:\'partials_backend_datepicker.showLastQuarter\')}', 
+                             5: '{f:translate(key:\'partials_backend_datepicker.showThisHalfYear\')}', 
+                             6: '{f:translate(key:\'partials_backend_datepicker.showLastHalfYear\')}', 
+                             7: '{f:translate(key:\'partials_backend_datepicker.showThisYear\')}', 
+                             8: '{f:translate(key:\'partials_backend_datepicker.showLastYear\')}'}" 
+                   additionalAttributes="{onChange : 'this.form.submit();'}" />
+
+</html>

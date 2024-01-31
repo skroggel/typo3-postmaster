@@ -578,8 +578,7 @@ class QueueMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getAttachmentPaths(): array
     {
-        $paths = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->attachmentPaths, true);
-        return $paths;
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->attachmentPaths, true);
     }
 
 
@@ -1091,7 +1090,7 @@ class QueueMail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \Madj2k\Postmaster\Domain\Model\MailingStatistics $mailingStatistics
      */
-    public function getMailingStatistics():? MailingStatistics
+    public function getMailingStatistics(): ?MailingStatistics
     {
         return $this->mailingStatistics;
     }

@@ -38,8 +38,13 @@ class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper
      */
     protected static function getWidgetUri(RenderingContextInterface $renderingContext, array $arguments): string
     {
+        /** @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext $controllerContext */
         $controllerContext = $renderingContext->getControllerContext();
+
+        /** @var \TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder $uriBuilder */
         $uriBuilder = $controllerContext->getUriBuilder();
+
+        /** @var string $argumentPrefix */
         $argumentPrefix = $controllerContext->getRequest()->getArgumentPrefix();
         $cleanedArgumentPrefix = substr($argumentPrefix, 0, strpos($argumentPrefix, '['));
         $parameters = $arguments['arguments'] ?? [];
@@ -59,9 +64,8 @@ class UriViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Widget\UriViewHelper
         return $uriBuilder->reset()
             ->setArguments($uriArguments)
             ->setSection($arguments['section'])
-            ->setUseCacheHash($arguments['useCacheHash'])
             ->setAddQueryString(true)
-            ->setAddQueryStringMethod($arguments['addQueryStringMethod'])
+            ->setAddQueryStringMethod($arguments['addQueryStringMethod'] ?: 'GET')
             ->setArgumentsToBeExcludedFromQueryString([$argumentPrefix, 'cHash'])
             ->setFormat($arguments['format'])
             ->build();

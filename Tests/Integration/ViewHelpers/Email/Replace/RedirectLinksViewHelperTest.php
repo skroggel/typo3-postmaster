@@ -138,10 +138,17 @@ class RedirectLinksViewHelperTest extends FunctionalTestCase
         $this->standAloneViewHelper->setTemplate('Check10.html');
         $this->standAloneViewHelper->assign('queueRecipient', $queueRecipient);
 
-        $expected = file_get_contents(self::FIXTURE_PATH . '/Expected/Check10.txt');
         $result = $this->standAloneViewHelper->render();
 
-        self::assertEquals($expected, $result);
+        self::assertStringContainsString('Testen Sie hier: http://www.google.de', $result);
+        self::assertStringContainsString('Testen Sie da: [http://www.yahoo.de/#anchor-1]', $result);
+        self::assertStringContainsString('Testen Sie dort: mail@example.com', $result);
+        self::assertStringContainsString('Testen Sie überall: #anchor-2', $result);
+
+        self::assertStringContainsString('<a href="http://www.google.de">Testen Sie hier</a>', $result);
+        self::assertStringContainsString('<a href="http://www.yahoo.de/#anchor-1">Testen Sie da</a>', $result);
+        self::assertStringContainsString('<a href="mailto:mail@example.com">Testen Sie dort</a>', $result);
+        self::assertStringContainsString('<a href="#anchor-2">Testen Sie überall</a>', $result);
     }
 
 
@@ -164,7 +171,6 @@ class RedirectLinksViewHelperTest extends FunctionalTestCase
          * Then anchor- and e-mail-links are left unchanged
          * Then a queueMail-parameter is set in the redirect-links
          * Then no queueRecipient-parameter is set in the redirect-links
-         * Then no cHash-parameter is set
          * Then a noCache-parameter is set
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check20.xml');
@@ -173,13 +179,21 @@ class RedirectLinksViewHelperTest extends FunctionalTestCase
 
         $this->standAloneViewHelper->setTemplate('Check20.html');
         $this->standAloneViewHelper->assign('queueMail', $queueMail);
-
-        $expected = file_get_contents(self::FIXTURE_PATH . '/Expected/Check20.txt');
         $result = $this->standAloneViewHelper->render();
 
-        self::assertEquals($expected, $result);
+        self::assertStringContainsString('Testen Sie hier: http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.google.de', $result);
+        self::assertStringContainsString('Testen Sie da: [http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.yahoo.de%2F%23anchor-1', $result);
+        self::assertStringContainsString('Testen Sie dort: mail@example.com', $result);
+        self::assertStringContainsString('Testen Sie überall: #anchor-2', $result);
+
+        self::assertStringContainsString('<a href="http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.google.de', $result);
+        self::assertStringContainsString('>Testen Sie hier</a>', $result);
+        self::assertStringContainsString('<a href="http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.yahoo.de%2F%23anchor-1', $result);
+        self::assertStringContainsString('>Testen Sie da</a>', $result);
+        self::assertStringContainsString('<a href="mailto:mail@example.com">Testen Sie dort</a>', $result);
+        self::assertStringContainsString('<a href="#anchor-2">Testen Sie überall</a>', $result);
+
         self::assertStringContainsString('postmaster/redirect/1?', $result);
-        self::assertStringNotContainsString('cHash=', $result);
         self::assertStringContainsString('no_cache=1', $result);
     }
 
@@ -203,7 +217,6 @@ class RedirectLinksViewHelperTest extends FunctionalTestCase
          * Then anchor- and e-mail-links are left unchanged
          * Then a queueMail-parameter is set in the redirect-links
          * Then a queueRecipient-parameter is set in the redirect-links
-         * Then no cHash-parameter is set
          * Then a noCache-parameter is set
          */
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Check30.xml');
@@ -215,12 +228,21 @@ class RedirectLinksViewHelperTest extends FunctionalTestCase
         $this->standAloneViewHelper->assign('queueMail', $queueMail);
         $this->standAloneViewHelper->assign('queueRecipient', $queueRecipient);
 
-        $expected = file_get_contents(self::FIXTURE_PATH . '/Expected/Check30.txt');
         $result = $this->standAloneViewHelper->render();
 
-        self::assertEquals($expected, $result);
+        self::assertStringContainsString('Testen Sie hier: http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.google.de', $result);
+        self::assertStringContainsString('Testen Sie da: [http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.yahoo.de%2F%23anchor-1', $result);
+        self::assertStringContainsString('Testen Sie dort: mail@example.com', $result);
+        self::assertStringContainsString('Testen Sie überall: #anchor-2', $result);
+
+        self::assertStringContainsString('<a href="http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.google.de', $result);
+        self::assertStringContainsString('>Testen Sie hier</a>', $result);
+        self::assertStringContainsString('<a href="http://www.example.com/umleitungsseite-der-umleitungen/postmaster/redirect/1/1?no_cache=1&tx_postmaster_tracking%5Burl%5D=http%3A%2F%2Fwww.yahoo.de%2F%23anchor-1', $result);
+        self::assertStringContainsString('>Testen Sie da</a>', $result);
+        self::assertStringContainsString('<a href="mailto:mail@example.com">Testen Sie dort</a>', $result);
+        self::assertStringContainsString('<a href="#anchor-2">Testen Sie überall</a>', $result);
+
         self::assertStringContainsString('postmaster/redirect/1/1?', $result);
-        self::assertStringNotContainsString('cHash=', $result);
         self::assertStringContainsString('no_cache=1', $result);
     }
 

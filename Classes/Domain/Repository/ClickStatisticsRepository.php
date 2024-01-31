@@ -64,7 +64,7 @@ class ClickStatisticsRepository extends AbstractRepository
     public function findOneByHashAndQueueMail(
         string $hash,
         \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
-    ):? ClickStatistics {
+    ): ?ClickStatistics {
 
         $query = $this->createQuery();
 

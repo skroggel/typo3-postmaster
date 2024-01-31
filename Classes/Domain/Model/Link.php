@@ -57,7 +57,7 @@ class Link extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueMail
      */
-    public function getQueueMail():? QueueMail
+    public function getQueueMail(): ?QueueMail
     {
         return $this->queueMail;
     }

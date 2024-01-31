@@ -73,7 +73,7 @@ class RteLinksViewHelper extends AbstractViewHelper
     ): string {
 
         $value = $renderChildrenClosure();
-        $plaintextFormat = (bool) ($arguments['isPlaintext'] ?: $arguments['plaintextFormat']);
+        $plaintextFormat = boolval($arguments['isPlaintext'] ?: $arguments['plaintextFormat']);
         $style = ($arguments['style'] ?: '');
         try {
 

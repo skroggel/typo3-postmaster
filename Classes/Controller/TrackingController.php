@@ -33,14 +33,32 @@ class TrackingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
      * @var \Madj2k\Postmaster\Tracking\ClickTracker
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected ClickTracker $clickTracker;
+    protected ?ClickTracker $clickTracker = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Tracking\OpeningTracker
      * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected OpeningTracker $openingTracker;
+    protected ?OpeningTracker $openingTracker = null;
+
+
+    /**
+     * @var \Madj2k\Postmaster\Tracking\ClickTracker
+     */
+    public function injectClickTracker(ClickTracker $clickTracker)
+    {
+        $this->clickTracker = $clickTracker;
+    }
+
+
+    /**
+     * @var \Madj2k\Postmaster\Tracking\OpeningTracker
+     */
+    public function injectOpeningTracker(OpeningTracker $openingTracker)
+    {
+        $this->openingTracker = $openingTracker;
+    }
 
 
     /**

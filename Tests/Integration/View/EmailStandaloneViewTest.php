@@ -229,7 +229,7 @@ class EmailStandaloneViewTest extends FunctionalTestCase
      * @test
      * @throws \Exception
      */
-    public function constructSetsViewPathsAccoringToConfiguration ()
+    public function constructSetsViewPathsAccordingToConfiguration ()
     {
 
         /**
@@ -263,7 +263,8 @@ class EmailStandaloneViewTest extends FunctionalTestCase
             ],
             'partial' => [
                 0 => 'typo3conf/ext/postmaster/Resources/Private/Partials/',
-                1 => 'typo3conf/ext/postmaster/Tests/Integration/Service/Fixtures/Frontend/Check10/Partials/'
+                1 => 'typo3conf/ext/postmaster/Tests/Integration/Service/Fixtures/Frontend/Check10/Partials/',
+                2 => 'typo3conf/ext/core_extended/Resources/Private/Partials/'
             ],
             'template' => [
                 0 => 'typo3conf/ext/postmaster/Resources/Private/Templates/',
@@ -279,9 +280,11 @@ class EmailStandaloneViewTest extends FunctionalTestCase
 
         $result = $this->subject->getPartialRootPaths();
         self::assertIsArray( $result);
-        self::assertCount(2, $result);
+        self::assertCount(3, $result);
         self::assertStringEndsWith($expected['partial'][0], $result[0]);
         self::assertStringEndsWith($expected['partial'][1], $result[1]);
+        self::assertStringEndsWith($expected['partial'][2], $result[2]);
+
 
         $result = $this->subject->getTemplateRootPaths();
         self::assertIsArray( $result);
@@ -588,7 +591,7 @@ class EmailStandaloneViewTest extends FunctionalTestCase
          * Given a valid configuration with two configured partialPaths for the view
          * Given two further partialPaths for the view
          * When the method is called
-         * Then four partialPaths exist
+         * Then five partialPaths exist
          * Then the further partialPaths are added after the existing ones
          */
 
@@ -600,18 +603,21 @@ class EmailStandaloneViewTest extends FunctionalTestCase
         $expected = [
             0 => 'typo3conf/ext/postmaster/Resources/Private/Partials/',
             1 => 'typo3conf/ext/postmaster/Tests/Integration/View/EmailStandaloneViewTest/Fixtures/Frontend/Partials/',
-            2 => 'typo3conf/ext/postmaster/Tests/Integration/Service/New100/Partials/',
-            3 => 'typo3conf/ext/postmaster/Tests/Integration/Service/New200/Partials/'
+            2 => 'typo3conf/ext/core_extended/Resources/Private/Partials/',
+            3 => 'typo3conf/ext/postmaster/Tests/Integration/Service/New100/Partials/',
+            4 => 'typo3conf/ext/postmaster/Tests/Integration/Service/New200/Partials/'
         ];
 
         $this->subject->addPartialRootPaths($paths);
         $result = $this->subject->getPartialRootPaths();
 
-        self::assertCount(4, $result);
+        self::assertCount(5, $result);
         self::assertStringEndsWith($expected[0], $result[0]);
         self::assertStringEndsWith($expected[1], $result[1]);
         self::assertStringEndsWith($expected[2], $result[2]);
         self::assertStringEndsWith($expected[3], $result[3]);
+        self::assertStringEndsWith($expected[4], $result[4]);
+
     }
 
 
@@ -1727,18 +1733,20 @@ class EmailStandaloneViewTest extends FunctionalTestCase
         $expected = [
             0 => 'typo3conf/ext/postmaster/Resources/Private/Partials/',
             1 => 'typo3conf/ext/postmaster/Tests/Integration/View/EmailStandaloneViewTest/Fixtures/Frontend/Partials/',
-            2 => 'typo3conf/ext/postmaster/Tests/Funky/New100/Partials/',
-            3 => 'typo3conf/ext/postmaster/Tests/Funky/New200/Partials/'
+            2 => 'typo3conf/ext/core_extended/Resources/Private/Partials/',
+            3 => 'typo3conf/ext/postmaster/Tests/Funky/New100/Partials/',
+            4 => 'typo3conf/ext/postmaster/Tests/Funky/New200/Partials/'
         ];
 
         $this->subject->setQueueMail($queueMail);
         $result = $this->subject->getPartialRootPaths();
 
-        self::assertCount(4, $result);
+        self::assertCount(5, $result);
         self::assertStringEndsWith($expected[0], $result[0]);
         self::assertStringEndsWith($expected[1], $result[1]);
         self::assertStringEndsWith($expected[2], $result[2]);
         self::assertStringEndsWith($expected[3], $result[3]);
+        self::assertStringEndsWith($expected[4], $result[4]);
     }
 
     //=============================================

@@ -70,23 +70,21 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Uri\ActionViewHelper
 
         $queueMail = $arguments['queueMail'];
         $queueRecipient = $arguments['queueRecipient'];
-        $pageUid = $arguments['pageUid'];
-        $pageType = $arguments['pageType'];
-        $noCache = $arguments['noCache'];
-        $noCacheHash = $arguments['noCacheHash'];
-        $section = $arguments['section'];
-        $format = $arguments['format'];
-        $linkAccessRestrictedPages = $arguments['linkAccessRestrictedPages'];
-        $additionalParams = $arguments['additionalParams'];
-        $addQueryString = $arguments['addQueryString'];
-        $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'];
-        $addQueryStringMethod = $arguments['addQueryStringMethod'];
-        $action = $arguments['action'];
-        $controller = $arguments['controller'];
-        $extensionName = $arguments['extensionName'];
-        $pluginName = $arguments['pluginName'];
-        $arguments = $arguments['arguments'];
-
+        $pageUid = intval($arguments['pageUid']);
+        $pageType = intval($arguments['pageType']);
+        $noCache = boolval($arguments['noCache']);
+        $section = $arguments['section'] ?: '';
+        $format = $arguments['format'] ?: '';
+        $linkAccessRestrictedPages = boolval($arguments['linkAccessRestrictedPages']);
+        $additionalParams = $arguments['additionalParams'] ?: [];
+        $addQueryString = boolval($arguments['addQueryString']);
+        $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'] ?: [];
+        $addQueryStringMethod = $arguments['addQueryStringMethod'] ?: '';
+        $action = $arguments['action'] ?: '';
+        $controller = $arguments['controller'] ?: '';
+        $extensionName = $arguments['extensionName'] ?: '';
+        $pluginName = $arguments['pluginName'] ?: '';
+        $arguments = $arguments['arguments'] ?: [];
         try {
 
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -99,7 +97,6 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Uri\ActionViewHelper
                 ->setTargetPageUid($pageUid)
                 ->setTargetPageType($pageType)
                 ->setNoCache($noCache)
-                ->setUseCacheHash(!$noCacheHash)
                 ->setSection($section)
                 ->setFormat($format)
                 ->setLinkAccessRestrictedPages($linkAccessRestrictedPages)
@@ -122,6 +119,8 @@ class ActionViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Uri\ActionViewHelper
 
         } catch (\Exception $e) {
 
+            var_dump($e->getMessage());
+            die();
             $logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
             $logger->log(
                 LogLevel::ERROR,

@@ -61,7 +61,7 @@ class OpeningStatistics extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueMail
      */
-    public function getQueueMail():? QueueMail
+    public function getQueueMail(): ?QueueMail
     {
         return $this->queueMail;
     }
@@ -108,7 +108,7 @@ class OpeningStatistics extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \Madj2k\Postmaster\Domain\Model\QueueRecipient
      */
-    public function getQueueRecipient():? QueueRecipient
+    public function getQueueRecipient(): ?QueueRecipient
     {
         return $this->queueRecipient;
     }

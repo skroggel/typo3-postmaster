@@ -62,7 +62,7 @@ class OpeningStatisticsRepository extends AbstractRepository
     public function findOneByHashAndQueueMail(
         string $hash,
         \Madj2k\Postmaster\Domain\Model\QueueMail $queueMail
-    ):? OpeningStatistics {
+    ): ?OpeningStatistics {
 
         $query = $this->createQuery();
         $query->matching(
