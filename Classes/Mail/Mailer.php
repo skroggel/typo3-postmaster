@@ -551,10 +551,15 @@ class Mailer
             $recipientAddress = [EmailValidator::cleanUpEmail($queueRecipient->getEmail()) => trim($recipientName)];
         }
 
+        $prioritySetter = 'priority';
+        if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 10000000) {
+            $prioritySetter = 'setPriority';
+        }
+
         $message->setFrom([EmailValidator::cleanUpEmail($queueMail->getFromAddress()) => $queueMail->getFromName()])
             ->setReplyTo([EmailValidator::cleanUpEmail($queueMail->getReplyToAddress()) => $queueMail->getReplyToName() ?: $queueMail->getFromName()])
             ->setReturnPath(EmailValidator::cleanUpEmail($queueMail->getReturnPath()))
-            ->priority($queueMail->getPriority())
+            ->$prioritySetter($queueMail->getPriority())
             ->setTo($recipientAddress)
             ->setSubject($queueRecipient->getSubject() ?: $queueMail->getSubject());
 
