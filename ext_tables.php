@@ -14,12 +14,12 @@ call_user_func(
         if (TYPO3_MODE === 'BE') {
 
             \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-                $extKey,
+                'Madj2k.' . $extKey,
                 'tools',	 // Make module a submodule of 'Web'
                 'mailadministration',	// Submodule key
                 '',						// Position
                 [
-                    \Madj2k\Postmaster\Controller\BackendController::class => 'statistics, clickStatistics, list, downloadBounced, pause, continue, delete, reset',
+                    'Backend' => 'statistics, clickStatistics, list, downloadBounced, pause, continue, delete, reset',
                 ],
                 [
                     'access' => 'user,group',
