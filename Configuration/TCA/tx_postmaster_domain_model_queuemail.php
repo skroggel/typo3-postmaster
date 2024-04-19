@@ -11,9 +11,6 @@ return [
 		'searchFields' => 'from_name, from_address, subject',
 		'iconfile' => 'EXT:postmaster/Resources/Public/Icons/tx_postmaster_domain_model_queuemail.gif'
 	],
-    'interface' => [
-        'showRecordFieldList' => '',
-    ],
     'types' => [
         '1' => ['showitem' => ''],
     ],

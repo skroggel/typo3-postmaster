@@ -10,9 +10,6 @@ return [
 
 		'iconfile' => 'EXT:postmaster/Resources/Public/Icons/tx_postmaster_domain_model_mailingstatistics.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => '',
-	],
 	'types' => [
 		'1' => ['showitem' => ''],
 	],

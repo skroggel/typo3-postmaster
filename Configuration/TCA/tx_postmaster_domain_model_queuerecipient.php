@@ -12,9 +12,6 @@ return [
 		'searchFields' => 'email, first_name, last_name, subject, status',
 		'iconfile' => 'EXT:postmaster/Resources/Public/Icons/tx_postmaster_domain_model_queuerecipient.gif'
 	],
-    'interface' => [
-        'showRecordFieldList' => '',
-    ],
     'types' => [
         '1' => ['showitem' => ''],
     ],
