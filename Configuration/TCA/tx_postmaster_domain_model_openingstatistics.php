@@ -11,9 +11,6 @@ return [
 		'searchFields' => 'hash',
 		'iconfile' => 'EXT:postmaster/Resources/Public/Icons/tx_postmaster_domain_model_openingstatistics.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => '',
-	],
 	'types' => [
 		'1' => ['showitem' => ''],
 	],

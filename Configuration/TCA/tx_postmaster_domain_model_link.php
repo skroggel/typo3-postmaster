@@ -11,9 +11,6 @@ return [
 		'searchFields' => 'hash, url',
 		'iconfile' => 'EXT:postmaster/Resources/Public/Icons/tx_postmaster_domain_model_link.gif'
 	],
-	'interface' => [
-		'showRecordFieldList' => 'hash, url',
-	],
 	'types' => [
 		'1' => ['showitem' => 'hash, url'],
 	],
