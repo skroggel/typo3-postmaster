@@ -39,43 +39,60 @@ class ClickTracker
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected QueueMailRepository $queueMailRepository;
+    protected ?QueueMailRepository $queueMailRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected QueueRecipientRepository $queueRecipientRepository;
+    protected ?QueueRecipientRepository $queueRecipientRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\LinkRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected LinkRepository $linkRepository;
+    protected ?LinkRepository $linkRepository = null;
 
 
     /**
      * @var \Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected ClickStatisticsRepository $clickStatisticsRepository;
+    protected ?ClickStatisticsRepository $clickStatisticsRepository = null;
 
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected PersistenceManager $persistenceManager;
+    protected ?PersistenceManager $persistenceManager = null;
 
 
     /**
      * @var \TYPO3\CMS\Core\Log\Logger|null
      */
     protected ?Logger $logger = null;
+
+
+    /**
+     * @param QueueMailRepository       $queueMailRepository
+     * @param QueueRecipientRepository  $queueRecipientRepository
+     * @param LinkRepository            $linkRepository
+     * @param ClickStatisticsRepository $clickStatisticsRepository
+     * @param PersistenceManager        $persistenceManager
+     */
+    public function __construct(
+        QueueMailRepository $queueMailRepository,
+        QueueRecipientRepository $queueRecipientRepository,
+        LinkRepository $linkRepository,
+        ClickStatisticsRepository $clickStatisticsRepository,
+        PersistenceManager $persistenceManager
+    ) {
+        $this->queueMailRepository = $queueMailRepository;
+        $this->queueRecipientRepository = $queueRecipientRepository;
+        $this->linkRepository = $linkRepository;
+        $this->clickStatisticsRepository = $clickStatisticsRepository;
+        $this->persistenceManager = $persistenceManager;
+    }
 
 
     /**
