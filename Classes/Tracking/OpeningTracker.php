@@ -16,6 +16,7 @@ namespace Madj2k\Postmaster\Tracking;
  */
 
 use Madj2k\Postmaster\Domain\Model\OpeningStatistics;
+use Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository;
 use Madj2k\Postmaster\Domain\Repository\OpeningStatisticsRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueMailRepository;
 use Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository;
@@ -38,37 +39,52 @@ class OpeningTracker
 {
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository|null
      */
-    protected QueueMailRepository $queueMailRepository;
+    protected ?QueueMailRepository $queueMailRepository = null;
 
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository|null
      */
-    protected QueueRecipientRepository $queueRecipientRepository;
+    protected ?QueueRecipientRepository $queueRecipientRepository = null;
 
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\OpeningStatisticsRepository
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \Madj2k\Postmaster\Domain\Repository\OpeningStatisticsRepository|null
      */
-    protected OpeningStatisticsRepository $openingStatisticsRepository;
+    protected ?OpeningStatisticsRepository $openingStatisticsRepository = null;
 
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
-     * @TYPO3\CMS\Extbase\Annotation\Inject
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager|null
      */
-    protected PersistenceManager $persistenceManager;
+    protected ?PersistenceManager $persistenceManager = null;
 
 
     /**
      * @var \TYPO3\CMS\Core\Log\Logger|null
      */
     protected ?Logger $logger = null;
+
+
+    /**
+     * @param \Madj2k\Postmaster\Domain\Repository\QueueMailRepository $queueMailRepository
+     * @param \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository $queueRecipientRepository
+     * @param \Madj2k\Postmaster\Domain\Repository\OpeningStatisticsRepository $openingStatisticsRepository
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
+     */
+    public function __construct(
+        QueueMailRepository $queueMailRepository,
+        QueueRecipientRepository $queueRecipientRepository,
+        OpeningStatisticsRepository $openingStatisticsRepository,
+        PersistenceManager $persistenceManager
+    ) {
+        $this->queueMailRepository = $queueMailRepository;
+        $this->queueRecipientRepository = $queueRecipientRepository;
+        $this->openingStatisticsRepository = $openingStatisticsRepository;
+        $this->persistenceManager = $persistenceManager;
+    }
 
 
     /**
@@ -79,6 +95,7 @@ class OpeningTracker
      * @return bool
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\UnknownObjectException
+     * @throws \Madj2k\Postmaster\Exception
      */
     public function track(
         int $queueMailId = 0,
