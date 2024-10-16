@@ -38,31 +38,31 @@ class ClickTracker
 {
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueMailRepository|null
      */
     protected ?QueueMailRepository $queueMailRepository = null;
 
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository
+     * @var \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository|null
      */
     protected ?QueueRecipientRepository $queueRecipientRepository = null;
 
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\LinkRepository
+     * @var \Madj2k\Postmaster\Domain\Repository\LinkRepository|null
      */
     protected ?LinkRepository $linkRepository = null;
 
 
     /**
-     * @var \Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository
+     * @var \Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository|null
      */
     protected ?ClickStatisticsRepository $clickStatisticsRepository = null;
 
 
     /**
-     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager|null
      */
     protected ?PersistenceManager $persistenceManager = null;
 
@@ -74,11 +74,11 @@ class ClickTracker
 
 
     /**
-     * @param QueueMailRepository       $queueMailRepository
-     * @param QueueRecipientRepository  $queueRecipientRepository
-     * @param LinkRepository            $linkRepository
-     * @param ClickStatisticsRepository $clickStatisticsRepository
-     * @param PersistenceManager        $persistenceManager
+     * @param \Madj2k\Postmaster\Domain\Repository\QueueMailRepository $queueMailRepository
+     * @param \Madj2k\Postmaster\Domain\Repository\QueueRecipientRepository $queueRecipientRepository
+     * @param \Madj2k\Postmaster\Domain\Repository\LinkRepository $linkRepository
+     * @param \Madj2k\Postmaster\Domain\Repository\ClickStatisticsRepository $clickStatisticsRepository
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
      */
     public function __construct(
         QueueMailRepository $queueMailRepository,
